@@ -27,6 +27,9 @@
       <button class="btn btn-secondary" @click="selectApp('test23')">тестмити3</button>
       <button class="btn btn-secondary" @click="selectApp('test24')">тестмити4</button>
       <button class="btn btn-secondary" @click="selectApp('test25')">тестмити5</button>
+      <button class="btn btn-secondary" @click="selectApp('test26')">тестксюши1</button>
+      <button class="btn btn-secondary" @click="selectApp('test27')">тестксюши2</button>
+      <button class="btn btn-secondary" @click="selectApp('test28')">тестксюши3</button>
     </div>
     <div v-if="selectedGame"> 
       <div v-if="selectedApp == 'test1'">
@@ -104,6 +107,15 @@
       <div v-else-if="selectedApp == 'test25'">
         <test5mitya/> 
       </div>
+      <div v-else-if="selectedApp == 'test26'">
+        <Test1k/>
+      </div>
+      <div v-else-if="selectedApp == 'test27'">
+        <Test2k/> 
+      </div>
+      <div v-else-if="selectedApp == 'test28'">
+        <Test3k/> 
+      </div>
 
     </div>
     <div v-else-if="!selectedGame">
@@ -168,6 +180,10 @@ import test3mitya from './components/mitya/test3/test3mitya.vue'
 import test4mitya from './components/mitya/test4/test4mitya.vue'
 import test5mitya from './components/mitya/test5/test5mitya.vue'
 
+import Test1k from './components/ksysha/Test1k.vue';
+import Test2k from './components/ksysha/Test2k.vue';
+import Test3k from './components/ksysha/Test3k.vue';
+
 export default {
   components: {
     Test1,
@@ -194,7 +210,10 @@ export default {
     test2mitya,
     test3mitya,
     test4mitya,
-    test5mitya
+    test5mitya,
+    Test1k,
+    Test2k,
+    Test3k
   },
   data() {
     return {
