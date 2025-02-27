@@ -57,7 +57,8 @@ export default {
         {
           "try_number": 1,
           "test": this.testId,
-          "user": this.userId
+          "user": this.userId,
+          "number_correct_answers": this.score
         };
         axios.post(
           'http://localhost:8000/api/test-results/create/',
