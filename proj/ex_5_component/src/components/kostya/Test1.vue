@@ -57,17 +57,24 @@ export default {
     async saveTestResult() {
       const testResultData = 
         {
-          "try_number": 1,
-          "test":1,
-          "user": 1
+          // "try_number": 1,
+          // "test":1,
+          // "user": 1
+          "username": "web",
+          "password": "passfortest"
 
 };
 console.log(testResultData);
-axios.post('http://localhost:8000/api/test-results/create/', testResultData, {
+axios.post('http://localhost:8000/api/login', testResultData, {
     headers: {
         'Content-Type': 'application/json',
     },
 })
+// axios.post('http://localhost:8000/api/test-results/create/', testResultData, {
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+// })
 .then(response => {
     console.log('Результат теста сохранен:', response.data);
 })
