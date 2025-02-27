@@ -35,15 +35,13 @@ export default {
       time: 60,
       timer: null,
       gameOver: false,
-      testId: 1, // ID теста (должно быть динамическим)
-      userId: 1, // ID теста (должно быть динамическим)
+      testId: 1,
+      userId: 1, // ID user (должно быть динамическим)
     };
   },
   watch: {
-    // Следим за изменением gameInProgress
     gameOver(newValue) {
       if (newValue) {
-        // Если игра завершена, вызываем метод сохранения
         this.saveTestResult();
       }
     },
@@ -57,31 +55,26 @@ export default {
     async saveTestResult() {
       const testResultData = 
         {
-          // "try_number": 1,
-          // "test":1,
-          // "user": 1
-          "username": "web",
-          "password": "passfortest"
-
-};
-console.log(testResultData);
-axios.post('http://localhost:8000/api/login', testResultData, {
-    headers: {
-        'Content-Type': 'application/json',
+          "try_number": 1,
+          "test": this.testId,
+          "user": this.userId
+        };
+        axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        ).then(response => {
+          console.log('Результат теста сохранен:', response.data);
+        }
+        ).catch(error => {
+          console.error('Ошибка при сохранении результата:', error);
+        }
+        );
     },
-})
-// axios.post('http://localhost:8000/api/test-results/create/', testResultData, {
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-// })
-.then(response => {
-    console.log('Результат теста сохранен:', response.data);
-})
-.catch(error => {
-    console.error('Ошибка при сохранении результата:', error);
-});
- },
     getRowEmojis(rowIndex) {
       const startIndex = (rowIndex - 1) * 4;
       return this.emojis.slice(startIndex, startIndex + 4); 
