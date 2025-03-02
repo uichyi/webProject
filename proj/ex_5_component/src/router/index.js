@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue'; // We'll create this next
 
 // Existing imports (unchanged)
-import Test1 from '../components/kostya/Test1.vue';
-import Test2 from '../components/kostya/Test2.vue';
-import Test3 from '../components/kostya/Test3.vue';
-import Test4 from '../components/kostya/Test4.vue';
-import Test5 from '../components/kostya/Test5.vue';
+import Test1 from '../components/kostya/StartTest1.vue';
+import Test2 from '../components/kostya/StartTest2.vue';
+import Test3 from '../components/kostya/StartTest3.vue';
+import Test4 from '../components/kostya/StartTest4.vue';
+import Test5 from '../components/kostya/StartTest5.vue';
 import AttentionTest from '../components/gleb/AttentionTest.vue';
 import ReactionTest from '../components/gleb/ReactionTest.vue';
 import MemoryTest from '../components/gleb/MemoryTest.vue';

@@ -11,6 +11,12 @@ export default {
 </script>
 
 <style>
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Общие стили для всего проекта */
 body {
   font-family: 'Inter', sans-serif; /* Современный шрифт, можно заменить на другой */

@@ -415,18 +415,20 @@
   </script>
   
   <style scoped>
-  
   /* Локальные стили для Home.vue */
   .carousel-section {
     padding-bottom: 40px;
     position: relative;
+    background-color: #f9f9f9; /* Light background for better contrast */
+    border-radius: 10px; /* Optional: Adds some roundness to the section */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a light shadow to the section */
   }
   
   .carousel-title {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Slightly bigger title for more emphasis */
     font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 24px;
+    color: #2b2b2b;
+    margin-bottom: 32px;
     text-align: left;
   }
   
@@ -441,9 +443,11 @@
   
   .carousel-wrapper {
     overflow: hidden;
-    width: 900px; /* 3 карточки по 300px */
+    width: 900px; /* 3 cards, each 300px */
     position: relative;
     border-radius: 16px;
+    background-color: #ffffff; /* White background for the carousel container */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Adds a larger shadow to the carousel container */
   }
   
   .arrow-container {
@@ -481,13 +485,15 @@
     border-radius: 16px;
     padding: 24px;
     width: 300px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Stronger shadow to make each card stand out more */
     flex-shrink: 0;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease;
+    margin: 0 15px; /* Adds some space between the cards */
   }
   
   .test-card:hover {
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.15); /* Darker shadow on hover for better emphasis */
+    transform: translateY(-5px); /* Slight movement on hover to give a lifted effect */
   }
   
   .main-card {
@@ -507,18 +513,20 @@
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 16px;
+    border: 2px solid #f0f0f0; /* Adds a subtle border around the images */
   }
   
   .test-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: #333;
     margin-bottom: 12px;
+    transition: color 0.3s ease; /* Adds a smooth transition for color */
   }
   
   .test-card p {
     font-size: 1rem;
-    color: #666;
+    color: #777;
     line-height: 1.5;
     margin-bottom: 16px;
   }
@@ -532,11 +540,11 @@
     text-decoration: none;
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(107, 72, 255, 0.3); /* Adds some shadow for a modern button */
   }
   
   .btn-modern:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(107, 72, 255, 0.3);
-    color: #fff;
+    box-shadow: 0 6px 20px rgba(107, 72, 255, 0.5); /* Stronger shadow on hover */
   }
-  </style>
+</style>
