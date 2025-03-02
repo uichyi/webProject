@@ -3,48 +3,50 @@
   import Timer from './Timer.vue'
 </script>
 <template>
-  <h2 class='text-center mb-4'>Тест Струпа</h2>
-  <h4 v-if='is_finished == false' class='text-center'>Задание: найдите все квадраты, у которых цвет и надпись (название цвета) совпадают.</h4>
-  <div v-if='is_finished == false' id='content'>
-    <div class='text_container my-5'>
-      <Timer ref="timer"/>
-      <h5><b>Осталось найти:</b> {{correct_answ}}</h5>
-      <h5><b>Уровень:</b> {{level}}</h5>
-    </div>  
-      <p>{{next}}</p>
-      <p>{{final}}</p>
-      <div class="rectangles">
-        <div
-          v-for="(rectangle, index) in rectangles"
-          :key="index"
-          :id = "index"
-          :style="{
-            backgroundColor: rectangle.color,
-            color: 'white',
-            width: '100px',
-            height: '100px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '10px',
-            cursor: 'pointer'
-          }"
-          @click="checkMatch(rectangle, index)"
-        >
-          {{ rectangle.text }}  
-        </div>
-   
+  <div class="wrapper">
+    <h2 class='text-center mb-4'>Тест Струпа</h2>
+    <h4 v-if='is_finished == false' class='text-center'>Задание: найдите все квадраты, у которых цвет и надпись (название цвета) совпадают.</h4>
+    <div v-if='is_finished == false' id='content'>
+      <div class='text_container my-5'>
+        <Timer ref="timer"/>
+        <h5><b>Осталось найти:</b> {{correct_answ}}</h5>
+        <h5><b>Уровень:</b> {{level}}</h5>
+      </div>
+        <p>{{next}}</p>
+        <p>{{final}}</p>
+        <div class="rectangles">
+          <div
+            v-for="(rectangle, index) in rectangles"
+            :key="index"
+            :id = "index"
+            :style="{
+              backgroundColor: rectangle.color,
+              color: 'white',
+              width: '100px',
+              height: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '10px',
+              cursor: 'pointer'
+            }"
+            @click="checkMatch(rectangle, index)"
+          >
+            {{ rectangle.text }}
+          </div>
+    
+      </div>
     </div>
-  </div> 
-  <div v-if='testCompletedAndCallFunction' class="card">
-    <div class="card-header text-center">
-      <h3>Результат теста</h3>
+    <div v-if='testCompletedAndCallFunction' class="card">
+      <div class="card-header text-center">
+        <h3>Результат теста</h3>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h5><b>Время прохождения:</b> {{ this.$refs.timer.timeUsedCount}} сек.</h5></li>
+        <li class="list-group-item"><h5><b>Количество правильных ответов:</b> {{given_correct_answ}} / {{number_of_all_correct_answ}}</h5></li>
+        <li class="list-group-item"><h5><b>Количество ошибок:</b> {{errors}} </h5></li>
+      </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><h5><b>Время прохождения:</b> {{ this.$refs.timer.timeUsedCount}} сек.</h5></li>
-      <li class="list-group-item"><h5><b>Количество правильных ответов:</b> {{given_correct_answ}} / {{number_of_all_correct_answ}}</h5></li>
-      <li class="list-group-item"><h5><b>Количество ошибок:</b> {{errors}} </h5></li>
-    </ul>
   </div>
   
 </template>
@@ -222,6 +224,13 @@ export default {
 </script>
 
 <style scoped>
+  .wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
   .rectangles {
     display: flex;
     flex-wrap: wrap;
