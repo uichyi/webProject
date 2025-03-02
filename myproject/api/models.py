@@ -38,7 +38,7 @@ class TestNSI(models.Model):
 class TestResult(models.Model):
     test = models.ForeignKey(TestNSI, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    try_number = models.SmallIntegerField()
+    try_number = models.SmallIntegerField(null=True, blank=True)
     number_all_answers = models.IntegerField(null=True, blank=True)
     number_correct_answers = models.IntegerField(null=True, blank=True)
     complete_time = models.DurationField(null=True, blank=True)

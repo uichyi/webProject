@@ -55,7 +55,8 @@ export default {
       score: 0,
       testStarted: false,
       testCompleted: false,
-      taskId: 6
+      taskId: 6,
+      testId: 6
     };
   },
   computed: {
@@ -75,10 +76,11 @@ export default {
     async saveTestResult() {
       const testResultData =
         {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.score,
-          "time": null,
-          "special_field": null
+          "number_correct_answers": this.score,
+          "number_all_answers": this.totalTasks,
+          "accuracy": this.score / this.totalTasks
         };
       console.log(testResultData)
         axios.post(

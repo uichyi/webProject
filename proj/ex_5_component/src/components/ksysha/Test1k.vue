@@ -61,7 +61,7 @@ export default {
       timerInterval: null, 
       testStarted: false,
       testFinished: false,
-      testId: 16
+      testId: 26
     };
   },
   computed: {
@@ -122,10 +122,10 @@ export default {
     },
     async saveTestResult(score) {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": score,
-        "time": this.totalTestTime - this.timeLeft,
-        "special_field": null
+        "number_correct_answers": score,
+        "complete_time": this.totalTestTime - this.timeLeft,
       };
       console.log(testResultData);
 

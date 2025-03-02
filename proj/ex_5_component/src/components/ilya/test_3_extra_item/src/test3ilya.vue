@@ -29,10 +29,10 @@ const startGame = () => {
 async function saveTestResult() {
     const testResultData =
       {
+        'user': localStorage.getItem('user_id'),
         "test": testId,
-        "correct_answers": points.value,
-        "time": null,
-        "special_field": null
+        "number_correct_answers": points.value,
+        "complete_time": INIT_TIME
 
       };
     console.log(testResultData)

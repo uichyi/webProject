@@ -64,7 +64,7 @@
                 answ_color: [],
                 correct_answ: [],
                 corr_places_count: 0,
-                testId: 23
+                testId: 17
             };
         },
         created(){
@@ -93,10 +93,10 @@
         methods: {
           async saveTestResult() {
               const testResultData = {
+                'user': localStorage.getItem('user_id'),
                 "test": this.testId,
-                "correct_answers": this.correct_answ.length,
-                "time": 0,
-                "special_field": null
+                "number_correct_answers": this.correct_answ.length,
+                "complete_time": 0,
               };
               console.log(testResultData);
 

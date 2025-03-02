@@ -101,7 +101,7 @@ export default {
       given_correct_answ: 0,
       time_load: false,
       is_finished: false,
-      testId: 22
+      testId: 16
     };
   },
   mounted(){
@@ -170,10 +170,12 @@ export default {
   methods: {
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": null,
-        "time": this.$refs.timer.timeUsedCount,
-        "special_field": this.errors
+        "number_correct_answers": this.given_correct_answ,
+        "number_all_answers": this.given_correct_answ + this.errors,
+        "complete_time": this.$refs.timer.timeUsedCount,
+        "accuracy": Number(((this.given_correct_answ + this.errors) / this.number_of_all_correct_answ).toFixed(2))
       };
       console.log(testResultData);
 

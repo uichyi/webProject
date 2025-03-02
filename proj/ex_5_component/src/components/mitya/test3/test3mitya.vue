@@ -42,7 +42,7 @@ export default {
       activeCell: null,
       timer: null,
       autoChangeTimer: null,
-      testId: 26
+      testId: 23
     };
   },
   methods: {
@@ -89,10 +89,10 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.score,
-        "time": 10,
-        "special_field": null
+        "number_correct_answers": this.score,
+        "complete_time": 10,
       };
       console.log(testResultData);
 

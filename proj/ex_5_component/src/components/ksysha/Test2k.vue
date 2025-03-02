@@ -43,7 +43,7 @@
         timerText: 'Ждите сигнал...',
         resultVisible: false,
         startTime: null,
-        testId: 17
+        testId: 27
       };
     },
     computed: {
@@ -98,10 +98,10 @@
       },
       async saveTestResult() {
         const testResultData = {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": null,
-          "time": 0,
-          "special_field": this.reactionTime
+          "complete_time": 0,
+          "accuracy": this.reactionTime
         };
         console.log(testResultData);
 

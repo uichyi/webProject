@@ -48,11 +48,9 @@ watch(currentLevel, () => {
 async function saveTestResult() {
     const testResultData =
       {
+        'user': localStorage.getItem('user_id'),
         "test": testId,
-        "correct_answers": correct.value,
-        "time": null,
-        "special_field": null
-
+        "number_correct_answers": correct.value,
       };
     console.log(testResultData)
       axios.post(

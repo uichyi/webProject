@@ -69,7 +69,7 @@ export default {
       find_corr_answ: 0,
       find_bad_answ: 0,
       time_load: false,
-      testId: 19
+      testId: 20
     };
   },
   mounted(){
@@ -122,10 +122,10 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.find_corr_answ,
-        "time": 60 - this.$refs.timer.timeLeftCount,
-        "special_field": null
+        "number_correct_answers": this.find_corr_answ,
+        "complete_time": 60 - this.$refs.timer.timeLeftCount,
       };
       console.log(testResultData);
 

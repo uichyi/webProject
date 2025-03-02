@@ -49,7 +49,7 @@
         testic: {},
         values: [],
         first_start: false,
-        testId: 28
+        testId: 25
       };
     },
     methods: {
@@ -187,10 +187,10 @@
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.score,
-        "time": 10 - this.remainingTime,
-        "special_field": null
+        "number_correct_answers": this.score,
+        "complete_time": 10 - this.remainingTime,
       };
       console.log(testResultData);
 

@@ -28,17 +28,18 @@ export default {
       userAnswers: [],
       correctAnswers: 0,
       resultsVisible: false,
-      testId: 9
+      testId: 10
     };
   },
   methods: {
     async saveTestResult() {
       const testResultData =
         {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.correctAnswers,
-          "time": null,
-          "special_field": null
+          "number_correct_answers": this.correctAnswers,
+          "number_all_answers": this.rows.length,
+          "accuracy": this.correctAnswers / this.rows.length
         };
       console.log(testResultData)
         axios.post(
