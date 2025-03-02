@@ -1,7 +1,7 @@
 <template>
   <div v-if="false">
     <!--<Log_in/>-->
-    <!-- <Sign_up/> -->
+    <!--<Sign_up/>-->
     <!--<User_information/>-->
   </div>
   <div v-else>
