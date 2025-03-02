@@ -1,31 +1,28 @@
 <template>
-    <div class="test-container">
-      <h2 class="test-title">Тест на реакцию</h2>
+    <div class="wrapper">
+      <div class="test-container">
+        <h2 class="test-title">Тест на реакцию</h2>
       
-      <div v-if="!testStarted" class="test-description">
-        <p>В этом тесте ваша задача — как можно быстрее нажать на кнопку, когда она появится на экране.</p>
-        <p>Кнопка будет показываться в случайный момент времени (от 2 до 5 секунд). Чем быстрее вы нажмете, тем лучше ваш результат!</p>
+        <div v-if="!testStarted" class="test-description">
+          <p>В этом тесте ваша задача — как можно быстрее нажать на кнопку, когда она появится на экране.</p>
+          <p>Кнопка будет показываться в случайный момент времени (от 2 до 5 секунд). Чем быстрее вы нажмете, тем лучше ваш результат!</p>
+        </div>
+        <div v-if="!testStarted" class="button-container">
+          <button @click="startTest" class="start-button">Начать тест</button>
+        </div>
+        <div v-if="testStarted && !waitingForReaction && !resultVisible" class="timer">
+          <p>{{ timerText }}</p>
+        </div>
+        <div v-if="waitingForReaction" class="reaction-button-container">
+          <button @click="recordReaction" class="reaction-button">Клик!</button>
+        </div>
+        <div v-if="resultVisible" class="result">
+          <p>Время реакции: {{ reactionTime }} миллисекунд</p>
+          <p>Оценка: {{ evaluation }}</p>
+          <button @click="startTest"class="start-button">Попробовать снова</button>
+        </div>
+        <button @click="goBack" class="back-button">Вернуться на главный экран</button>
       </div>
-  
-      <div v-if="!testStarted" class="button-container">
-        <button @click="startTest" class="start-button">Начать тест</button>
-      </div>
-  
-      <div v-if="testStarted && !waitingForReaction && !resultVisible" class="timer">
-        <p>{{ timerText }}</p>
-      </div>
-  
-      <div v-if="waitingForReaction" class="reaction-button-container">
-        <button @click="recordReaction" class="reaction-button">Клик!</button>
-      </div>
-  
-      <div v-if="resultVisible" class="result">
-        <p>Время реакции: {{ reactionTime }} миллисекунд</p>
-        <p>Оценка: {{ evaluation }}</p>
-        <button @click="startTest"class="start-button">Попробовать снова</button>
-      </div>
-
-      <button @click="goBack" class="back-button">Вернуться на главный экран</button>
     </div>
   </template>  
   
@@ -123,6 +120,14 @@
   </script>
   
   <style scoped>
+
+.wrapper {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+
   .test-container {
     text-align: center;
     max-width: 600px;
