@@ -88,7 +88,7 @@ const handleClick = (e, cell, index) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .gridWrapper {
   display: flex;
   justify-content: center;
