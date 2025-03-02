@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -29,20 +31,21 @@ export default {
       time: 60,
       timer: null,
       gameOver: false,
+      testId: 2,
     };
   },
   methods: {
     generateNewSymbol() {
       const symbols = ['←', '→', '↑', '↓'];
       const backgrounds = ['blue', 'red'];
-      
+
       this.currentSymbol = symbols[Math.floor(Math.random() * symbols.length)];
       this.backgroundColor = backgrounds[Math.floor(Math.random() * backgrounds.length)];
     },
     checkAnswer(selectedDirection) {
       const isBlueBackground = this.backgroundColor == 'blue';
       const isCorrect = (isBlueBackground && this.currentSymbol == selectedDirection) ||
-                       (!isBlueBackground && (this.currentSymbol == this.viceVersa(selectedDirection)));
+                        (!isBlueBackground && (this.currentSymbol == this.viceVersa(selectedDirection)));
 
       if (isCorrect) {
         this.score++;
@@ -50,7 +53,7 @@ export default {
         this.score--;
       }
 
-      this.generateNewSymbol(); 
+      this.generateNewSymbol();
     },
     viceVersa(selectedDirection) {
       switch(selectedDirection){
@@ -71,6 +74,29 @@ export default {
     stopGame() {
       this.gameOver = true;
       clearInterval(this.timer);
+      this.saveTestResult();
+    },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.score,
+        "time": 60,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
     }
   },
   mounted() {

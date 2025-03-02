@@ -3,10 +3,12 @@ import Game from "./components/Game.vue";
 import Start from "./components/Start.vue";
 import Results from "./components/Results.vue";
 import { ref } from "vue";
+import axios from "axios";
 
 const gameState = ref("start");
 const results = ref([]);
 const duration = ref(1);
+const testId = 14;
 
 const setDuration = (value) => {
   duration.value = value;
@@ -21,8 +23,36 @@ const startGame = () => {
   console.log("startGAme");
 };
 
+async function saveTestResult(value) {
+    const testResultData =
+      {
+        "test": testId,
+        "correct_answers": null,
+        "time": null,
+        "special_field": value
+
+      };
+    console.log(testResultData)
+      axios.post(
+        'http://localhost:8000/api/test-results/create/',
+        testResultData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(response => {
+        console.log('Результат теста сохранен:', response.data);
+      }
+      ).catch(error => {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+      );
+}
+
 const gameOver = (value) => {
   gameState.value = "gameover";
+  saveTestResult(value);
   results.value.push(value);
 };
 </script>

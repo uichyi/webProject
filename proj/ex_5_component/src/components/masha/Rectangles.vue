@@ -36,7 +36,7 @@
    
     </div>
   </div> 
-  <div v-if='is_finished==true' class="card">
+  <div v-if='testCompletedAndCallFunction' class="card">
     <div class="card-header text-center">
       <h3>Результат теста</h3>
     </div>
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   components: {
     Timer
@@ -98,13 +100,22 @@ export default {
       number_of_all_correct_answ:2,
       given_correct_answ: 0,
       time_load: false,
-      is_finished: false
+      is_finished: false,
+      testId: 22
     };
   },
   mounted(){
     this.time_load = true
   },
   computed:{
+    testCompletedAndCallFunction() {
+      if (this.is_finished) {
+        this.saveTestResult();
+        return true;
+      } else {
+        return false;
+      }
+    },
     next(){
       if (this.correct_answ == 0 && this.level<this.number_of_levels){
         this.level++
@@ -132,7 +143,6 @@ export default {
       else if(this.correct_answ == 0 && this.level==this.number_of_levels)
         this.level++
     },
-
     final(){
       if (this.level==this.number_of_levels+1){
         this.$refs.timer.stopTimer()
@@ -158,6 +168,28 @@ export default {
     }
   },
   methods: {
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": null,
+        "time": this.$refs.timer.timeUsedCount,
+        "special_field": this.errors
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+    },
     checkMatch(rectangle, index) {
       if (rectangle.color === rectangle.textColor) {
         this.matchCount++;

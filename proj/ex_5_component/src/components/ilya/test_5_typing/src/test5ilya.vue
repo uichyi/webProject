@@ -4,9 +4,11 @@ import Start from "./components/Start.vue";
 import Game from "./components/Game.vue";
 import TimerLine from "./components/TimerLine.vue";
 import Results from "./components/Results.vue";
+import axios from "axios";
 
 const gameState = ref("start");
 const gameDuration = ref(15);
+const testId = 15;
 
 const wpm = ref(0);
 const changeWPM = (val) => {
@@ -31,6 +33,33 @@ const changeState = (state) => {
 let timerInterval;
 const timer = ref(null);
 
+async function saveTestResult() {
+    const testResultData =
+      {
+        "test": testId,
+        "correct_answers": null,
+        "time": null,
+        "special_field": wpm.value
+
+      };
+    console.log(testResultData)
+      axios.post(
+        'http://localhost:8000/api/test-results/create/',
+        testResultData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(response => {
+        console.log('Результат теста сохранен:', response.data);
+      }
+      ).catch(error => {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+      );
+}
+
 watch(gameState, (newState) => {
   if (newState === "game") {
     if (timerInterval) {
@@ -44,6 +73,7 @@ watch(gameState, (newState) => {
         timer.value -= 1;
       } else {
         gameState.value = "end";
+        saveTestResult();
         clearInterval(timerInterval);
       }
     }, 1000);

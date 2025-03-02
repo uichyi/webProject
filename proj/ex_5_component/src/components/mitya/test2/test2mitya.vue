@@ -18,6 +18,7 @@
   import StartPage from "./StartPage.vue";
   import TestPage from "./TestPage.vue";
   import ResultPage from "./ResultPage.vue";
+  import axios from "axios";
   
   export default {
     name: "App",
@@ -40,7 +41,8 @@
         timer: 10,
         interval: null,
         gameOver: false,
-        answers: []
+        answers: [],
+        testId: 25
       };
     },
     methods: {
@@ -69,6 +71,7 @@
                 this.gameOver = true;
                 this.isTesting = false;
                 this.isFinished = true;
+                this.saveTestResult()
             }
         }, 1000);
       },
@@ -76,8 +79,8 @@
       if (this.gameOver) return;
       const checkcolor = this.words.indexOf(this.firstWord);
       const colorofword = this.colors[checkcolor];
-      const isCorrect = 
-        (colorofword === this.secondWordColor && isYes) || 
+      const isCorrect =
+        (colorofword === this.secondWordColor && isYes) ||
         (colorofword !== this.secondWordColor && !isYes);
 
       if (isCorrect) {
@@ -86,8 +89,6 @@
       this.answers.push([this.firstWord, this.firstWordColor, this.secondWord, this.secondWordColor, isYes, isCorrect])
       this.generateTask();
     },
-     
-
       resetTest() {
         this.isTesting = false;
         this.isFinished = false;
@@ -95,6 +96,28 @@
         this.score = 0;
         this.answers = [];
         
+      },
+      async saveTestResult() {
+        const testResultData = {
+          "test": this.testId,
+          "correct_answers": this.score,
+          "time": 10,
+          "special_field": this.answers.length - this.score // Количество неправильных
+        };
+        console.log(testResultData);
+
+        try {
+          const response = await axios.post(
+            'http://localhost:8000/api/test-results/create/',
+            testResultData,
+            {
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+          console.log('Результат теста сохранен:', response.data);
+        } catch (error) {
+          console.error('Ошибка при сохранении результата:', error);
+        }
       },
     },
   };

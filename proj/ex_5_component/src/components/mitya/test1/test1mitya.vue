@@ -15,6 +15,7 @@
 import StartPage from "./StartPage.vue";
 import TestPage from "./TestPage.vue";
 import ResultPage from "./ResultPage.vue";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -35,6 +36,7 @@ export default {
       timer: null, 
       expressions_answers: [],
       all_expressions: 0,
+      testId: 24
     };
   },
   methods: {
@@ -91,6 +93,7 @@ export default {
       clearInterval(this.timer);
       this.isTesting = false;
       this.isFinished = true;
+      this.saveTestResult();
     },
     resetTest() {
       this.isTesting = false;
@@ -101,6 +104,28 @@ export default {
       this.currentExpression = "";
       this.all_expressions = 0;
       
+    },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.score,
+        "time": 10,
+        "special_field": this.all_expressions - this.score // Количество неправильных
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
     },
   },
 };

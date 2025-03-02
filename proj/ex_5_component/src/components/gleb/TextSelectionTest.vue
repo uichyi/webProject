@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -36,7 +38,8 @@ export default {
       selectedWords: [],
       totalWords: 23,
       showResults: false,
-      testStarted: false
+      testStarted: false,
+      testId: 10
     };
   },
   methods: {
@@ -62,6 +65,7 @@ export default {
     },
     finishTest() {
       this.showResults = true;
+      this.saveTestResult()
       this.$emit('test-complete', this.selectedWords.length, this.totalWords);
     },
     restartTest() {
@@ -69,6 +73,28 @@ export default {
       this.showResults = false;
       this.$emit('test-start');
     },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.selectedWords.length,
+        "time": null,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+    }
   },
   mounted() {
     this.$emit('test-start');

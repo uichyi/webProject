@@ -41,6 +41,8 @@
   </template>  
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -60,6 +62,7 @@
         wordColor: '',
         options: [],
         evaluation: '',
+        testId: 18
       };
     },
     methods: {
@@ -109,7 +112,30 @@
         clearInterval(this.timerInterval); 
         this.testStarted = false;
         this.testEnded = true;
+        this.saveTestResult()
         this.evaluate();
+      },
+      async saveTestResult() {
+        const testResultData = {
+          "test": this.testId,
+          "correct_answers": this.correctAnswers,
+          "time": 60,
+          "special_field": null
+        };
+        console.log(testResultData);
+
+        try {
+          const response = await axios.post(
+            'http://localhost:8000/api/test-results/create/',
+            testResultData,
+            {
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+          console.log('Результат теста сохранен:', response.data);
+        } catch (error) {
+          console.error('Ошибка при сохранении результата:', error);
+        }
       },
       evaluate() {
         const percentage = (this.correctAnswers / 15) * 100; 

@@ -4,12 +4,14 @@ import StartScreen from "./components/StartScreen.vue";
 import Countdown from "./components/Countdown.vue";
 import Remembering from "./components/Remembering.vue";
 import Guessing from "./components/Guessing.vue";
+import axios from "axios";
 
 const correct = ref(0);
 const wrong = ref(0);
 const currentLevel = ref(2);
 const grid = ref([]);
 const MAX_LEVEL = 5;
+const testId = 11;
 
 const currentState = ref("start");
 
@@ -38,9 +40,37 @@ onMounted(() => {
 watch(currentLevel, () => {
   if (currentLevel.value > MAX_LEVEL) {
     currentState.value = "end";
+    saveTestResult();
     return;
   }
 });
+
+async function saveTestResult() {
+    const testResultData =
+      {
+        "test": testId,
+        "correct_answers": correct.value,
+        "time": null,
+        "special_field": null
+
+      };
+    console.log(testResultData)
+      axios.post(
+        'http://localhost:8000/api/test-results/create/',
+        testResultData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(response => {
+        console.log('Результат теста сохранен:', response.data);
+      }
+      ).catch(error => {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+      );
+}
 
 const restart = () => {
   currentLevel.value = 2;

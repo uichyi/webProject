@@ -36,7 +36,6 @@ export default {
       timer: null,
       gameOver: false,
       testId: 1,
-      userId: 1, // ID user (должно быть динамическим)
     };
   },
   watch: {
@@ -53,13 +52,15 @@ export default {
   },
   methods: {
     async saveTestResult() {
-      const testResultData = 
+      const testResultData =
         {
-          "try_number": 1,
           "test": this.testId,
-          "user": this.userId,
-          "number_correct_answers": this.score
+          "correct_answers": this.score,
+          "time": 60,
+          "special_field": null
+
         };
+      console.log(testResultData)
         axios.post(
           'http://localhost:8000/api/test-results/create/',
           testResultData,
@@ -78,12 +79,12 @@ export default {
     },
     getRowEmojis(rowIndex) {
       const startIndex = (rowIndex - 1) * 4;
-      return this.emojis.slice(startIndex, startIndex + 4); 
+      return this.emojis.slice(startIndex, startIndex + 4);
     },
     // TRK 11-12-2024 ->
     isSelected(index, rowIndex) {
       const actualIndex = index + (rowIndex - 1) * 4;
-      return actualIndex == this.firstChoice; 
+      return actualIndex == this.firstChoice;
     },
     // TRK 11-12-2024 <-
     getRandomEmojis(count) {
@@ -94,15 +95,15 @@ export default {
       while (selectedEmojis.length < count) {
         const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
         if (!selectedEmojis.includes(randomEmoji)) {
-          selectedEmojis.push(randomEmoji); 
+          selectedEmojis.push(randomEmoji);
         }
       }
       return this.shuffle(selectedEmojis);
     },
     shuffle(array) {
       for (let i = 0; i < array.length; i++) {
-        const j = Math.floor(Math.random() * (array.length - i)) + i; 
-        [array[i], array[j]] = [array[j], array[i]]; 
+        const j = Math.floor(Math.random() * (array.length - i)) + i;
+        [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
     },
@@ -143,7 +144,7 @@ export default {
     },
   },
   mounted() {
-    this.startTimer(); 
+    this.startTimer();
   },
 };
 </script>

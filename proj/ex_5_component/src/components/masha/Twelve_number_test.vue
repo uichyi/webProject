@@ -51,6 +51,8 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         data() {
             return {
@@ -61,7 +63,8 @@
                 check: false,
                 answ_color: [],
                 correct_answ: [],
-                corr_places_count: 0
+                corr_places_count: 0,
+                testId: 23
             };
         },
         created(){
@@ -88,6 +91,28 @@
             
         },
         methods: {
+          async saveTestResult() {
+              const testResultData = {
+                "test": this.testId,
+                "correct_answers": this.correct_answ.length,
+                "time": 0,
+                "special_field": null
+              };
+              console.log(testResultData);
+
+              try {
+                const response = await axios.post(
+                  'http://localhost:8000/api/test-results/create/',
+                  testResultData,
+                  {
+                    headers: { 'Content-Type': 'application/json' }
+                  }
+                );
+                console.log('Результат теста сохранен:', response.data);
+              } catch (error) {
+                console.error('Ошибка при сохранении результата:', error);
+              }
+            },
             checkAnswers(){
                this.check = true
                 for(let i=0; i<12; i++){
@@ -103,6 +128,7 @@
                         this.answ_color[i] = '#f0899d'
                     }
                 }
+                this.saveTestResult();
             }
         }
     }

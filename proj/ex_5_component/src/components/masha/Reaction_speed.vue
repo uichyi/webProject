@@ -19,6 +19,8 @@
     <Timer ref="timer"/>
 </template>
 <script>
+    import axios from "axios";
+
     export default {
         components: {
            Timer
@@ -32,6 +34,7 @@
                 is_touch: false,
                 result: 0,
                 level: 0,
+                testId: 21,
                 results: [[0, 150,'Превосходно! Можно садиться за штурвал истребителя или болида формулы 1.'], [151, 170, 'Это пять с плюсом! Чемпионы мира по пинг-понгу и боксу смотрят на Вас как на конкурента.'], 
                 [171, 190, 'Великолепно! Мастера спорта международного класса одобряют.'], [191, 200, 'Хорошо! Мастер спорта у Вас в кармане.'], [201, 210, 'Неплохо. КМС зачтен.'], [211, 230, 'Нормально. Вы активны, можете лучше.'], 
                 [231, 270, 'Средненько. Скорость реакции, как и у большинства людей.'], [271, 350, 'Неуд.'], [351, 500, 'Незачет.'],['Вы вообще живы там? Лучше отдохните, попробуйте завтра.']]
@@ -43,7 +46,6 @@
         computed:{
             countTime(){
                 if (this.is_waiting){
-                    console.log(this.$refs.timer.totalTime)
                     if (this.$refs.timer.totalTime == 3000){
                         this.is_waiting = false
                         this.is_touch = true
@@ -65,18 +67,40 @@
             show_res(){
                 if (this.level == 5){
                     for (let i=0; i<this.results.length-1; i++){
-                        console.log(this.results[i][2])
-                        console.log(this.result / this.level)
                         if(this.result / this.level>=this.results[i][0] && this.result / this.level<=this.results[i][1]){
+                            this.saveTestResult();
                             return 'Ваш результат: ' + this.results[i][2]
                         }
                     }
+                    this.saveTestResult();
                     return 'Ваш результат: ' + this.results[this.results.length-1][1]
                 }
                 return ''
             }
         },
         methods: {
+            async saveTestResult(result) {
+                const testResultData = {
+                  "test": this.testId,
+                  "correct_answers": null,
+                  "time": 0,
+                  "special_field": this.result / 5
+                };
+                console.log(testResultData);
+
+                try {
+                  const response = await axios.post(
+                    'http://localhost:8000/api/test-results/create/',
+                    testResultData,
+                    {
+                      headers: { 'Content-Type': 'application/json' }
+                    }
+                  );
+                  console.log('Результат теста сохранен:', response.data);
+                } catch (error) {
+                  console.error('Ошибка при сохранении результата:', error);
+                }
+              },
             do_actions(){
                 if(this.level < 5){
                     let box = document.getElementById('box')

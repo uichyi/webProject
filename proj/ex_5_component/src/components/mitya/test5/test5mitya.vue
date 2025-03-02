@@ -31,6 +31,8 @@
   </template>
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -47,6 +49,7 @@
         testic: {},
         values: [],
         first_start: false,
+        testId: 28
       };
     },
     methods: {
@@ -178,8 +181,31 @@
     checkGameOver() {
         if (this.values.length === 0 || this.remainingTime <= 0) {
         this.gameOver = true;
+        this.saveTestResult();
         clearInterval(this.timer);
         }
+    },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.score,
+        "time": 10 - this.remainingTime,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
     },
   },
   beforeDestroy() {

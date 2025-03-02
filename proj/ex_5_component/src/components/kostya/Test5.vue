@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -28,6 +30,7 @@ export default {
       time: 60,
       timer: null,
       gameOver: false,
+      testId: 5
     };
   },
   methods: {
@@ -68,7 +71,30 @@ export default {
     stopGame() {
       this.gameOver = true;
       clearInterval(this.timer);
+      this.saveTestResult();
     },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.score,
+        "time": 60,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+    }
   },
   mounted() {
     this.startTimer();

@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -40,6 +42,7 @@ export default {
       activeCell: null,
       timer: null,
       autoChangeTimer: null,
+      testId: 26
     };
   },
   methods: {
@@ -73,6 +76,7 @@ export default {
       clearTimeout(this.autoChangeTimer);
       this.isPlaying = false;
       this.gameOver = true;
+      this.saveTestResult();
     },
     resetGame() {
       clearInterval(this.timer);
@@ -82,6 +86,28 @@ export default {
       this.timeLeft = 10;
       this.score = 0;
       this.activeCell = null;
+    },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.score,
+        "time": 10,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
     },
   },
 };

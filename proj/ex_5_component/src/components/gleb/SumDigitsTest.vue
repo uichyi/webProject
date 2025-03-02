@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -26,10 +28,35 @@ export default {
       userAnswers: [],
       correctAnswers: 0,
       resultsVisible: false,
+      testId: 9
     };
   },
   methods: {
-
+    async saveTestResult() {
+      const testResultData =
+        {
+          "test": this.testId,
+          "correct_answers": this.correctAnswers,
+          "time": null,
+          "special_field": null
+        };
+      console.log(testResultData)
+        axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        ).then(response => {
+          console.log('Результат теста сохранен:', response.data);
+        }
+        ).catch(error => {
+          console.error('Ошибка при сохранении результата:', error);
+        }
+        );
+    },
     generateRows() {
       this.rows = Array.from({ length: 5 }, () =>
         Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join("")
@@ -37,7 +64,6 @@ export default {
       this.userAnswers = Array(this.rows.length).fill(null);
       this.$emit('test-start');
     },
-
     submitAnswers() {
       this.correctAnswers = this.rows.reduce((count, row, index) => {
         const correctSum = row
@@ -46,6 +72,7 @@ export default {
         return count + (this.userAnswers[index] === correctSum ? 1 : 0);
       }, 0);
       this.resultsVisible = true;
+      this.saveTestResult()
       this.$emit('test-complete', this.correctAnswers, 5);
     },
 

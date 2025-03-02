@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   components: {
     Timer
@@ -66,7 +68,8 @@ export default {
       is_finished: false,
       find_corr_answ: 0,
       find_bad_answ: 0,
-      time_load: false
+      time_load: false,
+      testId: 19
     };
   },
   mounted(){
@@ -117,6 +120,28 @@ export default {
         }
       }
     },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": this.find_corr_answ,
+        "time": 60 - this.$refs.timer.timeLeftCount,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+    },
     check_answ(){
       this.is_started = false
       this.is_finished = true
@@ -138,6 +163,7 @@ export default {
           }
         }
       }
+      this.saveTestResult()
     }
   }
     

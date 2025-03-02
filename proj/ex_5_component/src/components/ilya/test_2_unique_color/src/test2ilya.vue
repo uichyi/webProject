@@ -4,12 +4,14 @@ import StartScreen from "./components/StartScreen.vue";
 import EndScreen from "./components/EndScreen.vue";
 import Table from "./components/Table.vue";
 import TimerLine from "./components/TimerLine.vue";
+import axios from "axios";
 
 const INIT_TIME = 15;
 const timer = ref(INIT_TIME);
 const points = ref(0);
 const gameState = ref("startscreen");
 const tableKey = ref(0);
+const testId = 12;
 
 let timerInterval;
 
@@ -24,6 +26,33 @@ const startGame = () => {
   gameState.value = "game";
 };
 
+async function saveTestResult() {
+    const testResultData =
+      {
+        "test": testId,
+        "correct_answers": points.value,
+        "time": null,
+        "special_field": null
+
+      };
+    console.log(testResultData)
+      axios.post(
+        'http://localhost:8000/api/test-results/create/',
+        testResultData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(response => {
+        console.log('Результат теста сохранен:', response.data);
+      }
+      ).catch(error => {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+      );
+}
+
 watch(gameState, (newState) => {
   if (newState === "game") {
     if (timerInterval) {
@@ -37,6 +66,7 @@ watch(gameState, (newState) => {
         timer.value -= 1;
       } else {
         gameState.value = "end";
+        saveTestResult();
         clearInterval(timerInterval);
       }
     }, 1000);

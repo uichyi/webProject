@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'IQTest',
   data() {
@@ -58,7 +60,8 @@ export default {
       timeLeft: 30, 
       timerInterval: null, 
       testStarted: false,
-      testFinished: false, 
+      testFinished: false,
+      testId: 16
     };
   },
   computed: {
@@ -87,6 +90,7 @@ export default {
       });
       clearInterval(this.timerInterval); 
       this.resultMessage = `Ваш IQ: ${score * 10}.`;
+      this.saveTestResult(score);
       this.testFinished = true;
     },
     goBack() {
@@ -115,6 +119,28 @@ export default {
       this.testStarted = false;
       this.testFinished = false;
       clearInterval(this.timerInterval);
+    },
+    async saveTestResult(score) {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": score,
+        "time": this.totalTestTime - this.timeLeft,
+        "special_field": null
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
     }
   },
   beforeDestroy() {

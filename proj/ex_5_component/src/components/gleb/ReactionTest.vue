@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -28,6 +30,7 @@ export default {
       reactionTimes: [],
       timeoutId: null,
       startTime: 0,
+      testId: 8,
     };
   },
   computed: {
@@ -64,6 +67,7 @@ export default {
         } else {
           this.currentAttempt++;
           clearTimeout(this.timeoutId);
+          this.saveTestResult(); // Вызов функции сохранения результата
         }
       } else {
         alert('Подождите, пока круг станет зеленым!');
@@ -77,6 +81,28 @@ export default {
       this.reactionTimes = [];
       this.isGreen = false;
     },
+    async saveTestResult() {
+      const testResultData = {
+        "test": this.testId,
+        "correct_answers": null,
+        "time": null,
+        "special_field": this.averageReactionTime
+      };
+      console.log(testResultData);
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+        console.log('Результат теста сохранен:', response.data);
+      } catch (error) {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+    }
   },
 };
 </script>

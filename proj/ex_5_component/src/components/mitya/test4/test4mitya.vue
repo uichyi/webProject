@@ -32,6 +32,8 @@
   </template>
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -44,37 +46,38 @@
         gameWon: false,
         imageWidth: 0,
         imageHeight: 0,
+        testId: 27
       };
     },
     methods: {
         uploadImage(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        this.imageWidth = img.width;
-        this.imageHeight = img.height;
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = new Image();
+              img.onload = () => {
+                this.imageWidth = img.width;
+                this.imageHeight = img.height;
 
-        this.imageSrc = e.target.result;
-        this.imageLoaded = true;
+                this.imageSrc = e.target.result;
+                this.imageLoaded = true;
 
-        if (this.imageWidth > this.imageHeight) {
-          this.imageHeight = (this.imageHeight / this.imageWidth) * 400;
-          this.imageWidth = 400;
-        } else {
-          this.imageWidth = (this.imageWidth / this.imageHeight) * 400;
-          this.imageHeight = 400;
-        }
+                if (this.imageWidth > this.imageHeight) {
+                  this.imageHeight = (this.imageHeight / this.imageWidth) * 400;
+                  this.imageWidth = 400;
+                } else {
+                  this.imageWidth = (this.imageWidth / this.imageHeight) * 400;
+                  this.imageHeight = 400;
+                }
 
-        this.initializeGame();
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-},
+                this.initializeGame();
+              };
+              img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        },
       initializeGame() {
         this.pieces = [];
         const totalPieces = this.gridSize * this.gridSize;
@@ -134,24 +137,24 @@
         }
       },
       getPieceStyle(piece) {
-  if (piece.empty) {
-    return {
-      width: '100%',
-      height: '100%',
-      backgroundColor: '#f0f0f0',
-    };
-  }
-  const pieceWidth = 400 / this.gridSize;
-  const pieceHeight = 400 / this.gridSize;
+        if (piece.empty) {
+          return {
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#f0f0f0',
+          };
+        }
+        const pieceWidth = 400 / this.gridSize;
+        const pieceHeight = 400 / this.gridSize;
 
-  return {
-    width: `${pieceWidth}px`,
-    height: `${pieceHeight}px`,
-    backgroundImage: `url(${this.imageSrc})`,
-    backgroundSize: `400px 400px`,
-    backgroundPosition: `${-piece.x * (400 / this.imageWidth)}px ${-piece.y * (400 / this.imageHeight)}px`,
-  };
-},
+        return {
+          width: `${pieceWidth}px`,
+          height: `${pieceHeight}px`,
+          backgroundImage: `url(${this.imageSrc})`,
+          backgroundSize: `400px 400px`,
+          backgroundPosition: `${-piece.x * (400 / this.imageWidth)}px ${-piece.y * (400 / this.imageHeight)}px`,
+        };
+      },
       movePiece(index) {
         if (this.isAdjacent(index, this.emptyIndex)) {
           [this.shuffledPieces[index], this.shuffledPieces[this.emptyIndex]] = [
@@ -161,6 +164,7 @@
           this.emptyIndex = index;
   
           if (this.checkWin()) {
+            this.saveTestResult();
             this.gameWon = true;
           }
         }
@@ -173,7 +177,29 @@
         return (row1 === row2 && Math.abs(col1 - col2) === 1) || (col1 === col2 && Math.abs(row1 - row2) === 1);
       },
       checkWin() {
-        return this.shuffledPieces.every((piece, index) => piece.index === index);
+          return this.shuffledPieces.every((piece, index) => piece.index === index);
+      },
+      async saveTestResult() {
+        const testResultData = {
+          "test": this.testId,
+          "correct_answers": this.gameWon,
+          "time": null,
+          "special_field": null
+        };
+        console.log(testResultData);
+
+        try {
+          const response = await axios.post(
+            'http://localhost:8000/api/test-results/create/',
+            testResultData,
+            {
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+          console.log('Результат теста сохранен:', response.data);
+        } catch (error) {
+          console.error('Ошибка при сохранении результата:', error);
+        }
       },
     },
   };

@@ -30,6 +30,8 @@
   </template>  
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -41,6 +43,7 @@
         timerText: 'Ждите сигнал...',
         resultVisible: false,
         startTime: null,
+        testId: 17
       };
     },
     computed: {
@@ -69,7 +72,7 @@
       recordReaction() {
         const reactionTimeInMs = Date.now() - this.startTime;
         this.reactionTime = Math.round(reactionTimeInMs);
-  
+        this.saveTestResult()
         clearTimeout(this.timerInterval);
         this.waitingForReaction = false;
         this.resultVisible = true;
@@ -93,6 +96,28 @@
       goBack() {
         this.$emit('go-back'); 
       },
+      async saveTestResult() {
+        const testResultData = {
+          "test": this.testId,
+          "correct_answers": null,
+          "time": 0,
+          "special_field": this.reactionTime
+        };
+        console.log(testResultData);
+
+        try {
+          const response = await axios.post(
+            'http://localhost:8000/api/test-results/create/',
+            testResultData,
+            {
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+          console.log('Результат теста сохранен:', response.data);
+        } catch (error) {
+          console.error('Ошибка при сохранении результата:', error);
+        }
+      }
     },
   };
   </script>

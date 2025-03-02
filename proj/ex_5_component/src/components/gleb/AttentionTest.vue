@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-if="testCompleted" class="result">
+    <div v-if="testCompletedAndCallFunction" class="result">
       <h3>Тест завершен!</h3>
       <p>Вы правильно ответили на {{ score }} из {{ totalTasks }} вопросов.</p>
       <button @click="restartTest">Пройти тест заново</button>
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -53,14 +55,48 @@ export default {
       score: 0,
       testStarted: false,
       testCompleted: false,
+      taskId: 6
     };
   },
   computed: {
     progress() {
       return (this.currentTask / this.totalTasks) * 100;
     },
+    testCompletedAndCallFunction() {
+      if (this.testCompleted) {
+        this.saveTestResult();
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
+    async saveTestResult() {
+      const testResultData =
+        {
+          "test": this.testId,
+          "correct_answers": this.score,
+          "time": null,
+          "special_field": null
+        };
+      console.log(testResultData)
+        axios.post(
+          'http://localhost:8000/api/test-results/create/',
+          testResultData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        ).then(response => {
+          console.log('Результат теста сохранен:', response.data);
+        }
+        ).catch(error => {
+          console.error('Ошибка при сохранении результата:', error);
+        }
+        );
+    },
     handleClick() {
       if (!this.testStarted) {
         this.testStarted = true;

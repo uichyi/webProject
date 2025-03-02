@@ -52,6 +52,8 @@
     <p v-if='time_load'>{{final}}</p>
 </template>
 <script>
+    import axios from "axios";
+
     export default {
         components(){
             Timer
@@ -66,7 +68,8 @@
                 is_finished: false,
                 is_started: false,
                 level: 1,
-                time_levels: [80, 50, 30]
+                time_levels: [80, 50, 30],
+                testId: 20
             };    
         },
         mounted(){
@@ -78,6 +81,7 @@
                 if (this.guessed_nums.length == 9){
                     this.$refs.timerPuzzle.stopTimer()
                     this.is_finished = true
+                    this.saveTestResult();
                 }
                
                 if (this.$refs.timerPuzzle.timeLeft == 0 && this.is_started){
@@ -107,6 +111,28 @@
                     document.getElementById(id).style.border = '5px solid #423189'
                     this.chosen_ceil_id = id
                 }    
+            },
+            async saveTestResult() {
+              const testResultData = {
+                "test": this.testId,
+                "correct_answers": this.guessed_nums.length,
+                "time": this.time_levels[this.level-1] - this.$refs.timerPuzzle.timeLeft,
+                "special_field": null
+              };
+              console.log(testResultData);
+
+              try {
+                const response = await axios.post(
+                  'http://localhost:8000/api/test-results/create/',
+                  testResultData,
+                  {
+                    headers: { 'Content-Type': 'application/json' }
+                  }
+                );
+                console.log('Результат теста сохранен:', response.data);
+              } catch (error) {
+                console.error('Ошибка при сохранении результата:', error);
+              }
             },
             chooseNumber(num){
                 if (this.chosen_ceil_id != -1 && this.guessed_nums.includes(num) == false){
