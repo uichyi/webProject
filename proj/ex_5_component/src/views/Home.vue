@@ -2,57 +2,339 @@
     <div class="container mt-5 text-center">
       <h1 class="mb-4">Тесты</h1>
   
-      <!-- Carousel of links with arrows -->
-      <div class="d-flex align-items-center justify-content-center mb-4">
-        <!-- Left Arrow -->
-        <div class="arrow-left-container">
-          <svg 
-            @click="navigateTest('left')" 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="40" 
-            height="40" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            class="text-primary arrow-icon" 
-            :class="{'disabled-arrow': currentTest <= 0}"
-            style="cursor: pointer;">
-            <path d="M15 18l-6-6 6-6"></path>
-          </svg>
+      <!-- Kostya's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Кости</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('kostya', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.kostya <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.kostya * 300 - 300)}px)` }">
+              <div v-for="(test, index) in kostyaTests" 
+                   :key="`kostya-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.kostya, 'side-card': index !== currentIndices.kostya }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.kostya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('kostya', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.kostya >= kostyaTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
         </div>
+      </div>
   
-        <!-- Test description and link -->
-        <div class="mx-4">
-          <p>Текущий тест: {{ currentTest + 1 }} из {{ tests.length }} ({{ selectedTest.name }})</p>
-          <p>{{ selectedTest.description }}</p>
-          <router-link 
-            :to="selectedTest.path" 
-            class="btn btn-primary">
-            Перейти к тесту
-          </router-link>
+      <!-- Gleb's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Глеба</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('gleb', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.gleb <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.gleb * 300 - 300)}px)` }">
+              <div v-for="(test, index) in glebTests" 
+                   :key="`gleb-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.gleb, 'side-card': index !== currentIndices.gleb }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.gleb" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('gleb', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.gleb >= glebTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
         </div>
+      </div>
   
-        <!-- Right Arrow -->
-        <div class="arrow-right-container">
-          <svg 
-            @click="navigateTest('right')" 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="40" 
-            height="40" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            class="text-primary arrow-icon" 
-            :class="{'disabled-arrow': currentTest >= tests.length - 1}"
-            style="cursor: pointer;">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
+      <!-- Ilya's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Ильи</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('ilya', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.ilya <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ilya * 300 - 300)}px)` }">
+              <div v-for="(test, index) in ilyaTests" 
+                   :key="`ilya-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.ilya, 'side-card': index !== currentIndices.ilya }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.ilya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('ilya', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.ilya >= ilyaTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Masha's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Маши</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('masha', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.masha <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.masha * 300 - 300)}px)` }">
+              <div v-for="(test, index) in mashaTests" 
+                   :key="`masha-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.masha, 'side-card': index !== currentIndices.masha }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.masha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('masha', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.masha >= mashaTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Mitya's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Мити</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('mitya', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.mitya <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.mitya * 300 - 300)}px)` }">
+              <div v-for="(test, index) in mityaTests" 
+                   :key="`mitya-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.mitya, 'side-card': index !== currentIndices.mitya }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.mitya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('mitya', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.mitya >= mityaTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Ksysha's Carousel -->
+      <div class="carousel-section mb-5">
+        <h2 class="carousel-title">Тесты от Ксюши</h2>
+        <div class="carousel-outer-wrapper">
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('ksysha', 'left')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.ksysha <= 0}"
+              style="cursor: pointer;">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ksysha * 300 - 300)}px)` }">
+              <div v-for="(test, index) in ksyshaTests" 
+                   :key="`ksysha-${index}`" 
+                   class="test-card" 
+                   :class="{ 'main-card': index === currentIndices.ksysha, 'side-card': index !== currentIndices.ksysha }">
+                <h3>{{ test.name }}</h3>
+                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <p>{{ test.description }}</p>
+                <router-link v-if="index === currentIndices.ksysha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-container">
+            <svg 
+              @click="navigateCarousel('ksysha', 'right')" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="arrow-icon" 
+              :class="{'disabled-arrow': currentIndices.ksysha >= ksyshaTests.length - 1}"
+              style="cursor: pointer;">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -62,50 +344,70 @@
   export default {
     data() {
       return {
-        tests: [
-          { name: 'Test 1', path: '/test1', description: 'Перед вами набор эмодзи, в котором одинаковые только два. Найдите как можно больше пар таких эмодзи за минуту' },
-          { name: 'Test 2', path: '/test2', description: 'Перед вами стрелка, которая смотрит вверх/вниз/влево/вправо и либо красный фон, либо синий. Вам необходимо за минуту определить как можно больше раз путь стрелки...' },
-          { name: 'Test 3', path: '/test3', description: 'Описание теста 3' },
-          { name: 'Test 4', path: '/test4', description: 'Описание теста 4' },
-          { name: 'Test 5', path: '/test5', description: 'Описание теста 5' },
-          { name: 'Attention Test', path: '/attention-test', description: 'Описание теста на внимание' },
-          { name: 'Reaction Test', path: '/reaction-test', description: 'Описание теста на реакцию' },
-          { name: 'Memory Test', path: '/memory-test', description: 'Описание теста на память' },
-          { name: 'Text Selection Test', path: '/text-selection-test', description: 'Описание теста на выбор текста' },
-          { name: 'Sum Digits Test', path: '/sum-digits-test', description: 'Описание теста на сумму цифр' },
-          { name: 'Test 1 Ilya', path: '/test1ilya', description: 'Описание теста 1 от Ильи' },
-          { name: 'Test 2 Ilya', path: '/test2ilya', description: 'Описание теста 2 от Ильи' },
-          { name: 'Test 3 Ilya', path: '/test3ilya', description: 'Описание теста 3 от Ильи' },
-          { name: 'Test 4 Ilya', path: '/test4ilya', description: 'Описание теста 4 от Ильи' },
-          { name: 'Test 5 Ilya', path: '/test5ilya', description: 'Описание теста 5 от Ильи' },
-          { name: 'Rectangles', path: '/rectangles', description: 'Описание теста на прямоугольники' },
-          { name: 'Twelve Number Test', path: '/twelve-number-test', description: 'Описание теста на 12 чисел' },
-          { name: 'Numbers Puzzle', path: '/numbers-puzzle', description: 'Описание головоломки с числами' },
-          { name: 'Reaction Speed', path: '/reaction-speed', description: 'Описание теста на скорость реакции' },
-          { name: 'Classical Stroop Test', path: '/classical-stroop-test', description: 'Описание классического теста Струпа' },
-          { name: 'Test 1 Mitya', path: '/test1mitya', description: 'Описание теста 1 от Мити' },
-          { name: 'Test 2 Mitya', path: '/test2mitya', description: 'Описание теста 2 от Мити' },
-          { name: 'Test 3 Mitya', path: '/test3mitya', description: 'Описание теста 3 от Мити' },
-          { name: 'Test 4 Mitya', path: '/test4mitya', description: 'Описание теста 4 от Мити' },
-          { name: 'Test 5 Mitya', path: '/test5mitya', description: 'Описание теста 5 от Мити' },
-          { name: 'Test 1 Ksysha', path: '/test1k', description: 'Описание теста 1 от Ксюши' },
-          { name: 'Test 2 Ksysha', path: '/test2k', description: 'Описание теста 2 от Ксюши' },
-          { name: 'Test 3 Ksysha', path: '/test3k', description: 'Описание теста 3 от Ксюши' },
+        kostyaTests: [
+          { name: 'Test 1', path: '/test1', description: 'Найдите пары одинаковых эмодзи за минуту', preview: '/previews/kostya/test1.png' },
+          { name: 'Test 2', path: '/test2', description: 'Определите путь стрелки на цветном фоне', preview: '/previews/kostya/test2.png' },
+          { name: 'Test 3', path: '/test3', description: 'Описание теста 3', preview: '/previews/kostya/test3.png' },
+          { name: 'Test 4', path: '/test4', description: 'Описание теста 4', preview: '/previews/kostya/test4.png' },
+          { name: 'Test 5', path: '/test5', description: 'Описание теста 5', preview: '/previews/kostya/test5.png' },
         ],
-        currentTest: 0,
+        glebTests: [
+          { name: 'Attention Test', path: '/attention-test', description: 'Тест на внимание', preview: '/previews/gleb/attention.png' },
+          { name: 'Reaction Test', path: '/reaction-test', description: 'Тест на реакцию', preview: '/previews/gleb/reaction.png' },
+          { name: 'Memory Test', path: '/memory-test', description: 'Тест на память', preview: '/previews/gleb/memory.png' },
+          { name: 'Text Selection Test', path: '/text-selection-test', description: 'Тест на выбор текста', preview: '/previews/gleb/text.png' },
+          { name: 'Sum Digits Test', path: '/sum-digits-test', description: 'Тест на сумму цифр', preview: '/previews/gleb/sum.png' },
+        ],
+        ilyaTests: [
+          { name: 'Test 1 Ilya', path: '/test1ilya', description: 'Описание теста 1 от Ильи', preview: '/previews/ilya/test1.png' },
+          { name: 'Test 2 Ilya', path: '/test2ilya', description: 'Описание теста 2 от Ильи', preview: '/previews/ilya/test2.png' },
+          { name: 'Test 3 Ilya', path: '/test3ilya', description: 'Описание теста 3 от Ильи', preview: '/previews/ilya/test3.png' },
+          { name: 'Test 4 Ilya', path: '/test4ilya', description: 'Описание теста 4 от Ильи', preview: '/previews/ilya/test4.png' },
+          { name: 'Test 5 Ilya', path: '/test5ilya', description: 'Описание теста 5 от Ильи', preview: '/previews/ilya/test5.png' },
+        ],
+        mashaTests: [
+          { name: 'Rectangles', path: '/rectangles', description: 'Тест на прямоугольники', preview: '/previews/masha/rectangles.png' },
+          { name: 'Twelve Number Test', path: '/twelve-number-test', description: 'Тест на 12 чисел', preview: '/previews/masha/twelve.png' },
+          { name: 'Numbers Puzzle', path: '/numbers-puzzle', description: 'Головоломка с числами', preview: '/previews/masha/puzzle.png' },
+          { name: 'Reaction Speed', path: '/reaction-speed', description: 'Тест на скорость реакции', preview: '/previews/masha/speed.png' },
+          { name: 'Classical Stroop Test', path: '/classical-stroop-test', description: 'Классический тест Струпа', preview: '/previews/masha/stroop.png' },
+        ],
+        mityaTests: [
+          { name: 'Test 1 Mitya', path: '/test1mitya', description: 'Описание теста 1 от Мити', preview: '/previews/mitya/test1.png' },
+          { name: 'Test 2 Mitya', path: '/test2mitya', description: 'Описание теста 2 от Мити', preview: '/previews/mitya/test2.png' },
+          { name: 'Test 3 Mitya', path: '/test3mitya', description: 'Описание теста 3 от Мити', preview: '/previews/mitya/test3.png' },
+          { name: 'Test 4 Mitya', path: '/test4mitya', description: 'Описание теста 4 от Мити', preview: '/previews/mitya/test4.png' },
+          { name: 'Test 5 Mitya', path: '/test5mitya', description: 'Описание теста 5 от Мити', preview: '/previews/mitya/test5.png' },
+        ],
+        ksyshaTests: [
+          { name: 'Test 1 Ksysha', path: '/test1k', description: 'Описание теста 1 от Ксюши', preview: '/previews/ksysha/test1.png' },
+          { name: 'Test 2 Ksysha', path: '/test2k', description: 'Описание теста 2 от Ксюши', preview: '/previews/ksysha/test2.png' },
+          { name: 'Test 3 Ksysha', path: '/test3k', description: 'Описание теста 3 от Ксюши', preview: '/previews/ksysha/test3.png' },
+        ],
+        currentIndices: {
+          kostya: 0,
+          gleb: 0,
+          ilya: 0,
+          masha: 0,
+          mitya: 0,
+          ksysha: 0,
+        },
       };
     },
-    computed: {
-      selectedTest() {
-        return this.tests[this.currentTest];
-      },
-    },
     methods: {
-      navigateTest(direction) {
-        if (direction === 'left' && this.currentTest > 0) {
-          this.currentTest--;
-        } else if (direction === 'right' && this.currentTest < this.tests.length - 1) {
-          this.currentTest++;
+      navigateCarousel(group, direction) {
+        const tests = {
+          kostya: this.kostyaTests,
+          gleb: this.glebTests,
+          ilya: this.ilyaTests,
+          masha: this.mashaTests,
+          mitya: this.mityaTests,
+          ksysha: this.ksyshaTests,
+        };
+        if (direction === 'left' && this.currentIndices[group] > 0) {
+          this.currentIndices[group]--;
+        } else if (direction === 'right' && this.currentIndices[group] < tests[group].length - 1) {
+          this.currentIndices[group]++;
         }
       },
     },
@@ -113,32 +415,128 @@
   </script>
   
   <style scoped>
-  .arrow-left-container, .arrow-right-container {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+  
+  /* Локальные стили для Home.vue */
+  .carousel-section {
+    padding-bottom: 40px;
+    position: relative;
   }
   
-  .arrow-left-container {
-    left: 0;
-    padding: 10px;
-    border-radius: 50%;
+  .carousel-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    text-align: left;
   }
   
-  .arrow-right-container {
-    right: 0;
-    padding: 10px;
-    border-radius: 50%;
+  .carousel-outer-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .carousel-wrapper {
+    overflow: hidden;
+    width: 900px; /* 3 карточки по 300px */
+    position: relative;
+    border-radius: 16px;
+  }
+  
+  .arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    z-index: 2;
   }
   
   .arrow-icon {
     width: 40px;
     height: 40px;
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .arrow-icon:hover {
+    color: #6b48ff;
+    transform: scale(1.1);
   }
   
   .disabled-arrow {
     opacity: 0.3;
     pointer-events: none;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .test-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease;
+  }
+  
+  .test-card:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-card {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .side-card {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  
+  .preview-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .test-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+  
+  .test-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  
+  .btn-modern {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6b48ff 0%, #8a3ffc 100%);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(107, 72, 255, 0.3);
+    color: #fff;
   }
   </style>
