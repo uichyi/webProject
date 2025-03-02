@@ -77,7 +77,7 @@ const endGame = () => {
 </script>
 
 <template>
-  <div class="col">
+  <div class="col2">
     <p>{{ excerpts[randomIndex]["name"] }}</p>
     <div class="words">
       <div
@@ -100,7 +100,7 @@ const endGame = () => {
 </template>
 
 <style scoped>
-.col {
+.col2 {
   display: flex;
   flex-direction: column;
   align-items: center;

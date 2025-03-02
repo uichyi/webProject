@@ -17,7 +17,7 @@ import test2ilya from '../components/ilya/test_2_unique_color/src/test2ilya.vue'
 import test3ilya from '../components/ilya/test_3_extra_item/src/test3ilya.vue';
 import test4ilya from '../components/ilya/test_4_clicks/src/test4ilya.vue';
 import test5ilya from '../components/ilya/test_5_typing/src/test5ilya.vue';
-import Rectangles from '../components/masha/Rectangles.vue';
+import Rectangles from '../components/masha/StartRectangles.vue';
 import Twelve_number_test from '../components/masha/Twelve_number_test.vue';
 import Numbers_puzzle from '../components/masha/Numbers_puzzle.vue';
 import Reaction_speed from '../components/masha/Reaction_speed.vue';

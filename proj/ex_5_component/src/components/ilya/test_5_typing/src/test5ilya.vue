@@ -34,29 +34,29 @@ let timerInterval;
 const timer = ref(null);
 
 async function saveTestResult() {
-    const testResultData =
-      {
-        'user': localStorage.getItem('user_id'),
-        "test": testId,
-        "accuracy": wpm.value,
-        "complete_time": gameDuration.value
-      };
-    console.log(testResultData)
-      axios.post(
-        'http://localhost:8000/api/test-results/create/',
-        testResultData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      ).then(response => {
-        console.log('Результат теста сохранен:', response.data);
-      }
-      ).catch(error => {
-        console.error('Ошибка при сохранении результата:', error);
-      }
-      );
+  const testResultData =
+  {
+    'user': localStorage.getItem('user_id'),
+    "test": testId,
+    "accuracy": wpm.value,
+    "complete_time": gameDuration.value
+  };
+  console.log(testResultData)
+  axios.post(
+    'http://localhost:8000/api/test-results/create/',
+    testResultData,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  ).then(response => {
+    console.log('Результат теста сохранен:', response.data);
+  }
+  ).catch(error => {
+    console.error('Ошибка при сохранении результата:', error);
+  }
+  );
 }
 
 watch(gameState, (newState) => {
@@ -81,40 +81,38 @@ watch(gameState, (newState) => {
 </script>
 
 <template>
-  <div v-if="gameState === 'start'">
-    <Start
-      @changeState="changeState"
-      @changeGameDuration="changeGameDuration"
-      :duration="gameDuration"
-    ></Start>
-  </div>
-  <div v-if="gameState === 'game'" class="col">
-    <div class="panel">
-      <TimerLine :timer="timer" :INIT_TIME="gameDuration"></TimerLine>
-      <span>{{ timer }}</span>
+  <div id="app">
+    <div v-if="gameState === 'start'">
+      <Start @changeState="changeState" @changeGameDuration="changeGameDuration" :duration="gameDuration"></Start>
     </div>
+    <div v-if="gameState === 'game'" class="col">
+      <div class="panel">
+        <TimerLine :timer="timer" :INIT_TIME="gameDuration"></TimerLine>
+        <span>{{ timer }}</span>
+      </div>
 
-    <Game
-      @changeWPM="changeWPM"
-      @changeMistakenWords="changeMistakenWords"
-      @changeState="changeState"
-      :duration="gameDuration"
-    ></Game>
+      <Game @changeWPM="changeWPM" @changeMistakenWords="changeMistakenWords" @changeState="changeState" :duration="gameDuration"></Game>
+    </div>
+    <div v-if="gameState === 'end'">
+      <Results @changeState="changeState" :wpm="wpm" :mistakenWords="mistakenWords"></Results>
+    </div>
   </div>
-  <div v-if="gameState === 'end'">
-    <Results
-      @changeState="changeState"
-      :wpm="wpm"
-      :mistakenWords="mistakenWords"
-    ></Results>
-  </div>
+
 </template>
 
 <style scoped>
+#app {
+  text-align: center;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
 .col {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
 }
 

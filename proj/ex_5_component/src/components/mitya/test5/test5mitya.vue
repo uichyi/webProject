@@ -214,7 +214,7 @@
 };
 </script>
 
-<style>
+<style scoped>
 .game {
   text-align: center;
 }

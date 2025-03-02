@@ -20,41 +20,47 @@ const handleButtonClick = (val) => {
 </script>
 
 <template>
-  <h2>Тест ввода › Проверь сколько слов за минуту ты вводишь.</h2>
-
-  <div>
-    <button
-      :class="{ active: selectedDuration === 15 }"
-      @click="handleButtonClick(15)"
-    >
-      15сек
-    </button>
-    <button
-      :class="{ active: selectedDuration === 30 }"
-      @click="handleButtonClick(30)"
-    >
-      30сек
-    </button>
-    <button
-      :class="{ active: selectedDuration === 60 }"
-      @click="handleButtonClick(60)"
-    >
-      60сек
-    </button>
+  <div class="wrapper">
+    <h2>Тест ввода › Проверь сколько слов за минуту ты вводишь.</h2>
+    <div>
+      <button
+        :class="{ active: selectedDuration === 15 }"
+        @click="handleButtonClick(15)"
+      >
+        15сек
+      </button>
+      <button
+        :class="{ active: selectedDuration === 30 }"
+        @click="handleButtonClick(30)"
+      >
+        30сек
+      </button>
+      <button
+        :class="{ active: selectedDuration === 60 }"
+        @click="handleButtonClick(60)"
+      >
+        60сек
+      </button>
+    </div>
+    <p>
+      Тест Ввода – это простой, {{ selectedDuration }} секундный тест для проверки
+      скорости ввода. Наша команда совместно с экспертами тщательно подобрала 10
+      отрывков из литературы и более 1000 слов для этого теста. Текущий мировой
+      рекорд 225 слов в минуту. Не стесняйся бросить вызов друзьям или загружай
+      ролик на YouTube.
+    </p>
+    <button @click="handleClick">Начать!</button>
   </div>
-
-  <p>
-    Тест Ввода – это простой, {{ selectedDuration }} секундный тест для проверки
-    скорости ввода. Наша команда совместно с экспертами тщательно подобрала 10
-    отрывков из литературы и более 1000 слов для этого теста. Текущий мировой
-    рекорд 225 слов в минуту. Не стесняйся бросить вызов друзьям или загружай
-    ролик на YouTube.
-  </p>
-
-  <button @click="handleClick">Начать!</button>
 </template>
 
 <style scoped>
+.wrapper {
+  max-width: 800px; 
+  height: 100vh;
+  text-align: center;
+  display: grid;
+  place-content: center;
+}
 button {
   padding: 10px 20px;
   margin: 5px;
