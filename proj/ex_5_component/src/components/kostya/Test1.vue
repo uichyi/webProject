@@ -52,30 +52,45 @@ export default {
   },
   methods: {
     async saveTestResult() {
-      const testResultData =
+      const log =
+      {
+        "username": "testic",
+        "password": "pass"
+      };
+      const tesllogin = await axios.post(
+        'http://localhost:8000/api/login/',
+        log,
         {
-          "test": this.testId,
-          "correct_answers": this.score,
-          "time": 60,
-          "special_field": null
-
-        };
-      console.log(testResultData)
-        axios.post(
-          'http://localhost:8000/api/test-results/create/',
-          testResultData,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        ).then(response => {
-          console.log('Результат теста сохранен:', response.data);
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-        ).catch(error => {
-          console.error('Ошибка при сохранении результата:', error);
+      );
+      localStorage.setItem('user_id', tesllogin.data.user_id);
+    
+      const testResultData =
+      {
+        'user': localStorage.getItem('user_id'),
+        "test": this.testId,
+        "number_correct_answers": this.score,
+        "complete_time": 60,
+      };
+      axios.post
+      (
+        'http://localhost:8000/api/test-results/create/',
+        testResultData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-        );
+      ).then(response => {
+        console.log('Результат теста сохранен:', response.data);
+      }
+      ).catch(error => {
+        console.error('Ошибка при сохранении результата:', error);
+      }
+      );
     },
     getRowEmojis(rowIndex) {
       const startIndex = (rowIndex - 1) * 4;

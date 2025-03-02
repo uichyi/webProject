@@ -26,11 +26,9 @@ const startGame = () => {
 async function saveTestResult(value) {
     const testResultData =
       {
+        'user': localStorage.getItem('user_id'),
         "test": testId,
-        "correct_answers": null,
-        "time": null,
-        "special_field": value
-
+        "accuracy": value,
       };
     console.log(testResultData)
       axios.post(

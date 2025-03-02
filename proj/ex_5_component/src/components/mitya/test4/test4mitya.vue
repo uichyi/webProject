@@ -46,7 +46,7 @@
         gameWon: false,
         imageWidth: 0,
         imageHeight: 0,
-        testId: 27
+        testId: 24
       };
     },
     methods: {
@@ -181,10 +181,9 @@
       },
       async saveTestResult() {
         const testResultData = {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.gameWon,
-          "time": null,
-          "special_field": null
+          "number_correct_answers": 1,
         };
         console.log(testResultData);
 

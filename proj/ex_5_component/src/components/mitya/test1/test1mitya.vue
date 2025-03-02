@@ -36,7 +36,7 @@ export default {
       timer: null, 
       expressions_answers: [],
       all_expressions: 0,
-      testId: 24
+      testId: 21
     };
   },
   methods: {
@@ -107,10 +107,12 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.score,
-        "time": 10,
-        "special_field": this.all_expressions - this.score // Количество неправильных
+        "number_correct_answers": this.score,
+        "number_all_answers": this.all_expressions,
+        "complete_time": 10,
+        "accuracy": this.score /this.all_expressions // Количество неправильных
       };
       console.log(testResultData);
 

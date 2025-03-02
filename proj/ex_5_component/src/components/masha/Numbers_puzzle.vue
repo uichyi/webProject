@@ -69,7 +69,7 @@
                 is_started: false,
                 level: 1,
                 time_levels: [80, 50, 30],
-                testId: 20
+                testId: 18
             };    
         },
         mounted(){
@@ -114,10 +114,10 @@
             },
             async saveTestResult() {
               const testResultData = {
+                'user': localStorage.getItem('user_id'),
                 "test": this.testId,
-                "correct_answers": this.guessed_nums.length,
-                "time": this.time_levels[this.level-1] - this.$refs.timerPuzzle.timeLeft,
-                "special_field": null
+                "number_correct_answers": this.guessed_nums.length,
+                "complete_time": this.time_levels[this.level-1] - this.$refs.timerPuzzle.timeLeft,
               };
               console.log(testResultData);
 

@@ -78,10 +78,10 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.score,
-        "time": 60,
-        "special_field": null
+        "number_correct_answers": this.score,
+        "complete_time": 60,
       };
       console.log(testResultData);
 

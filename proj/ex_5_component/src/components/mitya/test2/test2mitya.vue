@@ -42,7 +42,7 @@
         interval: null,
         gameOver: false,
         answers: [],
-        testId: 25
+        testId: 22
       };
     },
     methods: {
@@ -99,10 +99,12 @@
       },
       async saveTestResult() {
         const testResultData = {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.score,
-          "time": 10,
-          "special_field": this.answers.length - this.score // Количество неправильных
+          "number_correct_answers": this.score,
+          "number_all_answers": this.answers.length,
+          "complete_time": 10,
+          "accuracy": this.score / this.answers.length // Количество неправильных
         };
         console.log(testResultData);
 

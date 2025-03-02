@@ -30,7 +30,7 @@ export default {
       reactionTimes: [],
       timeoutId: null,
       startTime: 0,
-      testId: 8,
+      testId: 7,
     };
   },
   computed: {
@@ -83,10 +83,9 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": null,
-        "time": null,
-        "special_field": this.averageReactionTime
+        "accuracy": this.averageReactionTime,
       };
       console.log(testResultData);
 

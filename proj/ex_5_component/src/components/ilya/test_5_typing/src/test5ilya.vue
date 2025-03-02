@@ -36,11 +36,10 @@ const timer = ref(null);
 async function saveTestResult() {
     const testResultData =
       {
+        'user': localStorage.getItem('user_id'),
         "test": testId,
-        "correct_answers": null,
-        "time": null,
-        "special_field": wpm.value
-
+        "accuracy": wpm.value,
+        "complete_time": gameDuration.value
       };
     console.log(testResultData)
       axios.post(

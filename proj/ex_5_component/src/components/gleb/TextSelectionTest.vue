@@ -39,7 +39,7 @@ export default {
       totalWords: 23,
       showResults: false,
       testStarted: false,
-      testId: 10
+      testId: 9
     };
   },
   methods: {
@@ -75,10 +75,11 @@ export default {
     },
     async saveTestResult() {
       const testResultData = {
+        'user': localStorage.getItem('user_id'),
         "test": this.testId,
-        "correct_answers": this.selectedWords.length,
-        "time": null,
-        "special_field": null
+        "number_correct_answers": this.selectedWords.length,
+        "number_all_answers": this.totalWords,
+        "accuracy": this.selectedWords.length / this.totalWords
       };
       console.log(testResultData);
 

@@ -62,7 +62,7 @@
         wordColor: '',
         options: [],
         evaluation: '',
-        testId: 18
+        testId: 28
       };
     },
     methods: {
@@ -117,10 +117,10 @@
       },
       async saveTestResult() {
         const testResultData = {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.correctAnswers,
-          "time": 60,
-          "special_field": null
+          "number_correct_answers": this.correctAnswers,
+          "complete_time": 60
         };
         console.log(testResultData);
 

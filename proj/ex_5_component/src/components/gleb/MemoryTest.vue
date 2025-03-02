@@ -107,7 +107,7 @@ export default {
       options: [],
       score: 0,
       testCompleted: false,
-      testId: 7
+      testId: 8
     };
   },
   computed: {
@@ -133,10 +133,11 @@ export default {
     async saveTestResult() {
       const testResultData =
         {
+          'user': localStorage.getItem('user_id'),
           "test": this.testId,
-          "correct_answers": this.score,
-          "time": null,
-          "special_field": null
+          "number_correct_answers": this.score,
+          "number_all_answers": this.totalQuestions,
+          "accuracy": this.score / this.totalQuestions
         };
       console.log(testResultData)
         axios.post(
