@@ -8,138 +8,151 @@
     <div id="app" class="container mt-5 text-center">
       <h1 class="mb-4">Тесты</h1>
 
-      <!-- Carousel for Navigation -->
-      <div class="btn-group mb-4" role="group">
-        <button class="btn btn-secondary" :disabled="currentGame <= 0" @click="navigateTest('left')">
-          &#8592; Назад
-        </button>
-        <button class="btn btn-secondary" :disabled="currentGame >= tests.length - 1" @click="navigateTest('right')">
-          Далее &#8594;
-        </button>
-      </div>
+      <!-- Layout with arrows and game -->
+      <div class="d-flex align-items-center justify-content-center mb-4">
+        
+        <!-- Left Arrow (Fixed to the left of the screen) -->
+        <div class="arrow-left-container">
+          <svg 
+            @click="navigateTest('left')" 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="40" 
+            height="40" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="text-primary arrow-icon" 
+            :class="{'disabled-arrow': currentGame <= 0}"
+            style="cursor: pointer;">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </div>
 
-      <!-- Display current counter value -->
-      <div>
-        <p>Текущий тест: {{ currentGame + 1 }} из {{ tests.length }} ({{ selectedApp }})</p>
-      </div>
+        <!-- Game -->
+        <div class="mx-4">
+          <p>Текущий тест: {{ currentGame + 1 }} из {{ tests.length }} ({{ selectedApp }})</p>
 
-      <!-- List of all test buttons
-      <div class="btn-group mb-4" role="group">
-        <button v-for="(test, index) in tests" :key="index" class="btn btn-secondary" @click="selectApp(test)">
-          {{ test }}
-        </button>
-      </div> -->
+          <div v-if="selectedGame">
+            <!-- Test Components -->
+            <div v-if="selectedApp == 'test1'">
+              <Test1 />
+            </div>
+            <div v-else-if="selectedApp == 'test2'">
+              <Test2 />
+            </div>
+            <div v-else-if="selectedApp == 'test3'">
+              <Test3 />
+            </div>
+            <div v-else-if="selectedApp == 'test4'">
+              <Test4 />
+            </div>
+            <div v-else-if="selectedApp == 'test5'">
+              <Test5 />
+            </div>
+            <div v-else-if="selectedApp == 'test6'">
+              <AttentionTest />
+            </div>
+            <div v-else-if="selectedApp == 'test7'">
+              <ReactionTest />
+            </div>
+            <div v-else-if="selectedApp == 'test8'">
+              <MemoryTest />
+            </div>
+            <div v-else-if="selectedApp == 'test9'">
+              <TextSelectionTest />
+            </div>
+            <div v-else-if="selectedApp == 'test10'">
+              <SumDigitsTest />
+            </div>
+            <div v-else-if="selectedApp == 'test11'">
+              <test1ilya />
+            </div>
+            <div v-else-if="selectedApp == 'test12'">
+              <test2ilya />
+            </div>
+            <div v-else-if="selectedApp == 'test13'">
+              <test3ilya />
+            </div>
+            <div v-else-if="selectedApp == 'test14'">
+              <test4ilya />
+            </div>
+            <div v-else-if="selectedApp == 'test15'">
+              <test5ilya />
+            </div>
+            <div v-else-if="selectedApp == 'test16'">
+              <Rectangles />
+            </div>
+            <div v-else-if="selectedApp == 'test17'">
+              <Twelve_number_test />
+            </div>
+            <div v-else-if="selectedApp == 'test18'">
+              <Numbers_puzzle />
+            </div>
+            <div v-else-if="selectedApp == 'test19'">
+              <Reaction_speed />
+            </div>
+            <div v-else-if="selectedApp == 'test20'">
+              <Classical_Stroop_Test />
+            </div>
+            <div v-else-if="selectedApp == 'test21'">
+              <test1mitya />
+            </div>
+            <div v-else-if="selectedApp == 'test22'">
+              <test2mitya />
+            </div>
+            <div v-else-if="selectedApp == 'test23'">
+              <test3mitya />
+            </div>
+            <div v-else-if="selectedApp == 'test24'">
+              <test4mitya />
+            </div>
+            <div v-else-if="selectedApp == 'test25'">
+              <test5mitya />
+            </div>
+            <div v-else-if="selectedApp == 'test26'">
+              <Test1k />
+            </div>
+            <div v-else-if="selectedApp == 'test27'">
+              <Test2k />
+            </div>
+            <div v-else-if="selectedApp == 'test28'">
+              <Test3k />
+            </div>
+          </div>
 
-      <div v-if="selectedGame">
-        <!-- Tests Components -->
-        <div v-if="selectedApp == 'test1'">
-          <Test1 />
+          <div v-else-if="!selectedGame">
+            <div v-if="selectedApp == 'test1'">
+              <p>Перед вами набор эмодзи, в котором одинаковые только <b>два.</b> Найдите как можно больше пар таких эмодзи за минуту</p>
+            </div>
+            <div v-else-if="selectedApp == 'test2'">
+              <p>Перед вами стрелка, которая смотрит вверх/вниз/влево/вправо и либо красный фон, либо синий. Вам необходимо за минуту определить как можно больше раз путь стрелки...</p>
+            </div>
+            <!-- Additional descriptions for other tests -->
+            <button class="btn btn-primary" @click="startGame()">Начать игру</button>
+          </div>
         </div>
-        <div v-else-if="selectedApp == 'test2'">
-          <Test2 />
-        </div>
-        <div v-else-if="selectedApp == 'test3'">
-          <Test3 />
-        </div>
-        <div v-else-if="selectedApp == 'test4'">
-          <Test4 />
-        </div>
-        <div v-else-if="selectedApp == 'test5'">
-          <Test5 />
-        </div>
-        <div v-else-if="selectedApp == 'test6'">
-          <AttentionTest />
-        </div>
-        <div v-else-if="selectedApp == 'test7'">
-          <ReactionTest />
-        </div>
-        <div v-else-if="selectedApp == 'test8'">
-          <MemoryTest />
-        </div>
-        <div v-else-if="selectedApp == 'test9'">
-          <TextSelectionTest />
-        </div>
-        <div v-else-if="selectedApp == 'test10'">
-          <SumDigitsTest />
-        </div>
-        <div v-else-if="selectedApp == 'test11'">
-          <test1ilya />
-        </div>
-        <div v-else-if="selectedApp == 'test12'">
-          <test2ilya />
-        </div>
-        <div v-else-if="selectedApp == 'test13'">
-          <test3ilya />
-        </div>
-        <div v-else-if="selectedApp == 'test14'">
-          <test4ilya />
-        </div>
-        <div v-else-if="selectedApp == 'test15'">
-          <test5ilya />
-        </div>
-        <div v-else-if="selectedApp == 'test16'">
-          <Rectangles />
-        </div>
-        <div v-else-if="selectedApp == 'test17'">
-          <Twelve_number_test />
-        </div>
-        <div v-else-if="selectedApp == 'test18'">
-          <Numbers_puzzle />
-        </div>
-        <div v-else-if="selectedApp == 'test19'">
-          <Reaction_speed />
-        </div>
-        <div v-else-if="selectedApp == 'test20'">
-          <Classical_Stroop_Test />
-        </div>
-        <div v-else-if="selectedApp == 'test21'">
-          <test1mitya />
-        </div>
-        <div v-else-if="selectedApp == 'test22'">
-          <test2mitya />
-        </div>
-        <div v-else-if="selectedApp == 'test23'">
-          <test3mitya />
-        </div>
-        <div v-else-if="selectedApp == 'test24'">
-          <test4mitya />
-        </div>
-        <div v-else-if="selectedApp == 'test25'">
-          <test5mitya />
-        </div>
-        <div v-else-if="selectedApp == 'test26'">
-          <Test1k />
-        </div>
-        <div v-else-if="selectedApp == 'test27'">
-          <Test2k />
-        </div>
-        <div v-else-if="selectedApp == 'test28'">
-          <Test3k />
-        </div>
-      </div>
 
-      <div v-else-if="!selectedGame">
-        <!-- Game descriptions -->
-        <div v-if="selectedApp == 'test1'">
-          <p>Перед вами набор эмодзи, в котором одинаковые только <b>два.</b> <br>
-            Найдите как можно больше пар таких эмодзи за минуту</p>
-        </div>
-        <div v-else-if="selectedApp == 'test2'">
-          <p>Перед вами стрелка, которая смотрит вверх/вниз/влево/вправо и либо красный фон, либо синий. <br>
-            Вам необходимо за минуту определить как можно больше раз путь стрелки, где синий фон обозначает <b>куда</b> направлена стрелка, а красный обозначает <b>откуда</b> идет стрелка</p>
-        </div>
-        <div v-else-if="selectedApp == 'test3'">
-          <p>Перед вами один эмодзи, который будет виден на протяжении 3 секунд. После, он заменится другим либо тем же самым. <br>
-            За одну минуту вам необходимо как можно больше раз указать, изменился ли эмодзи или нет.</p>
-        </div>
-        <div v-else-if="selectedApp == 'test4'">
-          <p>Перед вами два числа. За одну минуту вам необходимо сравнить как можно больше раз, какое число больше, а какое меньше</p>
-        </div>
-        <div v-else-if="selectedApp == 'test5'">
-          <p>Перед вами оттенок. За одну минуту вам необходимо определить как можно больше раз, какой цвет преобладает в этом оттенке</p>
-        </div>
-        <div v-if="selectedApp">
-          <button class="btn btn-primary" @click="startGame()">Начать игру</button>
+        <!-- Right Arrow (Fixed to the right of the screen) -->
+        <div class="arrow-right-container">
+          <svg 
+            @click="navigateTest('right')" 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="40" 
+            height="40" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="text-primary arrow-icon" 
+            :class="{'disabled-arrow': currentGame >= tests.length - 1}"
+            style="cursor: pointer;">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
         </div>
       </div>
     </div>
@@ -247,3 +260,34 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.arrow-left-container, .arrow-right-container {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.arrow-left-container {
+  left: 0;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.arrow-right-container {
+  right: 0;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.arrow-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.disabled-arrow {
+  opacity: 0.3;
+  pointer-events: none;
+}
+</style>
