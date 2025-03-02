@@ -185,42 +185,94 @@ export default {
 };
 </script>
 
-<style>
-
-.question-count{
-  position: absolute;
-  top: 90px;
-}
+<style scoped>
 
 .memory-test {
-  height: 300px;
-  max-width: 600px;
-  text-align: center;
-  margin-top: 100px;
-}
-.test-container{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  background-color: #0000003f;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #4caf50;
+  background-color: #f4f4f4;
+  cursor: pointer; /* Indicating it's clickable */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.start-screen:hover {
+  background-color: #e7f7e7; /* Hover effect */
+}
+
+.test-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  
+  max-width: 500px;
+}
+
+.question-count {
+  margin-top: 20px;
 }
 
 .question-image {
   max-width: 100%;
-  margin-top: 250px;
+  margin: 20px 0;
 }
 
 .options button {
   margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.options button:hover {
+  background-color: #45a049;
 }
 
 .result {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
+  margin-top: 10px;
   padding: 10px 20px;
-  font-size: 16px;
   cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
 }
+
+button:hover {
+  background-color: #45a049;
+}
+
 </style>

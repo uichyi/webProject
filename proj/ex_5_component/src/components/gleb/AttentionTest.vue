@@ -160,35 +160,62 @@ export default {
 };
 </script>
 
-<style>
-.attention-test{
+<style scoped>
+.attention-test {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 100vh; /* Make sure the content fills the screen */
+  width: 100vw;
+  background-color: #0000003f;
 }
 
-.test-container {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #4caf50;
+  background-color: #f4f4f4;
+  cursor: pointer; /* Indicating it's clickable */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
 }
+
+.start-screen:hover {
+  background-color: #e7f7e7; /* Hover effect */
+}
+
 .words {
   margin: 20px 0;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
+
 .word {
   font-size: 24px;
   margin: 0 10px;
 }
+
 .options button {
   margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
+
+.options button:hover {
+  background-color: #45a049;
+}
+
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -196,9 +223,32 @@ export default {
   margin-top: 20px;
   position: relative;
 }
+
 .progress {
   height: 100%;
   background: #4caf50;
   transition: width 0.3s;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 </style>

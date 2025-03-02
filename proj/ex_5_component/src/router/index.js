@@ -11,7 +11,7 @@ import AttentionTest from '../components/gleb/AttentionTest.vue';
 import ReactionTest from '../components/gleb/ReactionTest.vue';
 import MemoryTest from '../components/gleb/MemoryTest.vue';
 import TextSelectionTest from '../components/gleb/TextSelectionTest.vue';
-import SumDigitsTest from '../components/gleb/SumDigitsTest.vue';
+import SumDigitsTest from '../components/gleb/StartSumDigitsTest.vue';
 import test1ilya from '../components/ilya/test_1_numbers/src/test1ilya.vue';
 import test2ilya from '../components/ilya/test_2_unique_color/src/test2ilya.vue';
 import test3ilya from '../components/ilya/test_3_extra_item/src/test3ilya.vue';

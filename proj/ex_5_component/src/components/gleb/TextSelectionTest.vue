@@ -1,5 +1,6 @@
 <template>
-  <div class="text-selection-test">
+  <div class="wrapper">
+    <div class="text-selection-test">
     <h2>Тест: выделение слов</h2>
     <p>
       Постарайтесь выделить слова в следующем тексте. После того как вы
@@ -24,6 +25,8 @@
       <button @click="restartTest">Начать заново</button>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -104,6 +107,14 @@ export default {
 </script>
 
 <style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100vh;
+}
+
 .text-selection-test {
   max-width: 600px;
   margin: 0 auto;
