@@ -87,7 +87,7 @@
                    class="test-card" 
                    :class="{ 'main-card': index === currentIndices.gleb, 'side-card': index !== currentIndices.gleb }">
                 <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
+                <img :src="test.preview" alt="Preview" class="preview-img" width="200" height="93"/>
                 <p>{{ test.description }}</p>
                 <router-link v-if="index === currentIndices.gleb" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
               </div>
@@ -508,9 +508,9 @@
   }
   
   .preview-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+    width: 250px;
+    height: 150px;
+    /* object-fit: contain; */
     border-radius: 12px;
     margin-bottom: 16px;
     border: 2px solid #f0f0f0; /* Adds a subtle border around the images */
