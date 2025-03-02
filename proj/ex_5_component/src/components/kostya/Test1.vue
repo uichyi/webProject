@@ -52,22 +52,6 @@ export default {
   },
   methods: {
     async saveTestResult() {
-      const log =
-      {
-        "username": "testic",
-        "password": "pass"
-      };
-      const tesllogin = await axios.post(
-        'http://localhost:8000/api/login/',
-        log,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      localStorage.setItem('user_id', tesllogin.data.user_id);
-    
       const testResultData =
       {
         'user': localStorage.getItem('user_id'),

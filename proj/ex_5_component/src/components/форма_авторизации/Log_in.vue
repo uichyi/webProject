@@ -52,7 +52,7 @@
       };
     },
     methods: {
-      checkData() {
+      async checkData() {
         if (this.name ==''){
           this.error='Введите никнейм'
           return
@@ -62,6 +62,22 @@
           this.error='Введите пароль'
           return
         }
+        const log =
+        {
+          "username": this.name,
+          "password": this.password
+        };
+        console.log(log)
+        const tesllogin = await axios.post(
+          'http://localhost:8000/api/login/',
+          log,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+           },
+         }
+        );
+        localStorage.setItem('user_id', tesllogin.data.user_id);
       }
     }
   };

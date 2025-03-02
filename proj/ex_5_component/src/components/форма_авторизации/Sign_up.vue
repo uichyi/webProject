@@ -64,7 +64,7 @@
       };
     },
     methods: {
-      checkData() {
+      async checkData() {
         if (this.name ==''){
           this.error='Введите никнейм'
           return
@@ -83,6 +83,21 @@
           return
         }
          this.error = ''
+         const log =
+        {
+          "username": this.name,
+          "password": this.password
+        };
+        console.log(log)
+        const tesllogin = await axios.post(
+          'http://localhost:8000/api/register/',
+          log,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+           },
+         }
+        );
       }
     }
   };
