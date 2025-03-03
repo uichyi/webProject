@@ -1,35 +1,32 @@
 <template>
-  <div class="test-container">
-    <div v-if="!testStarted" class="description">
-      <h2>Тест на IQ</h2>
-      <p>Этот тест поможет вам оценить ваш уровень интеллекта. Ответьте на все вопросы, и мы вычислим ваш IQ!</p>
-    </div>
-
-    <button v-if="!testStarted" @click="startTest" class="start-button">Начать тест</button>
-
-    <div v-if="testStarted && currentQuestionIndex < questions.length && !testFinished" class="timer" id="timer">{{ timeLeft }} секунд</div>
-
-    <div v-if="testStarted && currentQuestionIndex < questions.length && !testFinished" class="question-container">
-      <div class="question-text">{{ currentQuestion.text }}</div>
-      <div class="buttons-container">
-        <button 
-          v-for="(answer, index) in currentQuestion.answers" 
-          :key="index"
-          class="answer-button"
-          @click="setAnswer(answer)"
-        >
-          {{ answer }}
-        </button>
+  <div class="wrapper">
+    <div class="test-container">
+      <div v-if="!testStarted" class="description">
+        <h2>Тест на IQ</h2>
+        <p>Этот тест поможет вам оценить ваш уровень интеллекта. Ответьте на все вопросы, и мы вычислим ваш IQ!</p>
       </div>
-    </div>
-
-    <div v-if="testFinished" class="result">
-      <p>{{ resultMessage }}</p>
-      <button @click="resetTest" class="start-button">Попробовать снова</button>
-    </div>
-
-    <div class="button-container">
-      <button @click="goBack" class="back-button">Вернуться на главный экран</button>
+      <button v-if="!testStarted" @click="startTest" class="start-button">Начать тест</button>
+      <div v-if="testStarted && currentQuestionIndex < questions.length && !testFinished" class="timer" id="timer">{{ timeLeft }} секунд</div>
+      <div v-if="testStarted && currentQuestionIndex < questions.length && !testFinished" class="question-container">
+        <div class="question-text">{{ currentQuestion.text }}</div>
+        <div class="buttons-container">
+          <button
+            v-for="(answer, index) in currentQuestion.answers"
+            :key="index"
+            class="answer-button"
+            @click="setAnswer(answer)"
+          >
+            {{ answer }}
+          </button>
+        </div>
+      </div>
+      <div v-if="testFinished" class="result">
+        <p>{{ resultMessage }}</p>
+        <button @click="resetTest" class="start-button">Попробовать снова</button>
+      </div>
+      <div class="button-container">
+        <button @click="goBack" class="back-button">Вернуться на главный экран</button>
+      </div>
     </div>
   </div>
 </template>
@@ -150,6 +147,12 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
 .back-button {
   background-color: #f44336;
   color: white;

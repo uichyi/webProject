@@ -1,29 +1,29 @@
 <template>
-  <div class="game">
-    <h1>Игра на реакцию</h1>
-    <p v-if="!isPlaying & !gameOver">
-      Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 60 секунд!
-    </p>
-    <button v-if="!isPlaying & !gameOver" @click="startGame">Начать игру</button>
-
-    <div v-if="isPlaying">
-      <p>Осталось времени: {{ timeLeft }} секунд</p>
-      <p>Очки: {{ score }}</p>
-      
-      <div class="matrix">
-        <div
-          v-for="(cell, index) in matrix"
-          :key="index"
-          :class="['cell', { active: activeCell === index }]"
-          @click="handleClick(index)"
-        ></div>
+  <div class="wrapper">
+    <div class="game">
+      <h1>Игра на реакцию</h1>
+      <p v-if="!isPlaying & !gameOver">
+        Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 60 секунд!
+      </p>
+      <button v-if="!isPlaying & !gameOver" @click="startGame">Начать игру</button>
+      <div v-if="isPlaying" class="col">
+        <p>Осталось времени: {{ timeLeft }} секунд</p>
+        <p>Очки: {{ score }}</p>
+    
+        <div class="matrix">
+          <div
+            v-for="(cell, index) in matrix"
+            :key="index"
+            :class="['cell', { active: activeCell === index }]"
+            @click="handleClick(index)"
+          ></div>
+        </div>
       </div>
-    </div>
-
-    <div v-if="gameOver" class="game-over">
-      <h2>Игра окончена!</h2>
-      <p>Ваш результат: {{ score }} очков</p>
-      <button @click="resetGame">Начать заново</button>
+      <div v-if="gameOver" class="game-over">
+        <h2>Игра окончена!</h2>
+        <p>Ваш результат: {{ score }} очков</p>
+        <button @click="resetGame">Начать заново</button>
+      </div>
     </div>
   </div>
 </template>
@@ -114,9 +114,24 @@ export default {
 </script>
 
 <style scoped>
-.game {
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game{
   text-align: center;
   font-family: Arial, sans-serif;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 button {
   padding: 10px 20px;
@@ -127,8 +142,8 @@ button {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 5px;
-  margin-left: 37% ;
-  width: 250px;
+  /* margin-left: 37% ; */
+  /* width: 250px; */
 }
 .cell {
   width: 50px;

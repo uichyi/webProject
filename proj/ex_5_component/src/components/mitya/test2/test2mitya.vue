@@ -125,10 +125,15 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .app {
     text-align: center;
     font-family: Arial, sans-serif;
     padding: 20px;
+
+    height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   }
   </style>

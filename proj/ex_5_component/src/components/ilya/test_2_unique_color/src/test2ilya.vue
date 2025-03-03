@@ -121,7 +121,10 @@ watch(gameState, (newState) => {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  height: 100%;
+
+  height: 100vh;
+  display: grid;
+  place-content: center;
 }
 
 .adnn-tick-icon,

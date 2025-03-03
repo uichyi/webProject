@@ -111,3 +111,14 @@ export default {
   border: 2px solid #000;
 }
 </style>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+</style>

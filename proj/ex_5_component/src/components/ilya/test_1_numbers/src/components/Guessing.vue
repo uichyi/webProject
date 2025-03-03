@@ -88,7 +88,7 @@ const handleClick = (e, cell, index) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .gridWrapper {
   display: flex;
   justify-content: center;
@@ -104,9 +104,9 @@ const handleClick = (e, cell, index) => {
     1fr
   ); /* Adjust number of columns as needed */
   grid-template-rows: repeat(5, 1fr); /* Adjust number of rows as needed */
-  max-width: 600px;
+  /* max-width: 600px; */
   width: 100%;
-  max-height: 500px; /* Optional: to limit the height */
+  /* max-height: 500px; */
   height: 100%;
   justify-content: center;
   align-content: center;

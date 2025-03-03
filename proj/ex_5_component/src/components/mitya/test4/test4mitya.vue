@@ -209,6 +209,12 @@
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
+
+    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   }
   
   .puzzle-grid {

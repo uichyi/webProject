@@ -22,8 +22,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>Пожалуйста, подождите...</h2>
-  <h1>{{ countdownValue }}</h1>
+  <div class="countdownWrapper">
+    <h2>Пожалуйста, подождите...</h2>
+    <h1>{{ countdownValue }}</h1>
+  </div>
 </template>
 
 <script></script>
+
+<style scoped>
+.countdownWrapper {
+  max-width: 800px; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+</style>

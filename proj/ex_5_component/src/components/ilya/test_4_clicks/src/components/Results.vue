@@ -56,7 +56,8 @@ const latestResult = results[results.length - 1];
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; /* Defining the columns */
+  grid-template-rows: auto auto; /* Defining two rows based on content size */
   align-items: center;
   gap: 5rem;
 }

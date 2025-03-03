@@ -79,7 +79,7 @@ const restart = () => {
 </script>
 
 <template>
-  <div id="app">
+  <div id="app1">
     <div v-if="currentState === 'start'">
       <StartScreen @handleClick="handleStateChange"></StartScreen>
     </div>
@@ -150,7 +150,18 @@ const restart = () => {
 </template>
 
 <style scoped>
-#app {
+p {
+  margin: 0;
+}
+
+#app1 {
+  min-height: 100vh;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;

@@ -148,22 +148,30 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
 .emoji {
   font-size: 64px;
   margin: 10px;
   cursor: pointer;
-  user-select: none; 
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid transparent; 
-  border-radius: 8px; 
-  height: 100px; 
+  border: 2px solid transparent;
+  border-radius: 8px;
+  height: 100px;
 }
-/* TRK 11-12-2024 -> */
+
 .selected-emoji {
   border-color: blue;
 }
-/* TRK 11-12-2024 <- */
 </style>

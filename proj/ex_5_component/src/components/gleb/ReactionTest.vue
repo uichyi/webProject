@@ -106,7 +106,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .timer{
   display: none;
 }
@@ -116,12 +116,26 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100px;
   text-align: center;
+  height: 100vh; /* Make sure the content fills the screen */
+  width: 100vw;
+  background-color: #0000003f;
 }
 
 .start-screen {
-  max-width: 600px;
+  /* max-width: 600px; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #4caf50;
+  background-color: #f4f4f4;
+  cursor: pointer; /* Indicating it's clickable */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
 }
 
 .circle-container {

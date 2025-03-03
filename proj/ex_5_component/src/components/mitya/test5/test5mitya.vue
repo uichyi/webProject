@@ -161,7 +161,7 @@
         
       this.targetSum = this.generateTargetSum();
       this.score = 0;
-      this.remainingTime = 10;
+      this.remainingTime = 100;
       this.gameOver = false;
       this.startTimer();
     },
@@ -214,31 +214,37 @@
 };
 </script>
 
-<style>
+<style scoped>
 .game {
   text-align: center;
-}
 
-.matrix {
-  display: inline-block;
-  margin-top: 0px;
-}
-
-.row {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
+.matrix {
+  display: grid;
+  grid-template-columns: repeat(9, 50px); /* 9 columns, each 50px wide */
+  grid-template-rows: repeat(9, 50px); /* 9 rows, each 50px tall */
+  gap: 1rem; /* Add a gap between the cells */
+  justify-content: center; /* Center the grid horizontally */
+  margin-top: 20px;
+}
+
 .cell {
+  border: 1px solid black;
   width: 50px;
   height: 50px;
-  margin: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;
   cursor: pointer;
   font-size: 20px;
+  box-sizing: border-box; /* Prevents padding from affecting the size */
 }
 
 .cell.selected {
@@ -251,7 +257,7 @@
 }
 
 button {
-  margin-top: 0px;
+  margin-top: 20px;
   padding: 10px;
   background-color: #4caf50;
   color: white;
@@ -267,4 +273,5 @@ button:hover {
   margin-top: 20px;
   font-size: 24px;
 }
+
 </style>

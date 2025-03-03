@@ -16,25 +16,16 @@ const handleButton = (e, val) => {
 </script>
 
 <template>
-  <div class="col">
+  <div class="col startWrapper">
     <h2>Тест На Скорость Кликов</h2>
     <div>
-      <button
-        :class="{ active: selectedDuration === 1 }"
-        @click="(e) => handleButton(e, 1)"
-      >
+      <button :class="{ active: selectedDuration === 1 }" @click="(e) => handleButton(e, 1)">
         1сек
       </button>
-      <button
-        :class="{ active: selectedDuration === 3 }"
-        @click="(e) => handleButton(e, 3)"
-      >
+      <button :class="{ active: selectedDuration === 3 }" @click="(e) => handleButton(e, 3)">
         3сек
       </button>
-      <button
-        :class="{ active: selectedDuration === 5 }"
-        @click="(e) => handleButton(e, 5)"
-      >
+      <button :class="{ active: selectedDuration === 5 }" @click="(e) => handleButton(e, 5)">
         5сек
       </button>
     </div>
@@ -52,10 +43,17 @@ const handleButton = (e, val) => {
 </template>
 
 <style scoped>
+.startWrapper {
+  max-width: 800px;
+  height: 100vh;
+  text-align: center;
+}
+
 .col {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 button {

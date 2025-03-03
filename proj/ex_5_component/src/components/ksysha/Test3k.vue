@@ -1,40 +1,40 @@
 <template>
-    <div>
-      <div v-if="!testStarted && !testEnded" class="menu">
-        <h1 class="test-title">Тест Струпа</h1>
-        <p class="test-description">
-          Добро пожаловать! В этом тесте вам нужно выбрать правильное слово, которое соответствует цвету текста. У вас будет 60 секунд, чтобы ответить на максимальное количество вопросов.
-        </p>
-        <div class="button-container">
-          <button @click="startTest" class="start-button">Начать тест</button>
+    <div class="wrapper">
+      <div>
+        <div v-if="!testStarted && !testEnded" class="menu">
+          <h1 class="test-title">Тест Струпа</h1>
+          <p class="test-description">
+            Добро пожаловать! В этом тесте вам нужно выбрать правильное слово, которое соответствует цвету текста. У вас будет 60 секунд, чтобы ответить на максимальное количество вопросов.
+          </p>
+          <div class="button-container">
+            <button @click="startTest" class="start-button">Начать тест</button>
+            <button @click="returnToMenu" class="back-button">Вернуться на главный экран</button>
+          </div>
+        </div>
+        <div v-if="testStarted" class="test">
+          <div class="timer">{{ remainingTime }} секунд</div>
+          <div class="word" :style="{ color: wordColor }">{{ wordText }}</div>
+          <div class="buttons">
+            <button
+              v-for="(option, index) in options"
+              :key="index"
+              :style="{ backgroundColor: option.color }"
+              class="button"
+              @click="checkAnswer(option.text)"
+            >
+              {{ option.text }}
+            </button>
+          </div>
+          <div class="result">Правильные ответы: {{ correctAnswers }}</div>
           <button @click="returnToMenu" class="back-button">Вернуться на главный экран</button>
         </div>
-      </div>
-  
-      <div v-if="testStarted" class="test">
-        <div class="timer">{{ remainingTime }} секунд</div>
-        <div class="word" :style="{ color: wordColor }">{{ wordText }}</div>
-        <div class="buttons">
-          <button
-            v-for="(option, index) in options"
-            :key="index"
-            :style="{ backgroundColor: option.color }"
-            class="button"
-            @click="checkAnswer(option.text)"
-          >
-            {{ option.text }}
-          </button>
-        </div>
-        <div class="result">Правильные ответы: {{ correctAnswers }}</div>
-        <button @click="returnToMenu" class="back-button">Вернуться на главный экран</button>
-      </div>
-  
-      <div v-if="testEnded" class="summary">
-        <div class="result">Тест завершён! Правильные ответы: {{ correctAnswers }}.</div>
-        <div class="result">Оценка: {{ evaluation }}</div>
-        <div class="button-container">
-          <button @click="startTest" class="start-button">Пройти тест снова</button>
-          <button @click="returnToMenu" class="back-button">Назад на главный экран</button>
+        <div v-if="testEnded" class="summary">
+          <div class="result">Тест завершён! Правильные ответы: {{ correctAnswers }}.</div>
+          <div class="result">Оценка: {{ evaluation }}</div>
+          <div class="button-container">
+            <button @click="startTest" class="start-button">Пройти тест снова</button>
+            <button @click="returnToMenu" class="back-button">Назад на главный экран</button>
+          </div>
         </div>
       </div>
     </div>
@@ -157,6 +157,13 @@
   </script>  
   
   <style scoped>
+.wrapper {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+
   body {
     font-family: Arial, sans-serif;
     display: flex;
