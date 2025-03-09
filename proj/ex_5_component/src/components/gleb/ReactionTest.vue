@@ -1,26 +1,35 @@
 <template>
-  <div class="test-container" @click="handleClick">
-    <div v-if="!testStarted" class="start-screen">
-      <h2>Нажмите, чтобы начать тест</h2>
-      <p>Вам предстоит выполнить 5 попыток. Реагируйте как можно быстрее, когда круг станет зеленым!</p>
+  <div id="appp">
+    <div class="navbarr">
+      <RedButton/>
     </div>
-    <div v-else-if="currentAttempt <= totalAttempts" class="circle-container">
-      <div
-        :class="['circle', isGreen ? 'green' : 'red']"
-      ></div>
-    </div>
-    <div v-else class="result-screen">
-      <h2>Тест завершен!</h2>
-      <p>Ваше среднее время реакции: {{ averageReactionTime }} мс</p>
-      <button @click="restartTest">Пройти заново</button>
+    <div class="test-container" @click="handleClick">
+      <div v-if="!testStarted" class="start-screen">
+        <h2>Нажмите, чтобы начать тест</h2>
+        <p>Вам предстоит выполнить 5 попыток. Реагируйте как можно быстрее, когда круг станет зеленым!</p>
+      </div>
+      <div v-else-if="currentAttempt <= totalAttempts" class="circle-container">
+        <div
+          :class="['circle', isGreen ? 'green' : 'red']"
+        ></div>
+      </div>
+      <div v-else class="result-screen">
+        <h2>Тест завершен!</h2>
+        <p>Ваше среднее время реакции: {{ averageReactionTime }} мс</p>
+        <button @click="restartTest">Пройти заново</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import RedButton from "../navbar/Return.vue";
 
 export default {
+  components: {
+    RedButton
+  },
   data() {
     return {
       testStarted: false,
@@ -107,6 +116,13 @@ export default {
 </script>
 
 <style scoped>
+#appp {
+  background-color: #0000003f;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 .timer{
   display: none;
 }
@@ -117,9 +133,8 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh; /* Make sure the content fills the screen */
+  height: auto; /* Make sure the content fills the screen */
   width: 100vw;
-  background-color: #0000003f;
 }
 
 .start-screen {

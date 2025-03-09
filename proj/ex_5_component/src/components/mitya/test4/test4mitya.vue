@@ -1,40 +1,49 @@
 <template>
-    <div class="puzzle-game">
-      <div>
-        <h1>Пятнашки</h1>
-        <input type="file" @change="uploadImage" accept="image/*" />
-        <select v-model="gridSize" @change="initializeGame">
-          <option value="3">3x3</option>
-        </select>
+    <div id="appp">
+      <div class="navbarr">
+        <RedButton />
       </div>
-      <div
-  v-if="imageLoaded"
-  class="puzzle-grid"
-  :style="{ 
-    width: '400px',
-    height: '400px',
-    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-    gridTemplateRows: `repeat(${gridSize}, 1fr)`
-  }"
->
-  <div
-    v-for="(piece, index) in shuffledPieces"
-    :key="index"
-    :class="['puzzle-piece', { empty: piece.empty }]"
-    :style="getPieceStyle(piece)"
-    @click="movePiece(index)"
-  ></div>
-</div>
-      <div v-if="gameWon" class="win-message">
-        <h2>Поздравляем! Вы победили!</h2>
+      <div class="puzzle-game">
+        <div>
+          <h1>Пятнашки</h1>
+          <input type="file" @change="uploadImage" accept="image/*" />
+          <select v-model="gridSize" @change="initializeGame">
+            <option value="3">3x3</option>
+          </select>
+        </div>
+        <div
+        v-if="imageLoaded"
+        class="puzzle-grid"
+        :style="{
+      width: '400px',
+      height: '400px',
+      gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+      gridTemplateRows: `repeat(${gridSize}, 1fr)`
+        }"
+      >
+        <div
+      v-for="(piece, index) in shuffledPieces"
+      :key="index"
+      :class="['puzzle-piece', { empty: piece.empty }]"
+      :style="getPieceStyle(piece)"
+      @click="movePiece(index)"
+        ></div>
+      </div>
+        <div v-if="gameWon" class="win-message">
+          <h2>Поздравляем! Вы победили!</h2>
+        </div>
       </div>
     </div>
   </template>
   
   <script>
   import axios from "axios";
+  import RedButton from "../../navbar/Return.vue";
 
   export default {
+    components: {
+    RedButton
+  },
     data() {
       return {
         gridSize: 3,
@@ -205,12 +214,20 @@
   </script>
   
   <style scoped>
+    #appp {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      justify-content: center;
+      align-items: center; 
+  }
   .puzzle-game {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
 
-    height: 100vh;
+    /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;

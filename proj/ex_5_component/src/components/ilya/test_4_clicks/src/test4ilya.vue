@@ -57,6 +57,9 @@ const gameOver = (value) => {
 
 <template>
   <div class="wrapper">
+    <div class="navbarr">
+      <RedButton />
+    </div>
     <div v-if="gameState === 'start'">
       <Start @startGame="startGame" @setDuration="setDuration"></Start>
     </div>
@@ -69,14 +72,27 @@ const gameOver = (value) => {
   </div>
 </template>
 
-<script></script>
+
+<script> 
+import RedButton from "../../../navbar/Return.vue";
+export default {
+  components: {
+    RedButton
+  }
+}
+</script>
 
 <style scoped>
-.wrapper,
-.wrapper > * {
-  max-width: 100vw;
+.wrapper {
   height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-content: center;
+  align-items: center;
+}
 
+.wrapper > * {
   display: flex;
   justify-content: center;
   align-items: center;

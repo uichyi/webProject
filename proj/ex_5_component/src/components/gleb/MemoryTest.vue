@@ -1,41 +1,44 @@
 <template>
-  <div class="memory-test" @click="handleClick">
-
-    <div v-if="!testStarted" class="start-screen">
-      <h2>Нажмите, чтобы начать тест</h2>
-      <p>Это тест на краткосрочную память. Вам нужно будет отвечать на простые вопросы связанные с вашей жизнью или картинками из теста. </p>
+  <div id="appp">
+    <div class="navbarr">
+      <RedButton/>
     </div>
-
-    <div v-else-if="currentQuestion <= totalQuestions && !testCompleted" class="test-container">
-      <h2 class="question-count">Вопрос {{ currentQuestion }}/{{ totalQuestions }}</h2>
-
-      <img :src="currentImage" alt="Вопрос о картинке" class="question-image" />
-      <p>{{ currentQuestionText }}</p>
-
-      <div class="options">
-        <button
-          v-for="(option, index) in currentOptions"
-          :key="index"
-          @click="checkAnswer(option)"
-        >
-          {{ option }}
-        </button>
+    <div class="memory-test" @click="handleClick">
+      <div v-if="!testStarted" class="start-screen">
+        <h2>Нажмите, чтобы начать тест</h2>
+        <p>Это тест на краткосрочную память. Вам нужно будет отвечать на простые вопросы связанные с вашей жизнью или картинками из теста. </p>
       </div>
-
-    </div>
-
-    <div v-if="testCompletedAndCallFunction" class="result">
-      <h3>Тест завершен!</h3>
-      <p>Вы правильно ответили на {{ score }} из {{ totalQuestions }} вопросов.</p>
-      <button @click="restartTest">Пройти тест заново</button>
+      <div v-else-if="currentQuestion <= totalQuestions && !testCompleted" class="test-container">
+        <h2 class="question-count">Вопрос {{ currentQuestion }}/{{ totalQuestions }}</h2>
+        <img :src="currentImage" alt="Вопрос о картинке" class="question-image" />
+        <p>{{ currentQuestionText }}</p>
+        <div class="options">
+          <button
+            v-for="(option, index) in currentOptions"
+            :key="index"
+            @click="checkAnswer(option)"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
+      <div v-if="testCompletedAndCallFunction" class="result">
+        <h3>Тест завершен!</h3>
+        <p>Вы правильно ответили на {{ score }} из {{ totalQuestions }} вопросов.</p>
+        <button @click="restartTest">Пройти тест заново</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import RedButton from "../navbar/Return.vue";
 
 export default {
+  components: {
+    RedButton
+  },
   data() {
     return {
       testStarted: false,
@@ -186,17 +189,21 @@ export default {
 </script>
 
 <style scoped>
-
+#appp {
+  background-color: #0000003f;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
 .memory-test {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
+  height: auto;
   width: 100vw;
   padding: 20px;
-  background-color: #0000003f;
 }
 
 .start-screen {

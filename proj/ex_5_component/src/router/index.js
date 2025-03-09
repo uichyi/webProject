@@ -31,10 +31,15 @@ import Test1k from '../components/ksysha/Test1k.vue';
 import Test2k from '../components/ksysha/Test2k.vue';
 import Test3k from '../components/ksysha/Test3k.vue';
 
+import Login from "../components/authorization/Log_in.vue";
+import Register from "../components/authorization/Sign_up.vue"
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home }, // Home page route
+    { path: '/login', component: Login},
+    { path: '/register', component: Register},
     { path: '/test1', component: Test1 },
     { path: '/test2', component: Test2 },
     { path: '/test3', component: Test3 },

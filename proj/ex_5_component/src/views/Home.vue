@@ -1,339 +1,338 @@
 <template>
-    <div class="container mt-5 text-center">
-      <h1 class="mb-4">Тесты</h1>
-  
-      <!-- Kostya's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Кости</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('kostya', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.kostya <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.kostya * 300 - 300)}px)` }">
-              <div v-for="(test, index) in kostyaTests" 
-                   :key="`kostya-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.kostya, 'side-card': index !== currentIndices.kostya }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.kostya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+    <div class="wrapper">
+      <div class="navbar-wrapper">
+        <Navbar />
+      </div>
+      <div class="container mt-5 text-center">
+        <h1 class="mb-4">Тесты</h1>
+        <!-- Kostya's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Кости</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('kostya', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.kostya <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.kostya * 300 - 300)}px)` }">
+                <div v-for="(test, index) in kostyaTests"
+                     :key="`kostya-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.kostya, 'side-card': index !== currentIndices.kostya }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" />
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.kostya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('kostya', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.kostya >= kostyaTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('kostya', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.kostya >= kostyaTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <!-- Gleb's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Глеба</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('gleb', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.gleb <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.gleb * 300 - 300)}px)` }">
-              <div v-for="(test, index) in glebTests" 
-                   :key="`gleb-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.gleb, 'side-card': index !== currentIndices.gleb }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" width="200" height="93"/>
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.gleb" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+        <!-- Gleb's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Глеба</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('gleb', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.gleb <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.gleb * 300 - 300)}px)` }">
+                <div v-for="(test, index) in glebTests"
+                     :key="`gleb-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.gleb, 'side-card': index !== currentIndices.gleb }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" width="200" height="93"/>
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.gleb" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('gleb', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.gleb >= glebTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('gleb', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.gleb >= glebTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <!-- Ilya's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Ильи</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('ilya', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.ilya <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ilya * 300 - 300)}px)` }">
-              <div v-for="(test, index) in ilyaTests" 
-                   :key="`ilya-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.ilya, 'side-card': index !== currentIndices.ilya }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.ilya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+        <!-- Ilya's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Ильи</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('ilya', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.ilya <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ilya * 300 - 300)}px)` }">
+                <div v-for="(test, index) in ilyaTests"
+                     :key="`ilya-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.ilya, 'side-card': index !== currentIndices.ilya }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" />
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.ilya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('ilya', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.ilya >= ilyaTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('ilya', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.ilya >= ilyaTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <!-- Masha's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Маши</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('masha', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.masha <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.masha * 300 - 300)}px)` }">
-              <div v-for="(test, index) in mashaTests" 
-                   :key="`masha-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.masha, 'side-card': index !== currentIndices.masha }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.masha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+        <!-- Masha's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Маши</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('masha', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.masha <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.masha * 300 - 300)}px)` }">
+                <div v-for="(test, index) in mashaTests"
+                     :key="`masha-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.masha, 'side-card': index !== currentIndices.masha }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" />
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.masha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('masha', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.masha >= mashaTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('masha', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.masha >= mashaTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <!-- Mitya's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Мити</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('mitya', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.mitya <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.mitya * 300 - 300)}px)` }">
-              <div v-for="(test, index) in mityaTests" 
-                   :key="`mitya-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.mitya, 'side-card': index !== currentIndices.mitya }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.mitya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+        <!-- Mitya's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Мити</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('mitya', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.mitya <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.mitya * 300 - 300)}px)` }">
+                <div v-for="(test, index) in mityaTests"
+                     :key="`mitya-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.mitya, 'side-card': index !== currentIndices.mitya }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" />
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.mitya" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('mitya', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.mitya >= mityaTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('mitya', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.mitya >= mityaTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <!-- Ksysha's Carousel -->
-      <div class="carousel-section mb-5">
-        <h2 class="carousel-title">Тесты от Ксюши</h2>
-        <div class="carousel-outer-wrapper">
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('ksysha', 'left')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.ksysha <= 0}"
-              style="cursor: pointer;">
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
-          <div class="carousel-wrapper">
-            <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ksysha * 300 - 300)}px)` }">
-              <div v-for="(test, index) in ksyshaTests" 
-                   :key="`ksysha-${index}`" 
-                   class="test-card" 
-                   :class="{ 'main-card': index === currentIndices.ksysha, 'side-card': index !== currentIndices.ksysha }">
-                <h3>{{ test.name }}</h3>
-                <img :src="test.preview" alt="Preview" class="preview-img" />
-                <p>{{ test.description }}</p>
-                <router-link v-if="index === currentIndices.ksysha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+        <!-- Ksysha's Carousel -->
+        <div class="carousel-section mb-5">
+          <h2 class="carousel-title">Тесты от Ксюши</h2>
+          <div class="carousel-outer-wrapper">
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('ksysha', 'left')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.ksysha <= 0}"
+                style="cursor: pointer;">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </div>
+            <div class="carousel-wrapper">
+              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ksysha * 300 - 300)}px)` }">
+                <div v-for="(test, index) in ksyshaTests"
+                     :key="`ksysha-${index}`"
+                     class="test-card"
+                     :class="{ 'main-card': index === currentIndices.ksysha, 'side-card': index !== currentIndices.ksysha }">
+                  <h3>{{ test.name }}</h3>
+                  <img :src="test.preview" alt="Preview" class="preview-img" />
+                  <p>{{ test.description }}</p>
+                  <router-link v-if="index === currentIndices.ksysha" :to="test.path" class="btn-modern">Перейти к тесту</router-link>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="arrow-container">
-            <svg 
-              @click="navigateCarousel('ksysha', 'right')" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="40" 
-              height="40" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="arrow-icon" 
-              :class="{'disabled-arrow': currentIndices.ksysha >= ksyshaTests.length - 1}"
-              style="cursor: pointer;">
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
+            <div class="arrow-container">
+              <svg
+                @click="navigateCarousel('ksysha', 'right')"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="arrow-icon"
+                :class="{'disabled-arrow': currentIndices.ksysha >= ksyshaTests.length - 1}"
+                style="cursor: pointer;">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -341,7 +340,9 @@
   </template>
   
   <script>
-  export default {
+import Navbar from "../components/navbar/Navbar.vue";
+
+export default {
     data() {
       return {
         kostyaTests: [
@@ -395,28 +396,63 @@
       };
     },
     methods: {
-      navigateCarousel(group, direction) {
-        const tests = {
-          kostya: this.kostyaTests,
-          gleb: this.glebTests,
-          ilya: this.ilyaTests,
-          masha: this.mashaTests,
-          mitya: this.mityaTests,
-          ksysha: this.ksyshaTests,
-        };
-        if (direction === 'left' && this.currentIndices[group] > 0) {
-          this.currentIndices[group]--;
-        } else if (direction === 'right' && this.currentIndices[group] < tests[group].length - 1) {
-          this.currentIndices[group]++;
-        }
-      },
+    navigateCarousel(group, direction) {
+      const tests = {
+        kostya: this.kostyaTests,
+        gleb: this.glebTests,
+        ilya: this.ilyaTests,
+        masha: this.mashaTests,
+        mitya: this.mityaTests,
+        ksysha: this.ksyshaTests,
+      };
+      
+      if (direction === 'left' && this.currentIndices[group] > 0) {
+        this.currentIndices[group]--;
+      } else if (direction === 'right' && this.currentIndices[group] < tests[group].length - 1) {
+        this.currentIndices[group]++;
+      }
+      
+      // Save the new index to localStorage
+      localStorage.setItem(`carousel_${group}`, this.currentIndices[group]);
     },
+    loadSavedIndices() {
+      // Load saved indices from localStorage
+      const groups = ['kostya', 'gleb', 'ilya', 'masha', 'mitya', 'ksysha'];
+      groups.forEach(group => {
+        const savedIndex = localStorage.getItem(`carousel_${group}`);
+        if (savedIndex !== null) {
+          // Ensure the saved index is within bounds
+          const maxIndex = this[`${group}Tests`].length - 1;
+          this.currentIndices[group] = Math.min(Math.max(parseInt(savedIndex), 0), maxIndex);
+        }
+      });
+    }
+  },
+  mounted() {
+    // Load saved indices when component mounts
+    this.loadSavedIndices();
+  },
+  components: {
+    Navbar,
+  }
   };
   </script>
   
   <style scoped>
+  .wrapper {
+    background: rgb(219, 240, 255);
+    width: 100vw;
+    height: 100%;
+  }
+  .navbar-wrapper {
+    background: white;
+    padding-block: 5px;
+    border-bottom: 1px solid gray;
+    padding-inline: 20%;
+  }
   /* Локальные стили для Home.vue */
   .carousel-section {
+    padding: 40px;
     padding-bottom: 40px;
     position: relative;
     background-color: #f9f9f9; /* Light background for better contrast */

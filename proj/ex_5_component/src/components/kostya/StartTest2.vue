@@ -1,5 +1,6 @@
 <!-- StartScreen.vue -->
 <template>
+    <RedButton/>
     <div v-if="!gameStarted" class="start-screen">
       <h1 class="start-title">Emoji Memory Game</h1>
       <p class="start-description">
@@ -14,10 +15,12 @@
   
   <script>
   import Game from './Test2.vue'; // Import the game component
-  
+  import RedButton from "../navbar/Return.vue";
+
   export default {
     components: {
-      Game
+      Game,
+      RedButton
     },
     data() {
       return {

@@ -1,13 +1,18 @@
 <template>
-  <div id="app" class="app">
-    <StartPage v-if="!isTesting && !isFinished" @start="startTest" />
-    <TestPage
-      v-if="isTesting"
-      :currentExpression="currentExpression"
-      :timeLeft="timeLeft"
-      @answer="checkAnswer"
-    />
-    <ResultPage v-if="isFinished" :score="score" :expressions_answers="expressions_answers" :all_expressions="all_expressions" @reset="resetTest" />
+  <div id="appp">
+    <div class="navbarr">
+        <RedButton />
+    </div>
+    <div id="app" class="app">
+      <StartPage v-if="!isTesting && !isFinished" @start="startTest" />
+      <TestPage
+        v-if="isTesting"
+        :currentExpression="currentExpression"
+        :timeLeft="timeLeft"
+        @answer="checkAnswer"
+      />
+      <ResultPage v-if="isFinished" :score="score" :expressions_answers="expressions_answers" :all_expressions="all_expressions" @reset="resetTest" />
+    </div>
   </div>
 </template>
 
@@ -16,6 +21,7 @@ import StartPage from "./StartPage.vue";
 import TestPage from "./TestPage.vue";
 import ResultPage from "./ResultPage.vue";
 import axios from "axios";
+import RedButton from "../../navbar/Return.vue";
 
 export default {
   name: "App",
@@ -23,6 +29,7 @@ export default {
     StartPage,
     TestPage,
     ResultPage,
+    RedButton
   },
   data() {
     return {
@@ -134,12 +141,21 @@ export default {
 </script>
 
 <style scoped>
+  #appp {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      justify-content: center;
+      align-items: center; 
+  }
+
 .app {
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
 
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   flex-direction: column;

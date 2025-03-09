@@ -21,7 +21,7 @@ const handleClick = () => {
 <style scoped>
 .startWrapper {
   max-width: 800px; 
-  height: 100vh;
+  /* height: 100vh; */
   text-align: center;
   display: grid;
   place-content: center;

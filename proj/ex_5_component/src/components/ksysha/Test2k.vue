@@ -21,7 +21,10 @@
           <p>Оценка: {{ evaluation }}</p>
           <button @click="startTest"class="start-button">Попробовать снова</button>
         </div>
-        <button @click="goBack" class="back-button">Вернуться на главный экран</button>
+        <button @click="goBack" class="back-button">          
+          <router-link to="/" class="text-white">
+            Вернуться на главный экран
+         </router-link></button>
       </div>
     </div>
   </template>  

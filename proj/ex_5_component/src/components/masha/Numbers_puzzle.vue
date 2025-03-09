@@ -2,62 +2,69 @@
   import Timer from './Timer.vue'
 </script>
 <template>
-    <div class="wrapper">
-        <h2 class='text-center mb-4'>Тест "Числовой пазл"</h2>
-        <div v-if='is_started == false' class='mx-5'>
-            <h3 class='my-4'>Правила прохождения теста:</h3>
-            <div>
-                <h5>1. Нажимайте на ячейку в первом блоке куда хотите поставить число из второго блока</h5>
-                <h5>2. Затем нажимайте на выбранное число из второго блока</h5>
-                <h5>3. Это число переносится в первый блок и отмечается определенным цветом:</h5>
-                <li class='my-1'><span style='background:#77d496'>Число находится в своей ячейке</span></li>
-                <li class='my-1'><span style='background:#ffff7a'>Число находится не в своей ячейке. Это число присутствует либо в ряду, либо в колонке открытой ячейки</span></li>
-                <li class='my-1'><span style='background:#ff4c5b'>Число находится не в своей ячейке. Этого числа нет ни в ряду, ни в колонке открытой ячейки</span></li>
-            </div>
-            <div>
-                <button class='btn btn-primary mt-3 text-center' @click='startTest'>Начать</button>
-            </div>
+    <div id="appp">
+        <div class="navbarr">
+            <RedButton />
         </div>
-        <Timer ref='timerPuzzle' class='text-center' v-show='is_started==true && is_finished==false'/>
+        <div class="wrapper">
+            <h2 class='text-center mb-4'>Тест "Числовой пазл"</h2>
+            <div v-if='is_started == false' class='mx-5'>
+                <h3 class='my-4'>Правила прохождения теста:</h3>
+                <div>
+                    <h5>1. Нажимайте на ячейку в первом блоке куда хотите поставить число из второго блока</h5>
+                    <h5>2. Затем нажимайте на выбранное число из второго блока</h5>
+                    <h5>3. Это число переносится в первый блок и отмечается определенным цветом:</h5>
+                    <li class='my-1'><span style='background:#77d496'>Число находится в своей ячейке</span></li>
+                    <li class='my-1'><span style='background:#ffff7a'>Число находится не в своей ячейке. Это число присутствует либо в ряду, либо в колонке открытой ячейки</span></li>
+                    <li class='my-1'><span style='background:#ff4c5b'>Число находится не в своей ячейке. Этого числа нет ни в ряду, ни в колонке открытой ячейки</span></li>
+                </div>
+                <div>
+                    <button class='btn btn-primary mt-3 text-center' @click='startTest'>Начать</button>
+                </div>
+            </div>
+            <Timer ref='timerPuzzle' class='text-center' v-show='is_started==true && is_finished==false'/>
         
-        <div class='d-flex justify-content-center row' v-if='is_finished == false && is_started'>
-            <div class='col-lg-6 col-sm-12 mt-5'>
-                <table>
-                    <tr v-for='tr in [0,3,6]'>
-                        <td v-for='td in [1,2,3]' :id='td+tr' @click='chooseCell(td+tr)'></td>
-                    </tr>
-                </table>
+            <div class='d-flex justify-content-center row' v-if='is_finished == false && is_started'>
+                <div class='col-lg-6 col-sm-12 mt-5'>
+                    <table>
+                        <tr v-for='tr in [0,3,6]'>
+                            <td v-for='td in [1,2,3]' :id='td+tr' @click='chooseCell(td+tr)'></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='col-lg-6 col-sm-12 mt-5'>
+                    <table>
+                        <tr v-for='tr in [0,3,6]'>
+                            <td v-for='td in [1,2,3]' :id='`id_${td+tr}`'  @click='chooseNumber(td+tr)'> <b>{{td+tr}}</b></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class='col-lg-6 col-sm-12 mt-5'>
-                <table>
-                    <tr v-for='tr in [0,3,6]'>
-                        <td v-for='td in [1,2,3]' :id='`id_${td+tr}`'  @click='chooseNumber(td+tr)'> <b>{{td+tr}}</b></td>
-                    </tr>
-                </table>
+            <div v-if='is_finished' class="card" style="width: 50rem; margin:auto;">
+                <div class="card-header text-center" style = 'background:#d5cede;'>
+                    <h3>Результат теста</h3>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h5>Время выполнения: <b>{{$refs.timerPuzzle.timeUsedCount}}</b></h5></li>
+                    <li class="list-group-item"><h5>Количество верно расставленных квадратов: <b>{{guessed_nums.length}} / 9 </b></h5></li>
+                    <li class="list-group-item"><h5>Количество ошибок: <b>{{error_number}}</b></h5></li>
+                </ul>
             </div>
-        </div>
-        <div v-if='is_finished' class="card" style="width: 50rem; margin:auto;">
-            <div class="card-header text-center" style = 'background:#d5cede;'>
-                <h3>Результат теста</h3>
+            <div class='d-flex justify-content-center'>
+                <button v-if='is_finished && level<3' class='btn btn-primary my-3' @click='nextLevel'>Продолжить</button>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h5>Время выполнения: <b>{{$refs.timerPuzzle.timeUsedCount}}</b></h5></li>
-                <li class="list-group-item"><h5>Количество верно расставленных квадратов: <b>{{guessed_nums.length}} / 9 </b></h5></li>
-                <li class="list-group-item"><h5>Количество ошибок: <b>{{error_number}}</b></h5></li>
-            </ul>
+            <p v-if='time_load'>{{final}}</p>
         </div>
-        <div class='d-flex justify-content-center'>
-            <button v-if='is_finished && level<3' class='btn btn-primary my-3' @click='nextLevel'>Продолжить</button>
-        </div>
-        <p v-if='time_load'>{{final}}</p>
     </div>
 </template>
 <script>
     import axios from "axios";
+    import RedButton from "../navbar/Return.vue";
 
     export default {
         components(){
-            Timer
+            Timer,
+            RedButton
         },
         data() {
             return {
@@ -161,8 +168,17 @@
 </script>
 
 <style scoped>
-    .wrapper {
+    #appp {
         height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        justify-content: center;
+        align-items: center; 
+    }
+
+    .wrapper {
+        /* height: 100vh; */
         display: flex;
         justify-content: center;
         flex-direction: column;

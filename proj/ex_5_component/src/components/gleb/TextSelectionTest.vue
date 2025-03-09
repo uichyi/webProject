@@ -1,38 +1,44 @@
 <template>
-  <div class="wrapper">
-    <div class="text-selection-test">
-    <h2>Тест: выделение слов</h2>
-    <p>
-      Постарайтесь выделить слова в следующем тексте. После того как вы
-      завершите, нажмите кнопку "Готово".
-    </p>
-
-    <div
-      class="text-area"
-      contenteditable="true"
-      ref="editableText"
-      @mouseup="handleSelection"
-    >
-      {{ text }}
+  <div id="appp">
+    <div class="navbarr">
+      <RedButton/>
     </div>
-
-    <button @click="finishTest">Готово</button>
-
-    <div v-if="showResults" class="results">
-      <h3>Результаты:</h3>
-      <p>Вы выделили {{ selectedWords.length }} слов(а).</p>
-      <p>Вы пропустили {{ totalWords - selectedWords.length }} слов(а).</p>
-      <button @click="restartTest">Начать заново</button>
+    <div class="wrapper">
+      <div class="text-selection-test">
+      <h2>Тест: выделение слов</h2>
+      <p>
+        Постарайтесь выделить слова в следующем тексте. После того как вы
+        завершите, нажмите кнопку "Готово".
+      </p>
+      <div
+        class="text-area"
+        contenteditable="true"
+        ref="editableText"
+        @mouseup="handleSelection"
+      >
+        {{ text }}
+      </div>
+      <button @click="finishTest">Готово</button>
+      <div v-if="showResults" class="results">
+        <h3>Результаты:</h3>
+        <p>Вы выделили {{ selectedWords.length }} слов(а).</p>
+        <p>Вы пропустили {{ totalWords - selectedWords.length }} слов(а).</p>
+        <button @click="restartTest">Начать заново</button>
+      </div>
     </div>
-  </div>
+    </div>
   </div>
   
 </template>
 
 <script>
 import axios from "axios";
+import RedButton from "../navbar/Return.vue";
 
 export default {
+  components: {
+    RedButton
+  },
   data() {
     return {
       text: `клодфитренмстоловоапряглицетыпошлидровоставракосылимонедпрыгаютвребелокречьщедорогакапустаквартирымыркодчебылкитюленувлесузебраскидаюхолстореворыпалкаочагпрокартайлебедяжукстарыйовражекореньдроваимеломшапканоркастихлосолнцезвенитшансгрибоклепестокпартастеклопосудажучокдверьлупень`,
@@ -107,12 +113,20 @@ export default {
 </script>
 
 <style scoped>
+#appp {
+  background-color: #0000003f;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  height: 100vh;
+  height: auto;
 }
 
 .text-selection-test {

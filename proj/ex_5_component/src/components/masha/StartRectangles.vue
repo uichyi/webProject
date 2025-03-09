@@ -1,23 +1,30 @@
 <!-- StartScreen.vue -->
 <template>
-    <div v-if="!gameStarted" class="start-screen">
-      <h1 class="start-title">Emoji Memory Game</h1>
-      <p class="start-description">
-        Test your memory by matching pairs of emojis. Click the button below to start the game!
-      </p>
-      <button class="start-button" @click="startGame">Start Game</button>
-      <p>Последняя попытка: ?</p>
-      <p>Рекорд: ?</p>
+    <div id="appp">
+      <div class="navbarr">
+        <RedButton />
+      </div>
+      <div v-if="!gameStarted" class="start-screen">
+        <h1 class="start-title">Emoji Memory Game</h1>
+        <p class="start-description">
+          Test your memory by matching pairs of emojis. Click the button below to start the game!
+        </p>
+        <button class="start-button" @click="startGame">Start Game</button>
+        <p>Последняя попытка: ?</p>
+        <p>Рекорд: ?</p>
+      </div>
+      <Game v-else />
     </div>
-    <Game v-else />
   </template>
   
   <script>
   import Game from './Rectangles.vue'; // Import the game component
-  
+  import RedButton from "../navbar/Return.vue";
+
   export default {
     components: {
-      Game
+      Game,
+      RedButton
     },
     data() {
       return {
@@ -33,12 +40,24 @@
   </script>
   
   <style scoped>
+  #appp {
+  margin: 0 auto;
+  padding: 2rem;
+
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-content: center;
+  align-items: center; 
+}
+
   .start-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background-color: #f9f9f9;
   }
   
