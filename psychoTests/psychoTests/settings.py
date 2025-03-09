@@ -140,6 +140,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 # Или разрешите конкретные домены
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Ваш фронтенд
-    "http://127.0.0.1:8080",
+    "http://localhost:8000",
 ]

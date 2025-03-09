@@ -2,11 +2,11 @@
 <template>
     <RedButton/>
     <div v-if="!gameStarted" class="start-screen">
-      <h1 class="start-title">Emoji Memory Game</h1>
+      <h1 class="start-title">Сравнение чисел</h1>
       <p class="start-description">
-        Test your memory by matching pairs of emojis. Click the button below to start the game!
+        Определи какой знак: больше, меньше или равно нужно поставить между числами, чтобы получилось верное утверждение. Нажмите на кнопку ниже, чтобы начать игру!
       </p>
-      <button class="start-button" @click="startGame">Start Game</button>
+      <button class="start-button" @click="startGame">Начать</button>
       <p>Последняя попытка: ?</p>
       <p>Рекорд: ?</p>
     </div>

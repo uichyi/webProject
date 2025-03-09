@@ -12,7 +12,6 @@
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form method='post' id="my_form">
-              {% csrf_token %}
               <div class="d-flex flex-row align-items-center justify-content-center">
                 <h2 class="text-primary my-5">Вход</h2>
               </div>
@@ -71,11 +70,11 @@
           "password": this.password
         };
         console.log(log)
-        const response = await fetch('/api/login/', {
+        const response = await fetch('/login/', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-          },
+               'Content-Type': 'application/json'
+           },
           body: JSON.stringify(log)  // Преобразование объекта в JSON
         });
 
@@ -83,11 +82,10 @@
         if (response.ok) {
           console.log(data);
           localStorage.setItem('user_id', data.user_id);
-          window.location.href = '/backend';
+          window.location.href = '/';
         } else {
           this.error = data.error || 'Ошибка при входе';
         }
-        localStorage.setItem('user_id', data.user_id);
       }
     }
   };

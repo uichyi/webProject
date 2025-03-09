@@ -303,7 +303,7 @@
               </svg>
             </div>
             <div class="carousel-wrapper">
-              <div class="carousel-track" :style="{ transform: `translateX(${-(currentIndices.ksysha * 300 - 300)}px)` }">
+              <div class="carousel-track ks" :style="{ transform: `translateX(${-(currentIndices.ksysha * 300 - 300)}px)` }">
                 <div v-for="(test, index) in ksyshaTests"
                      :key="`ksysha-${index}`"
                      class="test-card"
@@ -346,44 +346,44 @@ export default {
     data() {
       return {
         kostyaTests: [
-          { name: 'Test 1', path: '/test1', description: 'Найдите пары одинаковых эмодзи за минуту', preview: '/static/previews/kostya/test1.png' },
-          { name: 'Test 2', path: '/test2', description: 'Определите путь стрелки на цветном фоне', preview: '/static/previews/kostya/test2.png' },
-          { name: 'Test 3', path: '/test3', description: 'Описание теста 3', preview: '/static/previews/kostya/test3.png' },
-          { name: 'Test 4', path: '/test4', description: 'Описание теста 4', preview: '/static/previews/kostya/test4.png' },
-          { name: 'Test 5', path: '/test5', description: 'Описание теста 5', preview: '/static/previews/kostya/test5.png' },
+          { name: 'Пары эмодзи', path: '/test1', description: 'Найдите пары одинаковых эмодзи за минуту', preview: '/static/previews/kostya/test1.png' },
+          { name: 'Направление стрелки', path: '/test2', description: 'Определите направление стрелки на цветном фоне', preview: '/static/previews/kostya/test2.png' },
+          { name: 'Эмодзи друг за другом', path: '/test3', description: 'Определи поменялся ил эмодзи на новый', preview: '/static/previews/kostya/test3.png' },
+          { name: 'Сравнение чисел', path: '/test4', description: 'Поставь правильный знак между числами', preview: '/static/previews/kostya/test4.png' },
+          { name: 'Ближайший цвет', path: '/test5', description: 'Определи оттенок какого цвета на экране', preview: '/static/previews/kostya/test5.png' },
         ],
         glebTests: [
-          { name: 'Attention Test', path: '/attention-test', description: 'Тест на внимание', preview: '/static/previews/gleb/attention.png' },
-          { name: 'Reaction Test', path: '/reaction-test', description: 'Тест на реакцию', preview: '/static/previews/gleb/reaction.png' },
-          { name: 'Memory Test', path: '/memory-test', description: 'Тест на память', preview: '/static/previews/gleb/memory.png' },
-          { name: 'Text Selection Test', path: '/text-selection-test', description: 'Тест на выбор текста', preview: '/static/previews/gleb/text.png' },
-          { name: 'Sum Digits Test', path: '/sum-digits-test', description: 'Тест на сумму цифр', preview: '/static/previews/gleb/sum.png' },
+          { name: 'Цвет слова', path: '/attention-test', description: 'Определи какого цвета слова на экране', preview: '/static/previews/gleb/attention.png' },
+          { name: 'Реакция нажатия', path: '/reaction-test', description: 'Среагируй, когда цвет станет зеленым', preview: '/static/previews/gleb/reaction.png' },
+          { name: 'Краткосрочная память', path: '/memory-test', description: 'Запоминай картинки и отвечай на вопросы', preview: '/static/previews/gleb/memory.png' },
+          { name: 'Поиск слов', path: '/text-selection-test', description: 'Выдели слова из набора букв', preview: '/static/previews/gleb/text.png' },
+          { name: 'Сумма цифр', path: '/sum-digits-test', description: 'Сложи все цифры в каждом ряду', preview: '/static/previews/gleb/sum.png' },
         ],
         ilyaTests: [
-          { name: 'Test 1 Ilya', path: '/test1ilya', description: 'Описание теста 1 от Ильи', preview: '/static/previews/ilya/test1.png' },
-          { name: 'Test 2 Ilya', path: '/test2ilya', description: 'Описание теста 2 от Ильи', preview: '/static/previews/ilya/test2.png' },
-          { name: 'Test 3 Ilya', path: '/test3ilya', description: 'Описание теста 3 от Ильи', preview: '/static/previews/ilya/test3.png' },
-          { name: 'Test 4 Ilya', path: '/test4ilya', description: 'Описание теста 4 от Ильи', preview: '/static/previews/ilya/test4.png' },
-          { name: 'Test 5 Ilya', path: '/test5ilya', description: 'Описание теста 5 от Ильи', preview: '/static/previews/ilya/test5.png' },
+          { name: 'Запомни места цифр', path: '/test1ilya', description: 'Нажми на нужные квадраты в правильной последовательности', preview: '/static/previews/ilya/test1.png' },
+          { name: 'Особый цвет', path: '/test2ilya', description: 'Найди квадрат с уникальным цветом', preview: '/static/previews/ilya/test2.png' },
+          { name: 'Особый символ', path: '/test3ilya', description: 'Найди квадрат с уникальным символом', preview: '/static/previews/ilya/test3.png' },
+          { name: 'Скорость кликов', path: '/test4ilya', description: 'Кликай как можно быстрее', preview: '/static/previews/ilya/test4.png' },
+          { name: 'Скорость печати', path: '/test5ilya', description: 'Печатай слова как можно быстрее', preview: '/static/previews/ilya/test5.png' },
         ],
         mashaTests: [
-          { name: 'Rectangles', path: '/rectangles', description: 'Тест на прямоугольники', preview: '/static/previews/masha/rectangles.png' },
-          { name: 'Twelve Number Test', path: '/twelve-number-test', description: 'Тест на 12 чисел', preview: '/static/previews/masha/twelve.png' },
-          { name: 'Numbers Puzzle', path: '/numbers-puzzle', description: 'Головоломка с числами', preview: '/static/previews/masha/puzzle.png' },
-          { name: 'Reaction Speed', path: '/reaction-speed', description: 'Тест на скорость реакции', preview: '/static/previews/masha/speed.png' },
-          { name: 'Classical Stroop Test', path: '/classical-stroop-test', description: 'Классический тест Струпа', preview: '/static/previews/masha/stroop.png' },
+          { name: 'Название и цвет совпадают', path: '/rectangles', description: 'Найди квадраты, у которых совпадают название и цвет', preview: '/static/previews/masha/rectangles.png' },
+          { name: 'Запомни 12 чисел', path: '/twelve-number-test', description: 'Запомни в каких квадратах находятся числа', preview: '/static/previews/masha/twelve.png' },
+          { name: 'Числовой пазл', path: '/numbers-puzzle', description: 'Определи, в каких квадратах лежат правильные числа', preview: '/static/previews/masha/puzzle.png' },
+          { name: 'Скорость реакции', path: '/reaction-speed', description: 'Среагируй, когда цвет станет зеленым', preview: '/static/previews/masha/speed.png' },
+          { name: 'Тест Струпа', path: '/classical-stroop-test', description: 'Найди слова, у которых совпадают название и их цвет', preview: '/static/previews/masha/stroop.png' },
         ],
         mityaTests: [
-          { name: 'Test 1 Mitya', path: '/test1mitya', description: 'Описание теста 1 от Мити', preview: '/static/previews/mitya/test1.png' },
-          { name: 'Test 2 Mitya', path: '/test2mitya', description: 'Описание теста 2 от Мити', preview: '/static/previews/mitya/test2.png' },
-          { name: 'Test 3 Mitya', path: '/test3mitya', description: 'Описание теста 3 от Мити', preview: '/static/previews/mitya/test3.png' },
-          { name: 'Test 4 Mitya', path: '/test4mitya', description: 'Описание теста 4 от Мити', preview: '/static/previews/mitya/test4.png' },
-          { name: 'Test 5 Mitya', path: '/test5mitya', description: 'Описание теста 5 от Мити', preview: '/static/previews/mitya/test5.png' },
+          { name: 'Верно ли сравнение', path: '/test1mitya', description: 'Определи верный ли стоит знак сравнения', preview: '/static/previews/mitya/test1.png' },
+          { name: 'Цвет соответствует слову', path: '/test2mitya', description: 'Определи цвет слова соответствует ли слову внизу', preview: '/static/previews/mitya/test2.png' },
+          { name: 'Попади по квадрату', path: '/test3mitya', description: 'Нажимай на бежевый квадрат', preview: '/static/previews/mitya/test3.png' },
+          { name: 'Пятнашки', path: '/test4mitya', description: 'Собери правильную картинку', preview: '/static/previews/mitya/test4.png' },
+          { name: 'Нужная сумма', path: '/test5mitya', description: 'Отметь числа, сумма которых равна нужной', preview: '/static/previews/mitya/test5.png' },
         ],
         ksyshaTests: [
-          { name: 'Test 1 Ksysha', path: '/test1k', description: 'Описание теста 1 от Ксюши', preview: '/static/previews/ksysha/test1.png' },
-          { name: 'Test 2 Ksysha', path: '/test2k', description: 'Описание теста 2 от Ксюши', preview: '/static/previews/ksysha/test2.png' },
-          { name: 'Test 3 Ksysha', path: '/test3k', description: 'Описание теста 3 от Ксюши', preview: '/static/previews/ksysha/test3.png' },
+          { name: 'Простые вопросы', path: '/test1k', description: 'Отвечай на вопросы', preview: '/static/previews/ksysha/test1.png' },
+          { name: 'Нажми вовремя', path: '/test2k', description: 'Нажми на кнопу, когда она появиться', preview: '/static/previews/ksysha/test2.png' },
+          { name: 'Цвет и слово совпадают', path: '/test3k', description: 'Определи цвет слова', preview: '/static/previews/ksysha/test3.png' },
         ],
         currentIndices: {
           kostya: 0,
@@ -479,6 +479,8 @@ export default {
   
   .carousel-wrapper {
     overflow: hidden;
+    display: flex;
+    justify-content: center; /* Центрирование активной карточки */
     width: 900px; /* 3 cards, each 300px */
     position: relative;
     border-radius: 16px;
@@ -550,6 +552,13 @@ export default {
     border-radius: 12px;
     margin-bottom: 16px;
     border: 2px solid #f0f0f0; /* Adds a subtle border around the images */
+  }
+
+  .carousel-track .test-card:first-child {
+      margin-left: 600px;
+  }
+  .carousel-track.ks .test-card:first-child {
+      margin-left: 0;
   }
   
   .test-card h3 {

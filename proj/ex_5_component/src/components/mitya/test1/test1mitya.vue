@@ -125,7 +125,7 @@ export default {
 
       try {
         const response = await axios.post(
-          'http://localhost:8000/api/test-results/create/',
+          '/test-results/create/',
           testResultData,
           {
             headers: { 'Content-Type': 'application/json' }

@@ -10,23 +10,19 @@ from rest_framework import status
 from .models import TestResult
 from .serializers import TestResultSerializer
 from django.shortcuts import render
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
+@ensure_csrf_cookie
 def index(request):
     return render(request, 'index.html')
 
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def register_user(request):
-    if request.method == 'GET':
-        # Отображаем страницу регистрации при GET-запросе
-        return render(request, 'signup.html')
-
-    elif request.method == 'POST':
-        print(request.data)
-        # Обрабатываем регистрирующую информацию при POST-запросе
+    if request.method == 'POST':
         serializer = UserSerializer(data=request.data)
-        print(serializer)
+        print(serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -45,19 +41,15 @@ def save_test_result(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.shortcuts import render
 from django.template import RequestContext
 
-@api_view(['GET', 'POST'])
-@csrf_exempt
+@api_view(['POST'])
 def login_user(request):
-    if request.method == 'GET':
-        # Отображаем страницу регистрации при GET-запросе
-        return render(request, 'login.html')
-    elif request.method == 'POST':
-        print(request.data)
+    if request.method == 'POST':
         serializer = LoginSerializer(data=request.data)
+        print(serializer.is_valid())
         if serializer.is_valid():
             username = serializer.validated_data['username']
             password = serializer.validated_data['password']

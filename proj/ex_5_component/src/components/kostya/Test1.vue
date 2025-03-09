@@ -61,7 +61,7 @@ export default {
       };
       axios.post
       (
-        'http://localhost:8000/api/test-results/create/',
+        '/test-results/create/',
         testResultData,
         {
           headers: {

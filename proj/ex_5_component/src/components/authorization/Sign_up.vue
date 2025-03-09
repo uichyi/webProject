@@ -35,7 +35,7 @@
                     </form>
                   </div>
                   <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg"
                       class="img-fluid" alt="Sample image">
                   </div>
                 </div>
@@ -339,7 +339,7 @@
           "gaming": this.gaming
         };
         console.log(log)
-        const response = await fetch('/register', {
+        const response = await fetch('/register/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -349,7 +349,7 @@
         const data = await response.json();
         if (response.ok) {
           console.log(data);
-          window.location.href = '';
+          window.location.href = '/';
         } else {
           this.error = data.error || 'Ошибка при входе';
         }

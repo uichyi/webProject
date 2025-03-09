@@ -5,13 +5,11 @@
         <RedButton />
       </div>
       <div v-if="!gameStarted" class="start-screen">
-        <h1 class="start-title">Emoji Memory Game</h1>
+        <h1 class="start-title">Название и цвет совпадают</h1>
         <p class="start-description">
-          Test your memory by matching pairs of emojis. Click the button below to start the game!
+          Выбери квадраты, в которых название цвета совпадает с цветом их квадрата.
         </p>
-        <button class="start-button" @click="startGame">Start Game</button>
-        <p>Последняя попытка: ?</p>
-        <p>Рекорд: ?</p>
+        <button class="start-button" @click="startGame">Начать</button>
       </div>
       <Game v-else />
     </div>
