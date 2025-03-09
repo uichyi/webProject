@@ -349,6 +349,7 @@
         const data = await response.json();
         if (response.ok) {
           console.log(data);
+          localStorage.setItem('user_id', data.user_id);
           window.location.href = '/';
         } else {
           this.error = data.error || 'Ошибка при входе';

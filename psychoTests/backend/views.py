@@ -1,16 +1,11 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-from rest_framework import viewsets
-from .models import User, TestNSI, TestResult
-from .serializers import LoginSerializer, UserSerializer, TestNSISerializer, TestResultSerializer
-from rest_framework.views import APIView
+from .models import User
+from .serializers import LoginSerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from .models import TestResult
 from .serializers import TestResultSerializer
-from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.shortcuts import render
 
 
 @ensure_csrf_cookie
@@ -28,6 +23,7 @@ def register_user(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['POST'])
 def save_test_result(request):
     if request.method == 'POST':
@@ -40,10 +36,6 @@ def save_test_result(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from django.shortcuts import render
-from django.template import RequestContext
 
 @api_view(['POST'])
 def login_user(request):
