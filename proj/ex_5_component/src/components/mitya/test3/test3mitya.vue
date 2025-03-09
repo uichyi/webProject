@@ -1,28 +1,33 @@
 <template>
-  <div class="wrapper">
-    <div class="game">
-      <h1>Игра на реакцию</h1>
-      <p v-if="!isPlaying & !gameOver">
-        Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 60 секунд!
-      </p>
-      <button v-if="!isPlaying & !gameOver" @click="startGame">Начать игру</button>
-      <div v-if="isPlaying" class="col">
-        <p>Осталось времени: {{ timeLeft }} секунд</p>
-        <p>Очки: {{ score }}</p>
+  <div id="appp">
+    <div class="navbarr">
+        <RedButton />
+    </div>
+    <div class="wrapper">
+      <div class="game">
+        <h1>Игра на реакцию</h1>
+        <p v-if="!isPlaying & !gameOver">
+          Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 60 секунд!
+        </p>
+        <button v-if="!isPlaying & !gameOver" @click="startGame">Начать игру</button>
+        <div v-if="isPlaying" class="col">
+          <p>Осталось времени: {{ timeLeft }} секунд</p>
+          <p>Очки: {{ score }}</p>
     
-        <div class="matrix">
-          <div
-            v-for="(cell, index) in matrix"
-            :key="index"
-            :class="['cell', { active: activeCell === index }]"
-            @click="handleClick(index)"
-          ></div>
+          <div class="matrix">
+            <div
+              v-for="(cell, index) in matrix"
+              :key="index"
+              :class="['cell', { active: activeCell === index }]"
+              @click="handleClick(index)"
+            ></div>
+          </div>
         </div>
-      </div>
-      <div v-if="gameOver" class="game-over">
-        <h2>Игра окончена!</h2>
-        <p>Ваш результат: {{ score }} очков</p>
-        <button @click="resetGame">Начать заново</button>
+        <div v-if="gameOver" class="game-over">
+          <h2>Игра окончена!</h2>
+          <p>Ваш результат: {{ score }} очков</p>
+          <button @click="resetGame">Начать заново</button>
+        </div>
       </div>
     </div>
   </div>
@@ -30,8 +35,12 @@
 
 <script>
 import axios from "axios";
+import RedButton from "../../navbar/Return.vue";
 
 export default {
+  components: {
+    RedButton
+  },
   data() {
     return {
       isPlaying: false,
@@ -114,8 +123,18 @@ export default {
 </script>
 
 <style scoped>
+
+#appp {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      justify-content: center;
+      align-items: center; 
+  }
+  
 .wrapper {
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;

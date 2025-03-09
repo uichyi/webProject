@@ -75,6 +75,9 @@ watch(gameState, (newState) => {
 
 <template>
   <div id="app">
+    <div class="navbarr">
+      <RedButton />
+    </div>
     <div v-if="gameState === 'startscreen'">
       <StartScreen :INIT_TIME="INIT_TIME" @startGame="startGame"></StartScreen>
     </div>
@@ -116,6 +119,15 @@ watch(gameState, (newState) => {
   </div>
 </template>
 
+<script> 
+import RedButton from "../../../navbar/Return.vue";
+export default {
+  components: {
+    RedButton
+  }
+}
+</script>
+
 <style scoped>
 #app {
   margin: 0 auto;
@@ -123,8 +135,11 @@ watch(gameState, (newState) => {
   text-align: center;
 
   height: 100vh;
+  width: 100vw;
   display: grid;
-  place-content: center;
+  grid-template-rows: auto 1fr;
+  justify-content: center;
+  align-items: center; 
 }
 
 .adnn-tick-icon,

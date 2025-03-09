@@ -1,4 +1,8 @@
 <template>
+  <div id="appp">
+    <div class="navbarr">
+      <RedButton/>
+    </div>
   <div class="attention-test" @click="handleClick">
     <div v-if="!testStarted" class="start-screen">
       <h2>Нажмите, чтобы начать тест</h2>
@@ -37,12 +41,19 @@
       <button @click="restartTest">Пройти тест заново</button>
     </div>
   </div>
+  </div>
+
+ 
 </template>
 
 <script>
 import axios from "axios";
+import RedButton from "../navbar/Return.vue";
 
 export default {
+  components: {
+    RedButton
+  },
   data() {
     return {
       currentTask: 1,
@@ -167,11 +178,15 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh; /* Make sure the content fills the screen */
+  height: auto; /* Make sure the content fills the screen */
   width: 100vw;
-  background-color: #0000003f;
 }
-
+#appp {
+  background-color: #0000003f;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
 .start-screen {
   display: flex;
   flex-direction: column;

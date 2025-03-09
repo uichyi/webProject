@@ -3,57 +3,66 @@
 </script>
 
 <template>
-    <div class="wrapper">
-        <h2 class='text-center mb-4'>Тест "Запоминание 12 чисел"</h2>
-        <h4 v-if='time_finished != true' class='text-center'>Постарайтесь запомнить как можно больше из 12-ти чисел, которые вы видите ниже за 20 секунд.</h4>
-        <h4 v-if='check == true' class='text-center'>Результат теста</h4>
-        <div v-if='time_finished != true' class='d-flex justify-content-center mt-5'>
-            <Timer_twelve_numbers ref="timer"/>
+    <div id="appp">
+        <div class="navbarr">
+            <RedButton />
         </div>
-        <div v-if='time_finished != true || check==true' >
-            <div class='d-flex justify-content-center row'>
-                <div class='col-lg-6 col-sm-12 mt-5'>
-                    <h5 class='text-center'>Исходная таблица</h5>
-                    <table class=''>
-                        <tr v-for='tr in [0,4,8]'>
-                            <td v-for='td in [0,1,2,3]'> <b>{{correct_data[td+tr]}}</b></td>
-                        </tr>
-                    </table>
+        <div class="wrapper">
+            <h2 class='text-center mb-4'>Тест "Запоминание 12 чисел"</h2>
+            <h4 v-if='time_finished != true' class='text-center'>Постарайтесь запомнить как можно больше из 12-ти чисел, которые вы видите ниже за 20 секунд.</h4>
+            <h4 v-if='check == true' class='text-center'>Результат теста</h4>
+            <div v-if='time_finished != true' class='d-flex justify-content-center mt-5'>
+                <Timer_twelve_numbers ref="timer"/>
+            </div>
+            <div v-if='time_finished != true || check==true' >
+                <div class='d-flex justify-content-center row'>
+                    <div class='col-lg-6 col-sm-12 mt-5'>
+                        <h5 class='text-center'>Исходная таблица</h5>
+                        <table class=''>
+                            <tr v-for='tr in [0,4,8]'>
+                                <td v-for='td in [0,1,2,3]'> <b>{{correct_data[td+tr]}}</b></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div v-if='check==true' class='col-lg-6 col-sm-12 mt-5'>
+                        <h5 class='text-center'>Ваш ответ</h5>
+                        <table>
+                            <tr v-for='tr in [0,4,8]'>
+                                <td v-for='td in [0,1,2,3]' v-bind:id='td+tr' :style='{background: answ_color[td+tr]}'> <b>{{user_answer[td+tr]}}</b></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div v-if='check==true' class='col-lg-6 col-sm-12 mt-5'>
-                    <h5 class='text-center'>Ваш ответ</h5>
-                    <table>
-                        <tr v-for='tr in [0,4,8]'>
-                            <td v-for='td in [0,1,2,3]' v-bind:id='td+tr' :style='{background: answ_color[td+tr]}'> <b>{{user_answer[td+tr]}}</b></td>
-                        </tr>
-                    </table>
+                <div v-if='check==true' class='mt-4'>
+                    <h5>Вы смогли запомнить следующие числа:</h5>
+                    <h4><span v-for='ans in correct_answ.join(", ")'><b>{{ ans }}</b>  </span></h4>
+                    <h5>Количество чисел c соблюдением последовательности: <b>{{corr_places_count}}</b></h5>
                 </div>
             </div>
-            <div v-if='check==true' class='mt-4'>
-                <h5>Вы смогли запомнить следующие числа:</h5>
-                <h4><span v-for='ans in correct_answ.join(", ")'><b>{{ ans }}</b>  </span></h4>
-                <h5>Количество чисел c соблюдением последовательности: <b>{{corr_places_count}}</b></h5>
+            <h4 v-if='time_finished == true && check == false' class='text-center my-4'>Желательно разместить их в том порядке, в котором вы их видели, однако, ничего страшного, если порядок не будет соблюдён.</h4>
+            <div v-if='time_finished == true && check == false' class='d-flex justify-content-center'>
+                <table class='inp_table'>
+                    <tr v-for='tr in [0,4,8]'>
+                        <td v-for='td in [0,1,2,3]' style='font-size:100%'><input type='number' min=0 max=100 class='w-75 h-25' v-model='user_answer[td+tr]'/></td>
+                    </tr>
+                </table>
             </div>
+            <div class='d-flex justify-content-center'>
+                <button v-if='time_finished == true && check == false' class='btn btn-primary mt-4' @click='checkAnswers'>Проверить ответы</button>
+            </div>
+            <p>{{checkTime}}</p>
         </div>
-        <h4 v-if='time_finished == true && check == false' class='text-center my-4'>Желательно разместить их в том порядке, в котором вы их видели, однако, ничего страшного, если порядок не будет соблюдён.</h4>
-        <div v-if='time_finished == true && check == false' class='d-flex justify-content-center'>
-            <table class='inp_table'>
-                <tr v-for='tr in [0,4,8]'>
-                    <td v-for='td in [0,1,2,3]' style='font-size:100%'><input type='number' min=0 max=100 class='w-75 h-25' v-model='user_answer[td+tr]'/></td>
-                </tr>
-            </table>
-        </div>
-        <div class='d-flex justify-content-center'>
-            <button v-if='time_finished == true && check == false' class='btn btn-primary mt-4' @click='checkAnswers'>Проверить ответы</button>
-        </div>
-        <p>{{checkTime}}</p>
     </div>
 </template>
 
 <script>
     import axios from "axios";
+    import RedButton from "../navbar/Return.vue";
 
     export default {
+        components: {
+            RedButton
+        },
         data() {
             return {
                 correct_data: [],
@@ -135,7 +144,7 @@
 </script>
 <style scoped>
     .wrapper {
-        height: 100vh;
+        /* height: 100vh; */
         display: flex;
         justify-content: center;
         flex-direction: column;

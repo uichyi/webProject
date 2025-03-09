@@ -1,28 +1,31 @@
 <template>
-    <div class="game">
-      <p>Время: {{ remainingTime }} секунд</p>
-      <p v-if="!first_start">Будет дана матрица 9х9 из чисел (от 1 до 9). Необходимо будет отметить такой набор чисел, который в сумме будет давать указанное число.</p>
-      <button v-if="!first_start" @click="startGame">Начать</button>
-
-      <div v-if="gameOver & first_start" class="game-over">
-        <h2>Игра завершена!</h2>
-        <p>Ваши очки: {{ score }}</p>
-        <button @click="startGame">Начать заново</button>
+    <div id="appp">
+      <div class="navbarr">
+        <RedButton />
       </div>
-  
-      <div v-else>
-        <button v-if="first_start" @click="startGame">Начать игру заново</button>
-        <h1>Сумма: {{ targetSum }}</h1>
-        <div class="matrix">
-          <div v-for="(row, rowIndex) in matrix" :key="rowIndex" class="row">
-            <div
-              v-for="(cell, colIndex) in row"
-              :key="colIndex"
-              class="cell"
-              :class="getCellClass(rowIndex, colIndex)"
-              @click="selectCell(rowIndex, colIndex)"
-            >
-              {{ cell }}
+      <div class="game">
+        <p>Время: {{ remainingTime }} секунд</p>
+        <p v-if="!first_start">Будет дана матрица 9х9 из чисел (от 1 до 9). Необходимо будет отметить такой набор чисел, который в сумме будет давать указанное число.</p>
+        <button v-if="!first_start" @click="startGame">Начать</button>
+        <div v-if="gameOver & first_start" class="game-over">
+          <h2>Игра завершена!</h2>
+          <p>Ваши очки: {{ score }}</p>
+          <button @click="startGame">Начать заново</button>
+        </div>
+        <div v-else>
+          <button v-if="first_start" @click="startGame">Начать игру заново</button>
+          <h1>Сумма: {{ targetSum }}</h1>
+          <div class="matrix">
+            <div v-for="(row, rowIndex) in matrix" :key="rowIndex" class="row">
+              <div
+                v-for="(cell, colIndex) in row"
+                :key="colIndex"
+                class="cell"
+                :class="getCellClass(rowIndex, colIndex)"
+                @click="selectCell(rowIndex, colIndex)"
+              >
+                {{ cell }}
+              </div>
             </div>
           </div>
         </div>
@@ -32,8 +35,12 @@
   
   <script>
   import axios from "axios";
+  import RedButton from "../../navbar/Return.vue";
 
   export default {
+    components: {
+    RedButton
+  },
     data() {
       return {
         matrix: [],
@@ -215,10 +222,18 @@
 </script>
 
 <style scoped>
+  #appp {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      justify-content: center;
+      align-items: center; 
+  }
 .game {
   text-align: center;
 
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -8,7 +8,11 @@
           </p>
           <div class="button-container">
             <button @click="startTest" class="start-button">Начать тест</button>
-            <button @click="returnToMenu" class="back-button">Вернуться на главный экран</button>
+            <button @click="returnToMenu" class="back-button">
+              <router-link to="/" class="text-white">
+                Вернуться на главный экран
+              </router-link>
+            </button>
           </div>
         </div>
         <div v-if="testStarted" class="test">
@@ -26,14 +30,22 @@
             </button>
           </div>
           <div class="result">Правильные ответы: {{ correctAnswers }}</div>
-          <button @click="returnToMenu" class="back-button">Вернуться на главный экран</button>
+          <button @click="returnToMenu" class="back-button">
+            <router-link to="/" class="text-white">
+                Вернуться на главный экран
+              </router-link>
+          </button>
         </div>
         <div v-if="testEnded" class="summary">
           <div class="result">Тест завершён! Правильные ответы: {{ correctAnswers }}.</div>
           <div class="result">Оценка: {{ evaluation }}</div>
           <div class="button-container">
             <button @click="startTest" class="start-button">Пройти тест снова</button>
-            <button @click="returnToMenu" class="back-button">Назад на главный экран</button>
+            <button @click="returnToMenu" class="back-button">
+              <router-link to="/" class="text-white">
+                Вернуться на главный экран
+              </router-link>
+            </button>
           </div>
         </div>
       </div>

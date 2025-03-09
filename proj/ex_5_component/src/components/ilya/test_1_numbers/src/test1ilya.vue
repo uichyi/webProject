@@ -76,10 +76,15 @@ const restart = () => {
   wrong.value = 0;
   currentState.value = "countdown";
 };
+
+
 </script>
 
 <template>
   <div id="app1">
+    <div class="navbarr">
+      <RedButton />
+    </div>
     <div v-if="currentState === 'start'">
       <StartScreen @handleClick="handleStateChange"></StartScreen>
     </div>
@@ -149,18 +154,34 @@ const restart = () => {
   </div>
 </template>
 
+<script> 
+import RedButton from "../../../navbar/Return.vue";
+export default {
+  components: {
+    RedButton
+  }
+}
+</script>
+
 <style scoped>
 p {
   margin: 0;
 }
 
 #app1 {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
+
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-content: center;
+  align-items: center;  
 
   max-width: 1280px;
   margin: 0 auto;

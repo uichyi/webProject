@@ -2,6 +2,9 @@
   import Timer from './Timer.vue'
 </script>
 <template>
+  <div class="navbarr">
+    <RedButton />
+  </div>
   <div class="text-center">
     <h2>Тест на основе эффекта Струпа</h2>
     <h5>Как можно скорее выберите из списка слов те слова, цвет которых совпадает с названием. </h5>
@@ -51,10 +54,12 @@
 
 <script>
 import axios from "axios";
+import RedButton from "../navbar/Return.vue";
 
 export default {
   components: {
-    Timer
+    Timer,
+    RedButton
   },
   data() {
     return {

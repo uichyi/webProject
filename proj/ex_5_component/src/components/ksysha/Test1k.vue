@@ -25,7 +25,11 @@
         <button @click="resetTest" class="start-button">Попробовать снова</button>
       </div>
       <div class="button-container">
-        <button @click="goBack" class="back-button">Вернуться на главный экран</button>
+        <button @click="goBack" class="back-button">
+          <router-link to="/" class="text-white">
+            Вернуться на главный экран
+         </router-link>
+        </button>
       </div>
     </div>
   </div>

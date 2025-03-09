@@ -225,7 +225,7 @@ export default {
 
 <style scoped>
   .wrapper {
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     justify-content: center;
     flex-direction: column;

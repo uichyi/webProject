@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
     <div class="container mt-5 text-center">
       <h1 class="mb-4">Тесты</h1>
   
@@ -341,7 +342,9 @@
   </template>
   
   <script>
-  export default {
+import Navbar from "../components/navbar/Navbar.vue";
+
+export default {
     data() {
       return {
         kostyaTests: [
@@ -411,6 +414,9 @@
         }
       },
     },
+    components: {
+      Navbar,
+    }
   };
   </script>
   
