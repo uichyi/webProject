@@ -31,7 +31,7 @@
             <div class="text-center text-lg-start mt-4 pt-2">
               <button @click='checkData' type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Войти</button>
-              <p class="small fw-bold mt-2 pt-1 mb-0">Нет аккаунта? <a href="#!"
+              <p class="small fw-bold mt-2 pt-1 mb-0">Нет аккаунта? <a href="/register"
                   class="link-primary mb-3">Зарегистрироваться</a></p>
             </div>
 
