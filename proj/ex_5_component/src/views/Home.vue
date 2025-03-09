@@ -398,25 +398,45 @@ export default {
       };
     },
     methods: {
-      navigateCarousel(group, direction) {
-        const tests = {
-          kostya: this.kostyaTests,
-          gleb: this.glebTests,
-          ilya: this.ilyaTests,
-          masha: this.mashaTests,
-          mitya: this.mityaTests,
-          ksysha: this.ksyshaTests,
-        };
-        if (direction === 'left' && this.currentIndices[group] > 0) {
-          this.currentIndices[group]--;
-        } else if (direction === 'right' && this.currentIndices[group] < tests[group].length - 1) {
-          this.currentIndices[group]++;
-        }
-      },
+    navigateCarousel(group, direction) {
+      const tests = {
+        kostya: this.kostyaTests,
+        gleb: this.glebTests,
+        ilya: this.ilyaTests,
+        masha: this.mashaTests,
+        mitya: this.mityaTests,
+        ksysha: this.ksyshaTests,
+      };
+      
+      if (direction === 'left' && this.currentIndices[group] > 0) {
+        this.currentIndices[group]--;
+      } else if (direction === 'right' && this.currentIndices[group] < tests[group].length - 1) {
+        this.currentIndices[group]++;
+      }
+      
+      // Save the new index to localStorage
+      localStorage.setItem(`carousel_${group}`, this.currentIndices[group]);
     },
-    components: {
-      Navbar,
+    loadSavedIndices() {
+      // Load saved indices from localStorage
+      const groups = ['kostya', 'gleb', 'ilya', 'masha', 'mitya', 'ksysha'];
+      groups.forEach(group => {
+        const savedIndex = localStorage.getItem(`carousel_${group}`);
+        if (savedIndex !== null) {
+          // Ensure the saved index is within bounds
+          const maxIndex = this[`${group}Tests`].length - 1;
+          this.currentIndices[group] = Math.min(Math.max(parseInt(savedIndex), 0), maxIndex);
+        }
+      });
     }
+  },
+  mounted() {
+    // Load saved indices when component mounts
+    this.loadSavedIndices();
+  },
+  components: {
+    Navbar,
+  }
   };
   </script>
   
