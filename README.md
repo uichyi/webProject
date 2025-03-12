@@ -80,12 +80,24 @@ git clone https://github.com/uichyi/webProject.git
 ```bash
 cd webProject
 ```
-3.Установите зависимости:
-```bash
-npm install
-```
 
 ## ▶ Запуск проекта
 ```bash
-npm start
+python psychoTests/manage.py runserver
 ```
+
+Чтобы сбилдить .vue файлы нужно перейти в папку proj/ex_5_component
+```bash
+cd proj/ex_5_component
+```
+И запустить команды 
+```bash
+npm install
+npm update
+npm run build
+```
+После этого в папке ex_5_component создастся папка dist в которой будет файл
+1) index.html
+2) Папка assets c css и js файлами
+
+Код из них нужо скопировать в соответствующие файлы в папке static
