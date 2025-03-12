@@ -76,10 +76,14 @@ webProject — это проект, разработанный для  для п
 ```bash
 git clone https://github.com/uichyi/webProject.git
 ```
-2.Перейдите в директорию проекта:
+2. Перейдите в директорию проекта:
 ```bash
 cd webProject
 ```
+3. Установите нужные библиотеки:
+```bash
+pip install -r requirements.txt
+``` 
 
 ## ▶ Запуск проекта
 ```bash
