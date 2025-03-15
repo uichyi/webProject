@@ -2,9 +2,9 @@
 <template>
     <RedButton/>
     <div v-if="!gameStarted" class="start-screen">
-      <h1 class="start-title">"Эмодзи друг за другом</h1>
+      <h1 class="start-title">Эмодзи друг за другом</h1>
       <p class="start-description">
-        Определи изменился ли эмодзи или нет. Нажмите на кнопку ниже, чтобы начать игру!
+        Определите, изменился ли эмодзи или нет. Нажмите на кнопку ниже, чтобы начать игру!
       </p>
       <button class="start-button" @click="startGame">Начать</button>
       <p>Последняя попытка: ?</p>

@@ -348,9 +348,9 @@ export default {
         kostyaTests: [
           { name: 'Пары эмодзи', path: '/test1', description: 'Найдите пары одинаковых эмодзи за минуту', preview: '/static/previews/kostya/test1.png' },
           { name: 'Направление стрелки', path: '/test2', description: 'Определите направление стрелки на цветном фоне', preview: '/static/previews/kostya/test2.png' },
-          { name: 'Эмодзи друг за другом', path: '/test3', description: 'Определи поменялся ил эмодзи на новый', preview: '/static/previews/kostya/test3.png' },
-          { name: 'Сравнение чисел', path: '/test4', description: 'Поставь правильный знак между числами', preview: '/static/previews/kostya/test4.png' },
-          { name: 'Ближайший цвет', path: '/test5', description: 'Определи оттенок какого цвета на экране', preview: '/static/previews/kostya/test5.png' },
+          { name: 'Эмодзи друг за другом', path: '/test3', description: 'Определите, поменялся ли эмодзи на новый', preview: '/static/previews/kostya/test3.png' },
+          { name: 'Сравнение чисел', path: '/test4', description: 'Поставьте правильный знак между числами', preview: '/static/previews/kostya/test4.png' },
+          { name: 'Ближайший цвет', path: '/test5', description: 'Определите оттенок какого цвета на экране', preview: '/static/previews/kostya/test5.png' },
         ],
         glebTests: [
           { name: 'Цвет слова', path: '/attention-test', description: 'Определи какого цвета слова на экране', preview: '/static/previews/gleb/attention.png' },
