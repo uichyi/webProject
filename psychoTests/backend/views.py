@@ -27,7 +27,8 @@ def register_user(request):
 @api_view(['POST'])
 def save_test_result(request):
     if request.method == 'POST':
-        request.data['accuracy'] = round(request.data['accuracy'], 2)
+        if request.data.get('accuracy', None):
+            request.data['accuracy'] = round(request.data['accuracy'], 2)
         print(request.data)
         serializer = TestResultSerializer(data=request.data)
         print(serializer)
