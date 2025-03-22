@@ -4,7 +4,7 @@
     <div v-if="!gameStarted" class="start-screen">
       <h1 class="start-title">Пары эмодзи</h1>
       <p class="start-description">
-        Проверьте свою память, сопоставляя пары смайликов. Нажмите на кнопку ниже, чтобы начать игру!
+        Найдите два одинаковых смайлика. Нажмите на кнопку ниже, чтобы начать игру!
       </p>
       <button class="start-button" @click="startGame">Начать</button>
       <p>Последняя попытка: ?</p>

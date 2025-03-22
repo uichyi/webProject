@@ -70,7 +70,7 @@
           "password": this.password
         };
         console.log(log)
-        const response = await fetch('/login/', {
+        const response = await fetch('/login_user/', {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json'

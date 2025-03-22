@@ -4,7 +4,7 @@
     <div v-if="!gameStarted" class="start-screen">
       <h1 class="start-title">Эмодзи друг за другом</h1>
       <p class="start-description">
-        Определите, изменился ли эмодзи или нет. Нажмите на кнопку ниже, чтобы начать игру!
+        Определите, остался ли эмодзи прежний или нет. Нажмите на кнопку ниже, чтобы начать игру!
       </p>
       <button class="start-button" @click="startGame">Начать</button>
       <p>Последняя попытка: ?</p>

@@ -339,7 +339,7 @@
           "gaming": this.gaming
         };
         console.log(log)
-        const response = await fetch('/register/', {
+        const response = await fetch('/register_user/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -44,6 +44,7 @@
         this.isAuthenticated = false;
         // Перенаправление на главную страницу или страницу входа
         this.$router.push('/');
+        window.location.reload(true);
       },
     },
   };

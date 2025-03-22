@@ -10,8 +10,8 @@ TRK 11-12-2024 Добавил более запутывающий способ �
           <h1 class="display-1">{{ currentEmoji }}</h1>
         </div>
         <div v-if="generateButtons" class="d-flex justify-content-center mb-3">
-          <button class="btn btn-primary mx-2" @click="checkAnswer(true)">Да</button>
-          <button class="btn btn-primary mx-2" @click="checkAnswer(false)">Нет</button>
+          <button class="btn btn-primary mx-2" @click="checkAnswer(true)">Не изменился</button>
+          <button class="btn btn-primary mx-2" @click="checkAnswer(false)">Изменился</button>
         </div>
       </div>
       <div class="my-2">Счет: {{ score }}</div>
