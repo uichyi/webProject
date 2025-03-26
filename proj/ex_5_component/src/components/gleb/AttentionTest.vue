@@ -178,8 +178,8 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: auto; /* Make sure the content fills the screen */
-  width: 100vw;
+  padding: 20px;
+
 }
 #appp {
   background-color: #0000003f;
@@ -209,6 +209,7 @@ export default {
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .word {

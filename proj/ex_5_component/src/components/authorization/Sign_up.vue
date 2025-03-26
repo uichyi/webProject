@@ -45,55 +45,51 @@
         </div>
       </div>
     </section>
-    <section v-else class="h-100" style='background:#dbf0ff'>
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-          <form method='post' id="my_form2">
+    <section v-else class="h-100" style="background:#dbf0ff">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center w-100">
+          <form method="post" id="my_form2" class="w-100 d-flex justify-content-center">
             <div class="col">
               <div class="card card-registration my-2">
                 <div class="row g-0">
-                  <div>
-                    <div class="card-body p-md-5 text-black">
-                      <h3 class="mb-5 text-primary text-center">Введите информацию о себе</h3>
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
-                            <label class="form-label text-primary" for="age">Возраст</label>
-                            <input type="number" min="1" max="117" id="age" v-model='age' class="form-control form-control-lg" placeholder="Введите значение" required/>
-                            <label class="form-label text-danger" for="age">{{error_age}}</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
+                  <div class="card-body p-4 text-black">
+                    <h3 class="mb-4 text-primary text-center">Введите информацию о себе</h3>
+
+                    <div class="row">
+                      <div class="col-md-6 col-12 mb-3">
+                        <label class="form-label text-primary" for="age">Возраст</label>
+                        <input type="number" min="1" max="117" id="age" v-model="age" class="form-control" placeholder="Введите возраст" required />
+                        <span class="text-danger">{{error_age}}</span>
+                      </div>
+                      <div class="col-md-6 mb-md-3">
                           <div data-mdb-input-init class="form-outline">
                             <label class="form-label text-primary" for="height">Рост (см)</label>
-                            <input type="number" min="0" id="height" v-model='height' class="form-control form-control-lg" placeholder="Введите значение" required/>
+                            <input type="number" min="0" id="height" v-model='height' class="form-control" placeholder="Введите значение" required/>
                             <label class="form-label text-danger" for="height">{{error_height}}</label>
                           </div>
-                        </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div data-mdb-input-init class="form-outline">
-                            <label class="form-label text-primary" for="weight">Вес (кг)</label>
-                            <input type="number" min="0" id="weight" v-model='weight' class="form-control form-control-lg" placeholder="Введите значение" required/>
-                            <label class="form-label text-danger" for="weight">{{error_weight}}</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <div data-mdb-input-init class="form-outline">
-                            <label class="form-label text-primary" for="leading_arm">Ведущая рука</label>
-                            <select class="form-select form-select-lg" v-model="lead_hand" id="leading_arm" required>
-                              <option value="" selected></option>
-                              <option value="1">Правая</option>
-                              <option value="2">Левая</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+
                     <div class="row">
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 col-12 mb-3">
+                        <label class="form-label text-primary" for="weight">Вес (кг)</label>
+                        <input type="number" min="0" id="weight" v-model="weight" class="form-control" placeholder="Введите вес" required />
+                        <span class="text-danger">{{error_weight}}</span>
+                      </div>
+                      <div class="col-md-6 col-12 mb-3">
+                        <label class="form-label text-primary d-block mb-2" for="leading_arm">Ведущая рука</label>
+                        <select class="form-select w-100 form-control" v-model="lead_hand" id="leading_arm" required>
+                          <option value="" selected></option>
+                          <option value="1">Правая</option>
+                          <option value="2">Левая</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 col-12 mb-3">
                         <label class="form-label text-primary" for="education">Базовое образование</label>
-                        <select class="form-select form-select-lg" v-model="education" id="education" required>
+                        <select class="form-select form-control w-100" v-model="education" id="education" required>
                           <option value="" selected></option>
                           <option value="1">Основное общее</option>
                           <option value="2">Среднее общее</option>
@@ -101,30 +97,28 @@
                           <option value="4">Высшее образование: магистратура, специалитет</option>
                         </select>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div data-mdb-input-init class="form-outline">
-                          <label class="form-label text-primary" for="speciality">Специальность</label>
-                          <input type="text" id="speciality" v-model="speciality" class="form-control form-control-lg" placeholder="Введите название" required/>
-                        </div>
+                      <div class="col-md-6 col-12 mb-3">
+                        <label class="form-label text-primary" for="speciality">Специальность</label>
+                        <input type="text" id="speciality" v-model="speciality" class="form-control" placeholder="Введите специальность" required />
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <label class="form-label text-primary" for="place_of_residence">Место основного проживания</label>
-                        <select class="form-select form-select-lg" v-model="residence" id="place_of_residence" required>
-                          <option value="" selected></option>
-                          <option value="1">Столичный город (Москва или Санкт-Петербург)</option>
-                          <option value="2">Областной центр</option>
-                          <option value="3">Районный центр</option>
-                          <option value="4">Малый город или поселок городского типа</option>
-                          <option value="5">Деревня / село</option>
-                        </select>
-                      </div>
+
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label text-primary" for="place_of_residence">Место основного проживания</label>
+                      <select class="form-select form-control w-100" v-model="residence" id="place_of_residence" required>
+                        <option value="" selected></option>
+                        <option value="1">Столичный город (Москва или Санкт-Петербург)</option>
+                        <option value="2">Областной центр</option>
+                        <option value="3">Районный центр</option>
+                        <option value="4">Малый город или поселок городского типа</option>
+                        <option value="5">Деревня / село</option>
+                      </select>
                     </div>
-                    <h6 class="mb-0 me-4 text-primary">Как Вы себя чувствуете: </h6>
-                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+                    <h6 class="mb-3 text-primary">Как Вы себя чувствуете:</h6>
+                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-lg-2">
                       <div class="form-check form-check-inline mb-0 me-4">
-                        <input class="form-check-input" v-model="current_health" type="radio" name="inlineRadioOptions" id="very_bad"
+                        <input class="form-check-input ml-0" v-model="current_health" type="radio" name="inlineRadioOptions" id="very_bad"
                           v-bind:value="Number(1)" required/>
                         <label class="form-check-label" for="very_bad">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-tear" viewBox="0 0 16 16">
@@ -134,7 +128,7 @@
                         </label>
                       </div>
                       <div class="form-check form-check-inline mb-0 me-4">
-                        <input class="form-check-input" v-model="current_health" type="radio" name="inlineRadioOptions" id="bad"
+                        <input class="form-check-input ml-0" v-model="current_health" type="radio" name="inlineRadioOptions" id="bad"
                           v-bind:value="Number(2)"/>
                         <label class="form-check-label" for="bad">
                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">
@@ -144,7 +138,7 @@
                         </label>
                       </div>
                       <div class="form-check form-check-inline mb-0 me-4">
-                        <input class="form-check-input" v-model="current_health" type="radio" name="inlineRadioOptions" id="neutral"
+                        <input class="form-check-input ml-0" v-model="current_health" type="radio" name="inlineRadioOptions" id="neutral"
                           v-bind:value="Number(3)" />
                         <label class="form-check-label" for="neutral">
                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-neutral" viewBox="0 0 16 16">
@@ -154,7 +148,7 @@
                         </label>
                       </div>
                       <div class="form-check form-check-inline mb-0 me-4">
-                        <input class="form-check-input" v-model="current_health" type="radio" name="inlineRadioOptions" id="good"
+                        <input class="form-check-input ml-0" v-model="current_health" type="radio" name="inlineRadioOptions" id="good"
                           v-bind:value="Number(4)" />
                         <label class="form-check-label" for="good">
                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
@@ -164,7 +158,7 @@
                         </label>
                       </div>
                       <div class="form-check form-check-inline mb-0 me-4">
-                        <input class="form-check-input" v-model="current_health" type="radio" name="inlineRadioOptions" id="very_good"
+                        <input class="form-check-input ml-0" v-model="current_health" type="radio" name="inlineRadioOptions" id="very_good"
                           v-bind:value="Number(5)"/>
                         <label class="form-check-label" for="very_good">
                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
@@ -198,35 +192,37 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <label class="form-label text-primary" for="alcohol_frequency">Как часто Вы употребляете алкогольные напитки?</label>
-                        <select class="form-select form-select-lg" v-model="alcohol" id="alcohol_frequency" required>
-                          <option value="" selected></option>
-                          <option value="1">Никогда</option>
-                          <option value="2">Раз в месяц или реже</option>
-                          <option value="3">2 - 4 раза в месяц</option>
-                          <option value="4">2 - 3 раза в неделю</option>
-                          <option value="5">4 раза в неделю и чаще</option>
-                        </select>
-                      </div>
+
+                    <div class="mb-3">
+                      <label class="form-label text-primary" for="alcohol">Частота употребления алкоголя</label>
+                      <select class="form-select form-control" v-model="alcohol" id="alcohol" required>
+                        <option value="" selected></option>
+                        <option value="1">Никогда</option>
+                        <option value="2">Раз в месяц или реже</option>
+                        <option value="3">2 - 4 раза в месяц</option>
+                        <option value="4">2 - 3 раза в неделю</option>
+                        <option value="5">4 раза в неделю и чаще</option>
+                      </select>
                     </div>
-                    <div data-mdb-input-init class="form-outline mb-4">
+
+                    <div class="mb-3">
                       <label class="form-label text-primary" for="sports">Спорт</label>
-                      <input type="text" id="sports" class="form-control form-control-lg" v-model="sport" placeholder="Каким спортом занимаетесь?" required/>
+                      <input type="text" id="sports" class="form-control" v-model="sport" placeholder="Каким спортом занимаетесь?" required />
                     </div>
-                    <div class="d-flex justify-content-end pt-3">
-                      <button type="submit" @click='checkData' data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg ms-2">Перейти к тестам</button>
+
+                    <div class="d-flex justify-content-end">
+                      <button type="submit" @click="checkData" class="btn btn-primary btn-lg">Перейти к тестам</button>
                     </div>
-                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
-            </form>
-          </div>
+          </form>
         </div>
-      </section>
+      </div>
+    </section>
+
   </div>
 </template>
 
