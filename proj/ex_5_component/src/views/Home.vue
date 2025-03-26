@@ -3,8 +3,7 @@
     <div class="navbar-wrapper">
       <Navbar />
     </div>
-    <!-- <section v-if="isAuthenticated"> -->
-    <section>
+    <section v-if="isAuthenticated">
       <div class="container mt-5 text-center">
         <h1 class="mb-4">Тесты</h1>
         <!-- Kostya's Carousel -->
@@ -52,10 +51,7 @@
                   <h3>{{ test.name }}</h3>
                   <img :src="test.preview" alt="Preview" class="preview-img" />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.kostya"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -136,10 +132,7 @@
                     height="93"
                   />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.gleb"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -213,10 +206,7 @@
                   <h3>{{ test.name }}</h3>
                   <img :src="test.preview" alt="Preview" class="preview-img" />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.ilya"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -290,10 +280,7 @@
                   <h3>{{ test.name }}</h3>
                   <img :src="test.preview" alt="Preview" class="preview-img" />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.masha"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -368,10 +355,7 @@
                   <h3>{{ test.name }}</h3>
                   <img :src="test.preview" alt="Preview" class="preview-img" />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.mitya"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -446,10 +430,7 @@
                   <h3>{{ test.name }}</h3>
                   <img :src="test.preview" alt="Preview" class="preview-img" />
                   <p>{{ test.description }}</p>
-                  <router-link
-                    v-if="index === currentIndices.ksysha"
-                    :to="test.path"
-                    class="btn-modern"
+                  <router-link :to="test.path" class="btn-modern"
                     >Перейти к тесту</router-link
                   >
                 </div>
@@ -481,12 +462,12 @@
         </div>
       </div>
     </section>
-    <!-- <section
+    <section
       v-else
       class="d-flex justify-content-center align-items-center vh-100"
     >
       <h2>Для прохождения тестов требуется авторизация</h2>
-    </section> -->
+    </section>
   </div>
 </template>
 
@@ -501,31 +482,31 @@ export default {
           name: "Пары эмодзи",
           path: "/test1",
           description: "Найдите пары одинаковых эмодзи за минуту",
-          preview: "/previews/kostya/test1.png",
+          preview: "/static/previews/kostya/test1.png",
         },
         {
           name: "Направление стрелки",
           path: "/test2",
           description: "Определите направление стрелки на цветном фоне",
-          preview: "/previews/kostya/test2.png",
+          preview: "/static/previews/kostya/test2.png",
         },
         {
           name: "Эмодзи друг за другом",
           path: "/test3",
           description: "Определите, поменялся ли эмодзи на новый",
-          preview: "/previews/kostya/test3.png",
+          preview: "/static/previews/kostya/test3.png",
         },
         {
           name: "Сравнение чисел",
           path: "/test4",
           description: "Поставьте правильный знак между числами",
-          preview: "/previews/kostya/test4.png",
+          preview: "/static/previews/kostya/test4.png",
         },
         {
           name: "Ближайший цвет",
           path: "/test5",
           description: "Определите оттенок какого цвета на экране",
-          preview: "/previews/kostya/test5.png",
+          preview: "/static/previews/kostya/test5.png",
         },
       ],
       glebTests: [
@@ -533,31 +514,31 @@ export default {
           name: "Цвет слова",
           path: "/attention-test",
           description: "Определи какого цвета слова на экране",
-          preview: "/previews/gleb/attention.png",
+          preview: "/static/previews/gleb/attention.png",
         },
         {
           name: "Реакция нажатия",
           path: "/reaction-test",
           description: "Среагируй, когда цвет станет зеленым",
-          preview: "/previews/gleb/reaction.png",
+          preview: "/static/previews/gleb/reaction.png",
         },
         {
           name: "Краткосрочная память",
           path: "/memory-test",
           description: "Запоминай картинки и отвечай на вопросы",
-          preview: "/previews/gleb/memory.png",
+          preview: "/static/previews/gleb/memory.png",
         },
         {
           name: "Поиск слов",
           path: "/text-selection-test",
           description: "Выдели слова из набора букв",
-          preview: "/previews/gleb/text.png",
+          preview: "/static/previews/gleb/text.png",
         },
         {
           name: "Сумма цифр",
           path: "/sum-digits-test",
           description: "Сложи все цифры в каждом ряду",
-          preview: "/previews/gleb/sum.png",
+          preview: "/static/previews/gleb/sum.png",
         },
       ],
       ilyaTests: [
@@ -566,31 +547,31 @@ export default {
           path: "/test1ilya",
           description:
             "Нажми на нужные квадраты в правильной последовательности",
-          preview: "/previews/ilya/test1.png",
+          preview: "/static/previews/ilya/test1.png",
         },
         {
           name: "Особый цвет",
           path: "/test2ilya",
           description: "Найди квадрат с уникальным цветом",
-          preview: "/previews/ilya/test2.png",
+          preview: "/static/previews/ilya/test2.png",
         },
         {
           name: "Особый символ",
           path: "/test3ilya",
           description: "Найди квадрат с уникальным символом",
-          preview: "/previews/ilya/test3.png",
+          preview: "/static/previews/ilya/test3.png",
         },
         {
           name: "Скорость кликов",
           path: "/test4ilya",
           description: "Кликай как можно быстрее",
-          preview: "/previews/ilya/test4.png",
+          preview: "/static/previews/ilya/test4.png",
         },
         {
           name: "Скорость печати",
           path: "/test5ilya",
           description: "Печатай слова как можно быстрее",
-          preview: "/previews/ilya/test5.png",
+          preview: "/static/previews/ilya/test5.png",
         },
       ],
       mashaTests: [
@@ -598,31 +579,31 @@ export default {
           name: "Название и цвет совпадают",
           path: "/rectangles",
           description: "Найди квадраты, у которых совпадают название и цвет",
-          preview: "/previews/masha/rectangles.png",
+          preview: "/static/previews/masha/rectangles.png",
         },
         {
           name: "Запомни 12 чисел",
           path: "/twelve-number-test",
           description: "Запомни в каких квадратах находятся числа",
-          preview: "/previews/masha/twelve.png",
+          preview: "/static/previews/masha/twelve.png",
         },
         {
           name: "Числовой пазл",
           path: "/numbers-puzzle",
           description: "Определи, в каких квадратах лежат правильные числа",
-          preview: "/previews/masha/puzzle.png",
+          preview: "/static/previews/masha/puzzle.png",
         },
         {
           name: "Скорость реакции",
           path: "/reaction-speed",
           description: "Среагируй, когда цвет станет зеленым",
-          preview: "/previews/masha/speed.png",
+          preview: "/static/previews/masha/speed.png",
         },
         {
           name: "Тест Струпа",
           path: "/classical-stroop-test",
           description: "Найди слова, у которых совпадают название и их цвет",
-          preview: "/previews/masha/stroop.png",
+          preview: "/static/previews/masha/stroop.png",
         },
       ],
       mityaTests: [
@@ -630,31 +611,31 @@ export default {
           name: "Верно ли сравнение",
           path: "/test1mitya",
           description: "Определи верный ли стоит знак сравнения",
-          preview: "/previews/mitya/test1.png",
+          preview: "/static/previews/mitya/test1.png",
         },
         {
           name: "Цвет соответствует слову",
           path: "/test2mitya",
           description: "Определи цвет слова соответствует ли слову внизу",
-          preview: "/previews/mitya/test2.png",
+          preview: "/static/previews/mitya/test2.png",
         },
         {
           name: "Попади по квадрату",
           path: "/test3mitya",
           description: "Нажимайте на бежевый квадрат",
-          preview: "/previews/mitya/test3.png",
+          preview: "/static/previews/mitya/test3.png",
         },
         {
           name: "Пятнашки",
           path: "/test4mitya",
           description: "Собери правильную картинку",
-          preview: "/previews/mitya/test4.png",
+          preview: "/static/previews/mitya/test4.png",
         },
         {
           name: "Нужная сумма",
           path: "/test5mitya",
           description: "Отметьте числа, сумма которых равна нужной",
-          preview: "/previews/mitya/test5.png",
+          preview: "/static/previews/mitya/test5.png",
         },
       ],
       ksyshaTests: [
@@ -662,19 +643,19 @@ export default {
           name: "Простые вопросы",
           path: "/test1k",
           description: "Отвечайте на вопросы",
-          preview: "/previews/ksysha/test1.png",
+          preview: "/static/previews/ksysha/test1.png",
         },
         {
           name: "Нажми вовремя",
           path: "/test2k",
           description: "Нажми на кнопу, когда она появиться",
-          preview: "/previews/ksysha/test2.png",
+          preview: "/static/previews/ksysha/test2.png",
         },
         {
           name: "Цвет и слово совпадают",
           path: "/test3k",
           description: "Определите цвет слова",
-          preview: "/previews/ksysha/test3.png",
+          preview: "/static/previews/ksysha/test3.png",
         },
       ],
       currentIndices: {
@@ -761,13 +742,13 @@ export default {
   padding: 40px;
   padding-bottom: 40px;
   position: relative;
-  background-color: #f9f9f9; /* Light background for better contrast */
-  border-radius: 10px; /* Optional: Adds some roundness to the section */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a light shadow to the section */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-title {
-  font-size: 2.5rem; /* Slightly bigger title for more emphasis */
+  font-size: 2.5rem;
   font-weight: 700;
   color: #2b2b2b;
   margin-bottom: 32px;
@@ -786,12 +767,12 @@ export default {
 .carousel-wrapper {
   overflow: hidden;
   display: flex;
-  justify-content: center; /* Центрирование активной карточки */
-  width: 900px; /* 3 cards, each 300px */
+  justify-content: center;
+  width: 900px;
   position: relative;
   border-radius: 16px;
-  background-color: #ffffff; /* White background for the carousel container */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Adds a larger shadow to the carousel container */
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .arrow-container {
@@ -829,18 +810,16 @@ export default {
   border-radius: 16px;
   padding: 24px;
   width: 300px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Stronger shadow to make each card stand out more */
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out,
     box-shadow 0.3s ease;
-  margin: 0 15px; /* Adds some space between the cards */
+  margin: 0 15px;
 }
 
 .test-card:hover {
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.15); /* Darker shadow on hover for better emphasis */
-  transform: translateY(
-    -5px
-  ); /* Slight movement on hover to give a lifted effect */
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
 }
 
 .main-card {
@@ -857,10 +836,9 @@ export default {
 .preview-img {
   width: 250px;
   height: 150px;
-  /* object-fit: contain; */
   border-radius: 12px;
   margin-bottom: 16px;
-  border: 2px solid #f0f0f0; /* Adds a subtle border around the images */
+  border: 2px solid #f0f0f0;
 }
 
 .carousel-track .test-card:first-child {
@@ -875,7 +853,7 @@ export default {
   font-weight: 600;
   color: #333;
   margin-bottom: 12px;
-  transition: color 0.3s ease; /* Adds a smooth transition for color */
+  transition: color 0.3s ease;
 }
 
 .test-card p {
@@ -894,11 +872,61 @@ export default {
   text-decoration: none;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(107, 72, 255, 0.3); /* Adds some shadow for a modern button */
+  box-shadow: 0 4px 15px rgba(107, 72, 255, 0.3);
 }
 
 .btn-modern:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(107, 72, 255, 0.5); /* Stronger shadow on hover */
+  box-shadow: 0 6px 20px rgba(107, 72, 255, 0.5);
+}
+
+/* Медиа-запрос для ширины менее 800px */
+@media (max-width: 800px) {
+  .carousel-wrapper {
+    width: 100%;
+    box-shadow: none; /* Убираем тень для более чистого вида */
+  }
+
+  .carousel-track {
+    flex-direction: column; /* Переключаем в колонку */
+    align-items: center;
+    transform: none !important; /* Отключаем трансформацию */
+    transition: none; /* Убираем анимацию */
+  }
+
+  .test-card {
+    width: 100%; /* Полная ширина карточки */
+    max-width: 300px; /* Ограничиваем максимальную ширину */
+    margin: 15px 0; /* Вертикальные отступы вместо горизонтальных */
+    transform: none; /* Отключаем масштабирование */
+    opacity: 1; /* Все карточки полностью видимы */
+  }
+
+  .main-card,
+  .side-card {
+    transform: none; /* Убираем различия между главной и боковыми карточками */
+    opacity: 1;
+  }
+
+  .arrow-container {
+    display: none; /* Скрываем стрелки, так как карусель не нужна */
+  }
+
+  .carousel-track .test-card:first-child {
+    margin-left: 0; /* Убираем отступ для первой карточки */
+  }
+
+  .carousel-outer-wrapper {
+    flex-direction: column; /* Убеждаемся, что внешний контейнер тоже в колонке */
+  }
+
+  .carousel-section {
+    padding: 20px; /* Уменьшаем отступы для мобильных устройств */
+  }
+
+  .carousel-title {
+    font-size: 2rem; /* Уменьшаем размер заголовка */
+    text-align: center; /* Центрируем заголовок */
+  }
 }
 </style>
