@@ -7,7 +7,7 @@
       <div class="game">
         <h1>Игра на реакцию</h1>
         <p v-if="!isPlaying & !gameOver">
-          Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 60 секунд!
+          Нажмите "Начать игру", чтобы проверить вашу реакцию. У вас есть 10 секунд!
         </p>
         <button v-if="!isPlaying & !gameOver" @click="startGame">Начать игру</button>
         <div v-if="isPlaying" class="col">

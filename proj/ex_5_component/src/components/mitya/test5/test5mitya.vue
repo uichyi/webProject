@@ -48,7 +48,7 @@
         selectedCells: [],
         targetSum: null,
         score: 0,
-        remainingTime: 60,
+        remainingTime: 100,
         gameOver: false,
         isGameStarted: false,
         timer: null,
